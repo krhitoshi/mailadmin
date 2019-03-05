@@ -1,0 +1,14 @@
+Domains
+
+<table>
+  <tr>
+    <th>Domain</th><th>Address</th>
+  </tr>
+  <% @domains.each do |domain| %>
+    <% next if domain.domain == "ALL" %>
+    <tr>
+      <td><%= domain.domain %></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>
