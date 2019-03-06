@@ -14,7 +14,7 @@
 <table>
   <% @domain.rel_mailboxes.each do |m| %>
     <tr>
-      <td><%= m.username %></td>
+      <td><%= link_to m.username, edit_mailbox_path(m) %></td>
       <td><%= m.name %></td>
       <td><%= m.alias.goto %></td>
       <td><%= m.quota %></td>
