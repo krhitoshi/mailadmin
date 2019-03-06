@@ -74,6 +74,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.4)
     crass (1.0.4)
+    dovecot_crammd5 (0.0.3)
     erubi (1.8.0)
     execjs (2.7.0)
     ffi (1.10.0)
@@ -199,6 +200,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  dovecot_crammd5
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   mysql2 (>= 0.4.4, < 0.6.0)

@@ -5,7 +5,12 @@ class MailboxesController < ApplicationController
   end
 
   def update
-    if @mailbox.update(mailbox_params)
+    params = mailbox_params.dup
+    if params["password"]
+      params["password"] = DovecotCrammd5.calc(params["password"])
+    end
+    logger.debug("prams: #{params}")
+    if @mailbox.update(params)
       redirect_to domain_path(@mailbox.domain), notice: 'Mailbox was successfully updated.'
     else
       render action: 'edit'
@@ -18,6 +23,6 @@ class MailboxesController < ApplicationController
   end
 
   def mailbox_params
-    params.require(:mailbox).permit(:name, :quota, :active)
+    params.require(:mailbox).permit(:name, :password, :quota, :active)
   end
 end
