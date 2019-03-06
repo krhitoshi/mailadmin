@@ -12,7 +12,7 @@ Domains
   <% @domains.each do |domain| %>
     <% next if domain.domain == "ALL" %>
     <tr>
-      <td><%= domain.domain %></td>
+      <td><%= link_to domain.domain, domain %></td>
       <td><%= domain.rel_mailboxes.count %> / <%= domain.mailboxes %></td>
       <td><%= domain.rel_aliases.count - domain.rel_mailboxes.count %> / <%= domain.aliases %></td>
       <td><%= domain.maxquota %></td>
