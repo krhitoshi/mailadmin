@@ -13,6 +13,11 @@
   <% @domain.rel_mailboxes.each do |m| %>
     <tr>
       <td><%= m.username %></td>
+      <td><%= m.name %></td>
+      <td><%= m.alias.goto %></td>
+      <td><%= m.quota %></td>
+      <td><%= m.active %></td>
+      <td><%= m.modified %></td>
     </tr>
   <% end %>
 </table>
@@ -22,6 +27,9 @@
   <% @domain.pure_aliases.each do |a| %>
     <tr>
       <td><%= a.address %></td>
+      <td><%= a.goto %></td>
+      <td><%= a.active %></td>
+      <td><%= a.modified %></td>
     </tr>
   <% end %>
 </table>
