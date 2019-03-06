@@ -16,6 +16,12 @@
     <%= f.text_field :goto, size: 50 %>
   </div>
 
+  <% if @alias.pure_alias? %>
+  <div class="field">
+    <%= f.label :active %> <%= f.check_box :active %>
+  </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

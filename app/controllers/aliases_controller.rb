@@ -18,6 +18,6 @@ class AliasesController < ApplicationController
   end
 
   def alias_params
-    params.require(:alias).permit(:goto)
+    params.require(:alias).permit(:goto, :active)
   end
 end
