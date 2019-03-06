@@ -1,5 +1,7 @@
 <h1><%= @domain.domain %></h1>
 
+<p id="notice"><%= notice %></p>
+
 <ul>
   <li>Mailbox: <%= @domain.rel_mailboxes.count %> / <%= @domain.mailboxes %></li>
   <li>Alias: <%= @domain.pure_aliases.count %> / <%= @domain.aliases %></li>
@@ -26,7 +28,7 @@
 <table>
   <% @domain.pure_aliases.each do |a| %>
     <tr>
-      <td><%= a.address %></td>
+      <td><%= link_to a.address, edit_alias_path(a) %></td>
       <td><%= a.goto %></td>
       <td><%= a.active %></td>
       <td><%= a.modified %></td>

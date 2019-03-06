@@ -3,7 +3,7 @@ class Alias < ApplicationRecord
   self.primary_key = :address
 
   belongs_to :rel_domain, class_name: "Domain", foreign_key: :domain
-  belongs_to :mailbox, foreign_key: :address
+  belongs_to :mailbox, foreign_key: :address, optional: true
 
   scope :pure, -> { joins("LEFT OUTER JOIN mailbox ON alias.address = mailbox.username").where("mailbox.username" => nil) }
 
