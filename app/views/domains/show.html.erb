@@ -7,3 +7,21 @@
   <li>Active: <%= @domain.active %></li>
   <li>Modified: <%= @domain.modified %></li>
 </ul>
+
+<h3>Mailbox</h3>
+<table>
+  <% @domain.rel_mailboxes.each do |m| %>
+    <tr>
+      <td><%= m.username %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h3>Alias</h3>
+<table>
+  <% @domain.rel_aliases.each do |a| %>
+    <tr>
+      <td><%= a.address %></td>
+    </tr>
+  <% end %>
+</table>
