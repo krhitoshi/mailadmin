@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <%= form_for(@mailbox) do |f| %>
   <% if @mailbox.errors.any? %>
     <div id="error_explanation">
@@ -19,6 +21,11 @@
   <div class="field">
     <%= f.label :password %><br>
     <%= f.password_field :password, size: 50 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation, size: 50 %>
   </div>
 
   <div class="field">
