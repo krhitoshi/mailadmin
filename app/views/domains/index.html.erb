@@ -2,13 +2,22 @@ Domains
 
 <table>
   <tr>
-    <th>Domain</th><th>Address</th>
+    <th>Domain</th>
+    <th>Mailbox</th>
+    <th>Alias</th>
+    <th>Quota (MB)</th>
+    <th>Active</th>
+    <th>Modified</th>
   </tr>
   <% @domains.each do |domain| %>
     <% next if domain.domain == "ALL" %>
     <tr>
       <td><%= domain.domain %></td>
-      <td></td>
+      <td><%= domain.rel_mailboxes.count %> / <%= domain.mailboxes %></td>
+      <td><%= domain.rel_aliases.count - domain.rel_mailboxes.count %> / <%= domain.aliases %></td>
+      <td><%= domain.maxquota %></td>
+      <td><%= domain.active %></td>
+      <td><%= domain.modified %></td>
     </tr>
   <% end %>
 </table>
