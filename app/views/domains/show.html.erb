@@ -1,0 +1,9 @@
+<h1><%= @domain.domain %></h1>
+
+<ul>
+  <li>Mailbox: <%= @domain.rel_mailboxes.count %> / <%= @domain.mailboxes %></li>
+  <li>Alias: <%= @domain.rel_aliases.count - @domain.rel_mailboxes.count %> / <%= @domain.aliases %></li>
+  <li>Quota (MB): <%= @domain.maxquota %></li>
+  <li>Active: <%= @domain.active %></li>
+  <li>Modified: <%= @domain.modified %></li>
+</ul>
