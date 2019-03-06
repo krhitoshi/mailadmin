@@ -14,7 +14,7 @@ Domains
     <tr>
       <td><%= link_to domain.domain, domain %></td>
       <td><%= domain.rel_mailboxes.count %> / <%= domain.mailboxes %></td>
-      <td><%= domain.rel_aliases.count - domain.rel_mailboxes.count %> / <%= domain.aliases %></td>
+      <td><%= domain.pure_aliases.count %> / <%= domain.aliases %></td>
       <td><%= domain.maxquota %></td>
       <td><%= domain.active %></td>
       <td><%= domain.modified %></td>
