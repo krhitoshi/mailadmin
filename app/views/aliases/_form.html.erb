@@ -12,6 +12,20 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :address %><br>
+    <% if controller.action_name == "edit" %>
+      <%= f.text_field :address, size: 50, readonly: true %>
+    <% else %>
+      <%= f.text_field :address, size: 50 %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :domain %><br>
+    <%= f.text_field :domain, size: 50, readonly: true %>
+  </div>
+
+  <div class="field">
     <%= f.label :goto %><br>
     <%= f.text_field :goto, size: 50 %>
   </div>

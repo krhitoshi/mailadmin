@@ -28,6 +28,7 @@
 </table>
 
 <h3>Alias</h3>
+<%= link_to "new alias", new_alias_path(domain_id: @domain.domain) %>
 <table>
   <% @domain.pure_aliases.each do |a| %>
     <tr>
