@@ -5,6 +5,10 @@ class Admin < ApplicationRecord
   has_many :domain_admins, foreign_key: :username
   has_many :domains, through: :domain_admins
 
+  def super_admin?
+    domains.exists?("ALL")
+  end
+
   def self.timestamp_attributes_for_create
     ["created"]
   end
