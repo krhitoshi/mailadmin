@@ -14,8 +14,18 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :username %><br>
+    <%= f.text_field :username, size: 50 %>
+  </div>
+
+  <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name, size: 50 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :domain %><br>
+    <%= f.text_field :domain, size: 50, readonly: true %>
   </div>
 
   <div class="field">

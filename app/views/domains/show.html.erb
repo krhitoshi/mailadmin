@@ -13,6 +13,7 @@
 </ul>
 
 <h3>Mailbox</h3>
+<%= link_to "new mailbox", new_mailbox_path(domain_id: @domain.domain) %>
 <table>
   <% @domain.rel_mailboxes.each do |m| %>
     <tr>
