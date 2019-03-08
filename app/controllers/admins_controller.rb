@@ -7,6 +7,7 @@ class AdminsController < ApplicationController
 
   def new
     @admin = Admin.new
+    @domains = Domain.all
   end
 
   def create
@@ -31,8 +32,13 @@ class AdminsController < ApplicationController
     end
   end
 
+  def edit
+    @domains = Domain.all
+  end
+
   def update
     params = admin_params.dup
+    logger.debug("params: #{params}")
     if params["password"]
       if params["password"] != params["password_confirmation"]
         params.delete("password_confirmation")
@@ -44,7 +50,12 @@ class AdminsController < ApplicationController
       params["password"] = DovecotCrammd5.calc(params["password"])
       params.delete("password_confirmation")
     end
+
+    domains = params["domains"]
+    params.delete("domains")
+
     if @admin.update(params)
+      @admin.rel_domain_ids = domains
       redirect_to admins_path, notice: 'Admin was successfully updated.'
     else
       render action: 'edit'
@@ -63,6 +74,7 @@ class AdminsController < ApplicationController
   end
 
   def admin_params
-    params.require(:admin).permit(:username, :password, :password_confirmation, :active)
+    params.require(:admin).permit(:username, :password, :password_confirmation,
+                                  :active, domains: [])
   end
 end

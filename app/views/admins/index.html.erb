@@ -18,7 +18,7 @@
         <% if admin.super_admin? %>
           Super Admin
         <% else %>
-          <%= admin.domains.count %>
+          <%= admin.rel_domains.count %>
         <% end %>
       </td>
       <td><%= admin.active %></td>

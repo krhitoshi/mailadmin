@@ -36,6 +36,16 @@
     <%= f.label :active %> <%= f.check_box :active %>
   </div>
 
+  <ul>
+    <% @domains.each do |d| %>
+      <% if @admin.rel_domains.exists?(d.domain) %>
+      <li><%= d.domain %> <%= check_box_tag 'admin[domains][]', d.domain, checked: true %></li>
+      <% else %>
+      <li><%= d.domain %> <%= check_box_tag 'admin[domains][]', d.domain %></li>
+      <% end %>
+    <% end %>
+  </ul>
+
   <div class="actions">
     <%= f.submit %>
   </div>
