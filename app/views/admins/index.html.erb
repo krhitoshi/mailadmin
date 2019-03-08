@@ -22,6 +22,7 @@
         <% end %>
       </td>
       <td><%= admin.active %></td>
+      <td><%= link_to "Delete", admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <td><%= admin.modified %></td>
     </tr>
   <% end %>

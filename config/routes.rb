@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get 'admins/:id/edit', to: "admins#edit", constraints: { id: /[A-Za-z0-9\-.@]+/ }
   patch 'admins/:id', to: "admins#update", constraints: { id: /[A-Za-z0-9\-.@]+/ }
+  delete 'admins/:id', to: "admins#destroy", constraints: { id: /[A-Za-z0-9\-.@]+/ }
   resources :admins
 
   get 'domains/new', to: "domains#new"

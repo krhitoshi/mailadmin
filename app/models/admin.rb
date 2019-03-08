@@ -2,7 +2,7 @@ class Admin < ApplicationRecord
   self.table_name = :admin
   self.primary_key = :username
 
-  has_many :domain_admins, foreign_key: :username
+  has_many :domain_admins, foreign_key: :username, dependent: :delete_all
   has_many :domains, through: :domain_admins
 
   def super_admin?
