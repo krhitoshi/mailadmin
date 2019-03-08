@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   patch 'admins/:id', to: "admins#update", constraints: { id: /[A-Za-z0-9\-.@]+/ }
   resources :admins
 
+  get 'domains/new', to: "domains#new"
   get 'domains/:id', to: "domains#show", constraints: { id: /[A-Za-z0-9\-.]+/ }
   get 'domains/:id/edit', to: "domains#edit", constraints: { id: /[A-Za-z0-9\-.]+/ }
   patch 'domains/:id', to: "domains#update", constraints: { id: /[A-Za-z0-9\-.]+/ }

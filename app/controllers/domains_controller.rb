@@ -5,6 +5,21 @@ class DomainsController < ApplicationController
     @domains = Domain.all
   end
 
+  def new
+    @domain = Domain.new
+  end
+
+  def create
+    @domain = Domain.new(domain_params)
+    @domain.transport = "virtual"
+
+    if @domain.save
+      redirect_to domain_path(@domain.domain), notice: 'Domain was successfully created.'
+    else
+      render action: 'new'
+    end
+  end
+
   def show
   end
 
@@ -26,6 +41,6 @@ class DomainsController < ApplicationController
   end
 
   def domain_params
-    params.require(:domain).permit(:description, :aliases, :mailboxes, :active)
+    params.require(:domain).permit(:domain, :description, :aliases, :mailboxes, :active)
   end
 end
