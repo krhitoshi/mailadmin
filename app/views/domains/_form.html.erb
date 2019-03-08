@@ -1,0 +1,51 @@
+<%= form_for(@domain) do |f| %>
+  <% if @domain.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@domain.errors.count, "error") %> prohibited this domain from being saved:</h2>
+
+      <ul>
+        <% @domain.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :domain %><br>
+    <% if controller.action_name == "edit" %>
+      <%= f.text_field :domain, size: 50, readonly: true %>
+    <% else %>
+      <%= f.text_field :domain, size: 50 %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description, size: 50 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :aliases %><br>
+    <%= f.text_field :aliases, size: 50 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :mailboxes %><br>
+    <%= f.text_field :mailboxes, size: 50 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :maxquota %><br>
+    <%= f.text_field :maxquota, size: 50 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :active %> <%= f.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>

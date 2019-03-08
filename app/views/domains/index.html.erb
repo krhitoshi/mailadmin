@@ -3,20 +3,24 @@
 <table>
   <tr>
     <th>Domain</th>
+    <th>Description</th>
     <th>Mailbox</th>
     <th>Alias</th>
     <th>Quota (MB)</th>
     <th>Active</th>
+    <th>Edit</th>
     <th>Modified</th>
   </tr>
   <% @domains.each do |domain| %>
     <% next if domain.domain == "ALL" %>
     <tr>
       <td><%= link_to domain.domain, domain %></td>
+      <td><%= domain.description %></td>
       <td><%= domain.rel_mailboxes.count %> / <%= domain.mailboxes %></td>
       <td><%= domain.pure_aliases.count %> / <%= domain.aliases %></td>
       <td><%= domain.maxquota %></td>
       <td><%= domain.active %></td>
+      <td><%= link_to "Edit", edit_domain_path(domain) %></td>
       <td><%= domain.modified %></td>
     </tr>
   <% end %>

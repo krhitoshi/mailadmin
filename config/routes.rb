@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   resources :admins
 
   get 'domains/:id', to: "domains#show", constraints: { id: /[A-Za-z0-9\-.]+/ }
-  resources :domains do
-  end
+  get 'domains/:id/edit', to: "domains#edit", constraints: { id: /[A-Za-z0-9\-.]+/ }
+  patch 'domains/:id', to: "domains#update", constraints: { id: /[A-Za-z0-9\-.]+/ }
+  resources :domains
 
   get 'mailboxes/:id/edit', to: "mailboxes#edit", constraints: { id: /[A-Za-z0-9\-.@]+/ }
   patch 'mailboxes/:id', to: "mailboxes#update", constraints: { id: /[A-Za-z0-9\-.@]+/ }
