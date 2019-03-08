@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get 'mailboxes/:id/edit', to: "mailboxes#edit", constraints: { id: /[A-Za-z0-9\-.@]+/ }
   patch 'mailboxes/:id', to: "mailboxes#update", constraints: { id: /[A-Za-z0-9\-.@]+/ }
+  delete 'mailboxes/:id', to: "mailboxes#destroy", constraints: { id: /[A-Za-z0-9\-.@]+/ }
   resources :mailboxes
 
   get 'aliases/:id/edit', to: "aliases#edit", constraints: { id: /[A-Za-z0-9\-.@]+/ }

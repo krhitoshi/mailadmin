@@ -1,5 +1,5 @@
 class MailboxesController < ApplicationController
-  before_action :set_mailbox, only: [:edit, :update]
+  before_action :set_mailbox, only: [:edit, :update, :destroy]
   before_action :set_domain, only: [:new]
 
   def new
@@ -56,6 +56,11 @@ class MailboxesController < ApplicationController
     else
       render action: 'edit'
     end
+  end
+
+  def destroy
+    @mailbox.destroy
+    redirect_to domain_path(@mailbox.domain)
   end
 
   private

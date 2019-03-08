@@ -1,5 +1,5 @@
 class DomainsController < ApplicationController
-  before_action :set_domain, only: [:show, :edit, :update]
+  before_action :set_domain, only: [:show, :edit, :update, :destroy]
 
   def index
     @domains = Domain.all

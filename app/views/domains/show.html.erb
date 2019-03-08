@@ -23,6 +23,7 @@
       <td><%= m.alias.goto %></td>
       <td><%= m.quota %></td>
       <td><%= m.active %></td>
+      <td><%= link_to "Delete", m, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <td><%= m.modified %></td>
     </tr>
   <% end %>
