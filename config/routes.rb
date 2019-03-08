@@ -16,5 +16,6 @@ Rails.application.routes.draw do
 
   get 'aliases/:id/edit', to: "aliases#edit", constraints: { id: /[A-Za-z0-9\-.@]+/ }
   patch 'aliases/:id', to: "aliases#update", constraints: { id: /[A-Za-z0-9\-.@]+/ }
+  delete 'aliases/:id', to: "aliases#destroy", constraints: { id: /[A-Za-z0-9\-.@]+/ }
   resources :aliases
 end

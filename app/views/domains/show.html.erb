@@ -36,6 +36,7 @@
       <td><%= link_to a.address, edit_alias_path(a) %></td>
       <td><%= a.goto %></td>
       <td><%= a.active %></td>
+      <td><%= link_to "Delete", a, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <td><%= a.modified %></td>
     </tr>
   <% end %>

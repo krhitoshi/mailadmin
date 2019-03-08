@@ -1,5 +1,5 @@
 class AliasesController < ApplicationController
-  before_action :set_alias, only: [:edit, :update]
+  before_action :set_alias, only: [:edit, :update, :destroy]
   before_action :set_domain, only: [:new]
 
   def new
@@ -26,6 +26,11 @@ class AliasesController < ApplicationController
     else
       render action: 'edit'
     end
+  end
+
+  def destroy
+    @alias.destroy
+    redirect_to domain_path(@alias.domain)
   end
 
   private
