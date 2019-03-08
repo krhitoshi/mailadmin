@@ -23,6 +23,7 @@
       <td><%= domain.maxquota %></td>
       <td><%= domain.active %></td>
       <td><%= link_to "Edit", edit_domain_path(domain) %></td>
+      <td><%= link_to "Delete", domain, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <td><%= domain.modified %></td>
     </tr>
   <% end %>
