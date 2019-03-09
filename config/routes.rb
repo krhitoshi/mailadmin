@@ -15,12 +15,14 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'domains/new', to: "domains#new"
-  get 'domains/:id', to: "domains#show", constraints: { id: RE_DOMAIN_NAME_LIKE }
-  get 'domains/:id/edit', to: "domains#edit", constraints: { id: RE_DOMAIN_NAME_LIKE }
-  patch 'domains/:id', to: "domains#update", constraints: { id: RE_DOMAIN_NAME_LIKE }
-  delete 'domains/:id', to: "domains#destroy", constraints: { id: RE_DOMAIN_NAME_LIKE }
-  resources :domains
+  resources :domains, only: [:index, :new, :create] do
+    member do
+      get 'edit', action: 'edit', constraints: { id: RE_DOMAIN_NAME_LIKE }
+      get '', action: 'show', constraints: { id: RE_DOMAIN_NAME_LIKE }, as: ''
+      patch '', action: 'update', constraints: { id: RE_DOMAIN_NAME_LIKE }
+      delete '', action: 'destroy', constraints: { id: RE_DOMAIN_NAME_LIKE }
+    end
+  end
 
   get 'mailboxes/:id/edit', to: "mailboxes#edit", constraints: { id: RE_ADDRESS_LIKE }
   patch 'mailboxes/:id', to: "mailboxes#update", constraints: { id: RE_ADDRESS_LIKE }
