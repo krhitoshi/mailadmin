@@ -16,6 +16,8 @@ class AdminsController < ApplicationController
 
   def create
     params = admin_params.dup
+    domains = params["domains"]
+    params.delete("domains")
 
     if params["password"] != params["password_confirmation"]
       params.delete("password_confirmation")
@@ -30,6 +32,7 @@ class AdminsController < ApplicationController
     @admin = Admin.new(params)
 
     if @admin.save
+      @admin.rel_domain_ids = domains
       redirect_to admins_path, notice: 'Admin was successfully created.'
     else
       render action: 'new'
