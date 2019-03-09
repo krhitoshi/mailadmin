@@ -24,10 +24,13 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'mailboxes/:id/edit', to: "mailboxes#edit", constraints: { id: RE_ADDRESS_LIKE }
-  patch 'mailboxes/:id', to: "mailboxes#update", constraints: { id: RE_ADDRESS_LIKE }
-  delete 'mailboxes/:id', to: "mailboxes#destroy", constraints: { id: RE_ADDRESS_LIKE }
-  resources :mailboxes
+  resources :mailboxes, only: [:index, :new, :create] do
+    member do
+      get 'edit', action: 'edit', constraints: { id: RE_ADDRESS_LIKE }
+      patch '', action: 'update', constraints: { id: RE_ADDRESS_LIKE }, as: ''
+      delete '', action: 'destroy', constraints: { id: RE_ADDRESS_LIKE }
+    end
+  end
 
   get 'aliases/:id/edit', to: "aliases#edit", constraints: { id: RE_ADDRESS_LIKE }
   patch 'aliases/:id', to: "aliases#update", constraints: { id: RE_ADDRESS_LIKE }
