@@ -17,7 +17,7 @@
 
 <table class="table">
   <tbody>
-  <% @domain.rel_mailboxes.each do |m| %>
+  <% @domain.rel_mailboxes.includes(:alias).each do |m| %>
     <tr>
       <td><%= link_to m.username, edit_mailbox_path(m) %></td>
       <td><%= link_to "alias", edit_alias_path(m.alias),
