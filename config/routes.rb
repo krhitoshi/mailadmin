@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   RE_DOMAIN_NAME_LIKE = /([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}/
   RE_ADDRESS_LIKE = /[A-Za-z0-9\-.]+@([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}/
 
+  root 'domains#index'
+
   get 'admins/:id/edit', to: "admins#edit", constraints: { id: RE_ADDRESS_LIKE }
   patch 'admins/:id', to: "admins#update", constraints: { id: RE_ADDRESS_LIKE }
   delete 'admins/:id', to: "admins#destroy", constraints: { id: RE_ADDRESS_LIKE }
