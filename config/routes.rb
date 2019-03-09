@@ -1,24 +1,26 @@
 Rails.application.routes.draw do
+  RE_DOMAIN_NAME_LIKE = /([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}/
+  RE_ADDRESS_LIKE = /[A-Za-z0-9\-.]+@([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}/
 
-  get 'admins/:id/edit', to: "admins#edit", constraints: { id: /[A-Za-z0-9\-.@]+/ }
-  patch 'admins/:id', to: "admins#update", constraints: { id: /[A-Za-z0-9\-.@]+/ }
-  delete 'admins/:id', to: "admins#destroy", constraints: { id: /[A-Za-z0-9\-.@]+/ }
+  get 'admins/:id/edit', to: "admins#edit", constraints: { id: RE_ADDRESS_LIKE }
+  patch 'admins/:id', to: "admins#update", constraints: { id: RE_ADDRESS_LIKE }
+  delete 'admins/:id', to: "admins#destroy", constraints: { id: RE_ADDRESS_LIKE }
   resources :admins
 
   get 'domains/new', to: "domains#new"
-  get 'domains/:id', to: "domains#show", constraints: { id: /[A-Za-z0-9\-.]+/ }
-  get 'domains/:id/edit', to: "domains#edit", constraints: { id: /[A-Za-z0-9\-.]+/ }
-  patch 'domains/:id', to: "domains#update", constraints: { id: /[A-Za-z0-9\-.]+/ }
-  delete 'domains/:id', to: "domains#destroy", constraints: { id: /[A-Za-z0-9\-.]+/ }
+  get 'domains/:id', to: "domains#show", constraints: { id: RE_DOMAIN_NAME_LIKE }
+  get 'domains/:id/edit', to: "domains#edit", constraints: { id: RE_DOMAIN_NAME_LIKE }
+  patch 'domains/:id', to: "domains#update", constraints: { id: RE_DOMAIN_NAME_LIKE }
+  delete 'domains/:id', to: "domains#destroy", constraints: { id: RE_DOMAIN_NAME_LIKE }
   resources :domains
 
-  get 'mailboxes/:id/edit', to: "mailboxes#edit", constraints: { id: /[A-Za-z0-9\-.@]+/ }
-  patch 'mailboxes/:id', to: "mailboxes#update", constraints: { id: /[A-Za-z0-9\-.@]+/ }
-  delete 'mailboxes/:id', to: "mailboxes#destroy", constraints: { id: /[A-Za-z0-9\-.@]+/ }
+  get 'mailboxes/:id/edit', to: "mailboxes#edit", constraints: { id: RE_ADDRESS_LIKE }
+  patch 'mailboxes/:id', to: "mailboxes#update", constraints: { id: RE_ADDRESS_LIKE }
+  delete 'mailboxes/:id', to: "mailboxes#destroy", constraints: { id: RE_ADDRESS_LIKE }
   resources :mailboxes
 
-  get 'aliases/:id/edit', to: "aliases#edit", constraints: { id: /[A-Za-z0-9\-.@]+/ }
-  patch 'aliases/:id', to: "aliases#update", constraints: { id: /[A-Za-z0-9\-.@]+/ }
-  delete 'aliases/:id', to: "aliases#destroy", constraints: { id: /[A-Za-z0-9\-.@]+/ }
+  get 'aliases/:id/edit', to: "aliases#edit", constraints: { id: RE_ADDRESS_LIKE }
+  patch 'aliases/:id', to: "aliases#update", constraints: { id: RE_ADDRESS_LIKE }
+  delete 'aliases/:id', to: "aliases#destroy", constraints: { id: RE_ADDRESS_LIKE }
   resources :aliases
 end
