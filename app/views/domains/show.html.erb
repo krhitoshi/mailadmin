@@ -66,6 +66,7 @@
     <th>Alias</th>
     <th>Go to</th>
     <th>Active</th>
+    <th>Edit</th>
     <th>Delete</th>
     <th>Modified</th>
   </tr>
@@ -73,13 +74,15 @@
   <tbody>
   <% @domain.pure_aliases.each do |a| %>
     <tr>
-      <td><%= link_to a.address, edit_alias_path(a) %></td>
+      <td><%= a.address %></td>
       <td>
         <% a.gotos.each do |g| %>
           <%= g %><br>
         <% end %>
       </td>
       <td><%= a.active %></td>
+      <td><%= link_to "Edit", edit_alias_path(a),
+                      role: "button", class: "btn btn-info btn-sm" %></td>
       <td><%= link_to "Delete", a, method: :delete,
                       data: { confirm: 'Are you sure?' },
                       role: "button", class: "btn btn-secondary btn-sm" %></td>
