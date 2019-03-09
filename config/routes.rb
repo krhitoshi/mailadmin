@@ -26,19 +26,21 @@ Rails.application.routes.draw do
         delete '', action: 'destroy'
       end
     end
-  end
 
-  resources :mailboxes, only: [:index, :new, :create] do
-    member do
-      constraints id: RE_ADDRESS_LIKE do
-        get 'edit', action: 'edit'
-        patch '', action: 'update', as: ''
-        delete '', action: 'destroy'
+    constraints domain_id: RE_DOMAIN_NAME_LIKE do
+      resources :aliases, only: [:index, :new, :create] do
+        member do
+          constraints id: RE_ADDRESS_LIKE do
+            get 'edit', action: 'edit'
+            patch '', action: 'update', as: ''
+            delete '', action: 'destroy'
+          end
+        end
       end
     end
   end
 
-  resources :aliases, only: [:index, :new, :create] do
+  resources :mailboxes, only: [:index, :new, :create] do
     member do
       constraints id: RE_ADDRESS_LIKE do
         get 'edit', action: 'edit'

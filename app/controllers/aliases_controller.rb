@@ -1,6 +1,6 @@
 class AliasesController < ApplicationController
   before_action :set_alias, only: [:edit, :update, :destroy]
-  before_action :set_domain, only: [:new]
+  before_action :set_domain, only: [:new, :edit]
 
   def new
     @alias = Alias.new
