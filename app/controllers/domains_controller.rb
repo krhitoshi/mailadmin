@@ -50,6 +50,7 @@ class DomainsController < ApplicationController
   end
 
   def domain_params
-    params.require(:domain).permit(:domain, :description, :aliases, :mailboxes, :active)
+    params.require(:domain).permit(:domain, :description, :maxquota, :aliases,
+                                   :mailboxes, :active)
   end
 end
