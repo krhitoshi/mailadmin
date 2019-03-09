@@ -32,7 +32,7 @@
       <td><%= link_to "Delete", domain, method: :delete,
                       data: { confirm: 'Are you sure?' },
                       role: "button", class: "btn btn-secondary btn-sm" %></td>
-      <td><%= domain.modified %></td>
+      <td><%= domain.modified.strftime("%Y-%m-%d %X") %></td>
     </tr>
   <% end %>
   </tbody>
