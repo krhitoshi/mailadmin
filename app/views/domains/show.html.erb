@@ -13,7 +13,7 @@
 
 <h3>Mailbox</h3>
 
-<%= link_to "new mailbox", new_mailbox_path(domain_id: @domain.domain),
+<%= link_to "new mailbox", new_domain_mailbox_path(@domain),
             role: "button", class: "btn btn-primary btn-lg" %>
 
 <table class="table">
@@ -44,9 +44,9 @@
       <td><%= m.active %></td>
       <td><%= link_to "alias", edit_domain_alias_path(@domain, m.alias),
                       role: "button", class: "btn btn-info btn-sm" %></td>
-      <td><%= link_to "Edit", edit_mailbox_path(m),
+      <td><%= link_to "Edit", edit_domain_mailbox_path(@domain, m),
                       role: "button", class: "btn btn-info btn-sm" %></td>
-      <td><%= link_to "Delete", m, method: :delete,
+      <td><%= link_to "Delete", domain_mailbox_path(@domain, m), method: :delete,
                       data: { confirm: 'Are you sure?' },
                       role: "button", class: "btn btn-secondary btn-sm" %></td>
       <td><%= m.modified.strftime("%Y-%m-%d %X") %></td>

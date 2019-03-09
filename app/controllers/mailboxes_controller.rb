@@ -67,10 +67,13 @@ class MailboxesController < ApplicationController
 
   def set_domain
     @domain = Domain.find(params[:domain_id])
+    raise "Invalid domain access" unless @current_admin.has_domain?(@domain)
   end
 
   def set_mailbox
     @mailbox = Mailbox.find(params[:id])
+    set_domain
+    raise "Invalid Paramters" if @mailbox.rel_domain != @domain
   end
 
   def mailbox_params
