@@ -9,34 +9,42 @@ Rails.application.routes.draw do
 
   resources :admins, only: [:index, :new, :create] do
     member do
-      get 'edit', constraints: { id: RE_ADDRESS_LIKE }
-      patch '', action: 'update', constraints: { id: RE_ADDRESS_LIKE }, as: ''
-      delete '', action: 'destroy', constraints: { id: RE_ADDRESS_LIKE }
+      constraints id: RE_ADDRESS_LIKE do
+        get 'edit'
+        patch '', action: 'update', as: ''
+        delete '', action: 'destroy'
+      end
     end
   end
 
   resources :domains, only: [:index, :new, :create] do
     member do
-      get 'edit', action: 'edit', constraints: { id: RE_DOMAIN_NAME_LIKE }
-      get '', action: 'show', constraints: { id: RE_DOMAIN_NAME_LIKE }, as: ''
-      patch '', action: 'update', constraints: { id: RE_DOMAIN_NAME_LIKE }
-      delete '', action: 'destroy', constraints: { id: RE_DOMAIN_NAME_LIKE }
+      constraints id: RE_DOMAIN_NAME_LIKE do
+        get 'edit', action: 'edit'
+        get '', action: 'show', as: ''
+        patch '', action: 'update'
+        delete '', action: 'destroy'
+      end
     end
   end
 
   resources :mailboxes, only: [:index, :new, :create] do
     member do
-      get 'edit', action: 'edit', constraints: { id: RE_ADDRESS_LIKE }
-      patch '', action: 'update', constraints: { id: RE_ADDRESS_LIKE }, as: ''
-      delete '', action: 'destroy', constraints: { id: RE_ADDRESS_LIKE }
+      constraints id: RE_ADDRESS_LIKE do
+        get 'edit', action: 'edit'
+        patch '', action: 'update', as: ''
+        delete '', action: 'destroy'
+      end
     end
   end
 
   resources :aliases, only: [:index, :new, :create] do
     member do
-      get 'edit', action: 'edit', constraints: { id: RE_ADDRESS_LIKE }
-      patch '', action: 'update', constraints: { id: RE_ADDRESS_LIKE }, as: ''
-      delete '', action: 'destroy', constraints: { id: RE_ADDRESS_LIKE }
+      constraints id: RE_ADDRESS_LIKE do
+        get 'edit', action: 'edit'
+        patch '', action: 'update', as: ''
+        delete '', action: 'destroy'
+      end
     end
   end
 end
