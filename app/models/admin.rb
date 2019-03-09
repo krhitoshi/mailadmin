@@ -9,6 +9,10 @@ class Admin < ApplicationRecord
     rel_domains.exists?("ALL")
   end
 
+  def has_admin?(admin)
+    self == admin || super_admin?
+  end
+
   def has_domain?(domain)
     !rel_domains.where(domain: ["ALL", domain.domain]).empty?
   end

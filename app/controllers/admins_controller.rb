@@ -1,11 +1,14 @@
 class AdminsController < ApplicationController
+  before_action :super_admin_check, only: [:new, :create, :destroy]
   before_action :set_admin, only: [:edit, :update, :destroy]
 
   def index
     if @current_admin.super_admin?
       @admins = Admin.all
+      @super_admin = true
     else
       @admins = [@current_admin]
+      @super_admin = false
     end
   end
 
@@ -76,8 +79,13 @@ class AdminsController < ApplicationController
 
   private
 
+  def super_admin_check
+    raise "Ivalid admin access" unless @current_admin.super_admin?
+  end
+
   def set_admin
     @admin = Admin.find(params[:id])
+    raise "Invalid admin access" unless @current_admin.has_admin?(@admin)
   end
 
   def admin_params

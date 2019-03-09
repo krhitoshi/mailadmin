@@ -2,8 +2,10 @@
 
 <p id="notice"><%= notice %></p>
 
+<% if @super_admin %>
 <%= link_to "new admin", new_admin_path,
             role: "button", class: "btn btn-primary btn-lg"%>
+<% end %>
 
 <table class="table">
   <thead class="thead-dark">
@@ -12,7 +14,9 @@
     <th>Domains</th>
     <th>Active</th>
     <th>Edit</th>
+    <% if @super_admin %>
     <th>Delete</th>
+    <% end %>
     <th>Modified</th>
   </tr>
   </thead>
@@ -30,9 +34,11 @@
       <td><%= admin.active %></td>
       <td><%= link_to "Edit", edit_admin_path(admin),
                       role: "button", class: "btn btn-info btn-sm"%></td>
+      <% if @super_admin %>
       <td><%= link_to "Delete", admin, method: :delete,
                       data: { confirm: 'Are you sure?' },
                       role: "button", class: "btn btn-secondary btn-sm" %></td>
+      <% end %>
       <td><%= admin.modified.strftime("%Y-%m-%d %X") %></td>
     </tr>
   <% end %>
