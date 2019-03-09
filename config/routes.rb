@@ -7,10 +7,13 @@ Rails.application.routes.draw do
   post   'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  get 'admins/:id/edit', to: "admins#edit", constraints: { id: RE_ADDRESS_LIKE }
-  patch 'admins/:id', to: "admins#update", constraints: { id: RE_ADDRESS_LIKE }
-  delete 'admins/:id', to: "admins#destroy", constraints: { id: RE_ADDRESS_LIKE }
-  resources :admins
+  resources :admins, only: [:index, :new, :create] do
+    member do
+      get 'edit', constraints: { id: RE_ADDRESS_LIKE }
+      patch '', action: 'update', constraints: { id: RE_ADDRESS_LIKE }, as: ''
+      delete '', action: 'destroy', constraints: { id: RE_ADDRESS_LIKE }
+    end
+  end
 
   get 'domains/new', to: "domains#new"
   get 'domains/:id', to: "domains#show", constraints: { id: RE_DOMAIN_NAME_LIKE }
