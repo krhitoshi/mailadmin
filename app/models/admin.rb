@@ -9,6 +9,10 @@ class Admin < ApplicationRecord
     rel_domains.exists?("ALL")
   end
 
+  def has_domain?(domain)
+    !rel_domains.where(domain: ["ALL", domain.domain]).empty?
+  end
+
   def authenticate(plain_password)
     password == DovecotCrammd5.calc(plain_password)
   end

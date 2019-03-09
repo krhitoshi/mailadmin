@@ -47,6 +47,7 @@ class DomainsController < ApplicationController
 
   def set_domain
     @domain = Domain.find(params[:id])
+    raise "Invalid domain access" unless @current_admin.has_domain?(@domain)
   end
 
   def domain_params
