@@ -1,0 +1,11 @@
+<%= form_tag(nil, class: "form-signin", style: "max-width: 330px; margin: auto;") do %>
+  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+  <% if alert %>
+    <p id="notice"><%= alert %></p>
+  <% end %>
+  <%= text_field_tag :username, nil, class: "form-control", placeholder: "Login (email)" %>
+
+  <%= password_field_tag :password, nil, class: "form-control", placeholder: "Password" %>
+
+  <%= submit_tag 'Sign in', class: "btn btn-lg btn-primary btn-block", style: "margin-top: 20px" %>
+<% end %>

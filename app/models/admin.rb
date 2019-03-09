@@ -9,6 +9,10 @@ class Admin < ApplicationRecord
     rel_domains.exists?("ALL")
   end
 
+  def authenticate(plain_password)
+    password == DovecotCrammd5.calc(plain_password)
+  end
+
   def self.timestamp_attributes_for_create
     ["created"]
   end
