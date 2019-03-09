@@ -2,7 +2,11 @@ class DomainsController < ApplicationController
   before_action :set_domain, only: [:show, :edit, :update, :destroy]
 
   def index
-    @domains = Domain.all
+    if @current_admin.super_admin?
+      @domains = Domain.all
+    else
+      @domains = @current_admin.rel_domains
+    end
   end
 
   def new

@@ -2,7 +2,11 @@ class AdminsController < ApplicationController
   before_action :set_admin, only: [:edit, :update, :destroy]
 
   def index
-    @admins = Admin.all
+    if @current_admin.super_admin?
+      @admins = Admin.all
+    else
+      @admins = [@current_admin]
+    end
   end
 
   def new
