@@ -42,7 +42,9 @@ class AdminsController < ApplicationController
 
   def update
     params = admin_params.dup
-    logger.debug("params: #{params}")
+    domains = params["domains"]
+    params.delete("domains")
+
     if params["password"]
       if params["password"] != params["password_confirmation"]
         params.delete("password_confirmation")
@@ -54,9 +56,6 @@ class AdminsController < ApplicationController
       params["password"] = DovecotCrammd5.calc(params["password"])
       params.delete("password_confirmation")
     end
-
-    domains = params["domains"]
-    params.delete("domains")
 
     if @admin.update(params)
       @admin.rel_domain_ids = domains
