@@ -32,8 +32,11 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'aliases/:id/edit', to: "aliases#edit", constraints: { id: RE_ADDRESS_LIKE }
-  patch 'aliases/:id', to: "aliases#update", constraints: { id: RE_ADDRESS_LIKE }
-  delete 'aliases/:id', to: "aliases#destroy", constraints: { id: RE_ADDRESS_LIKE }
-  resources :aliases
+  resources :aliases, only: [:index, :new, :create] do
+    member do
+      get 'edit', action: 'edit', constraints: { id: RE_ADDRESS_LIKE }
+      patch '', action: 'update', constraints: { id: RE_ADDRESS_LIKE }, as: ''
+      delete '', action: 'destroy', constraints: { id: RE_ADDRESS_LIKE }
+    end
+  end
 end
