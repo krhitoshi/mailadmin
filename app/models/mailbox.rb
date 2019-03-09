@@ -5,6 +5,14 @@ class Mailbox < ApplicationRecord
   belongs_to :rel_domain, class_name: "Domain", foreign_key: :domain
   has_one :alias, foreign_key: :address, dependent: :destroy
 
+  def quota_str
+    if quota.zero?
+      "Unlimited"
+    else
+      (quota / 1_024_000).to_s
+    end
+  end
+
   def self.timestamp_attributes_for_create
     ["created"]
   end

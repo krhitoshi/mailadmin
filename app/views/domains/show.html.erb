@@ -5,50 +5,85 @@
 <p id="notice"><%= notice %></p>
 
 <ul>
-  <li>Mailbox: <%= @domain.rel_mailboxes.count %> / <%= @domain.mailboxes %></li>
-  <li>Alias: <%= @domain.pure_aliases.count %> / <%= @domain.aliases %></li>
-  <li>Quota (MB): <%= @domain.maxquota %></li>
+  <li>Mailboxes: <%= @domain.rel_mailboxes.count %> / <%= @domain.mailboxes %></li>
+  <li>Aliases: <%= @domain.pure_aliases.count %> / <%= @domain.aliases %></li>
+  <li>Quota (MB): <%= @domain.maxquota_str %></li>
   <li>Active: <%= @domain.active %></li>
-  <li>Modified: <%= @domain.modified %></li>
 </ul>
 
 <h3>Mailbox</h3>
-<%= link_to "new mailbox", new_mailbox_path(domain_id: @domain.domain) %>
+
+<%= link_to "new mailbox", new_mailbox_path(domain_id: @domain.domain),
+            role: "button", class: "btn btn-primary btn-lg"%>
 
 <table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th>Mailbox</th>
+    <th>To</th>
+    <th>Name</th>
+    <th>Quota (MB)</th>
+    <th>Active</th>
+    <th>Alias</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    <th>Modified</th>
+  </tr>
+  </thead>
   <tbody>
   <% @domain.rel_mailboxes.includes(:alias).each do |m| %>
     <tr>
-      <td><%= link_to m.username, edit_mailbox_path(m) %></td>
+      <td><%= m.username %></td>
+      <td>
+        <% m.alias.gotos.each do |g| %>
+        <%= g %><br>
+        <% end %>
+      </td>
+      <td><%= m.name %></td>
+      <td><%= m.quota_str %></td>
+      <td><%= m.active %></td>
       <td><%= link_to "alias", edit_alias_path(m.alias),
                       role: "button", class: "btn btn-info btn-sm" %></td>
-      <td><%= m.name %></td>
-      <td><%= m.alias.goto %></td>
-      <td><%= m.quota %></td>
-      <td><%= m.active %></td>
+      <td><%= link_to "Edit", edit_mailbox_path(m),
+                      role: "button", class: "btn btn-info btn-sm" %></td>
       <td><%= link_to "Delete", m, method: :delete,
                       data: { confirm: 'Are you sure?' },
                       role: "button", class: "btn btn-secondary btn-sm" %></td>
-      <td><%= m.modified %></td>
+      <td><%= m.modified.strftime("%Y-%m-%d %X") %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
 
 <h3>Alias</h3>
-<%= link_to "new alias", new_alias_path(domain_id: @domain.domain) %>
+
+<%= link_to "new alias", new_alias_path(domain_id: @domain.domain),
+            role: "button", class: "btn btn-primary btn-lg" %>
 
 <table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th>Alias</th>
+    <th>Go to</th>
+    <th>Active</th>
+    <th>Delete</th>
+    <th>Modified</th>
+  </tr>
+  </thead>
   <tbody>
   <% @domain.pure_aliases.each do |a| %>
     <tr>
       <td><%= link_to a.address, edit_alias_path(a) %></td>
-      <td><%= a.goto %></td>
+      <td>
+        <% a.gotos.each do |g| %>
+          <%= g %><br>
+        <% end %>
+      </td>
       <td><%= a.active %></td>
       <td><%= link_to "Delete", a, method: :delete,
                       data: { confirm: 'Are you sure?' },
                       role: "button", class: "btn btn-secondary btn-sm" %></td>
-      <td><%= a.modified %></td>
+      <td><%= a.modified.strftime("%Y-%m-%d %X") %></td>
     </tr>
   <% end %>
   </tbody>

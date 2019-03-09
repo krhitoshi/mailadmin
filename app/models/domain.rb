@@ -11,6 +11,14 @@ class Domain < ApplicationRecord
     rel_aliases.pure
   end
 
+  def maxquota_str
+    if maxquota.zero?
+      "Unlimited"
+    else
+      maxquota.to_s
+    end
+  end
+
   def self.timestamp_attributes_for_create
     ["created"]
   end

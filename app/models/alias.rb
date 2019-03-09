@@ -15,6 +15,10 @@ class Alias < ApplicationRecord
     !mailbox
   end
 
+  def gotos
+    goto.split(",")
+  end
+
   def self.timestamp_attributes_for_create
     ["created"]
   end
