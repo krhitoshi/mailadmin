@@ -53,6 +53,7 @@ class AdminsController < ApplicationController
         params.delete("password_confirmation")
         @admin.attributes = params
         flash[:notice] = "Password mismatch"
+        @domains = Domain.all
         render action: 'edit'
         return
       end
