@@ -10,9 +10,11 @@
   </head>
 
   <body>
-  <%= link_to "Admins", admins_path %>
-  <%= link_to "Domains", domains_path %>
+  <div class="container">
+    <%= link_to "Admins", admins_path %>
+    <%= link_to "Domains", domains_path %>
 
-  <%= yield %>
+    <%= yield %>
+  </div>
   </body>
 </html>
