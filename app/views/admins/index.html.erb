@@ -2,7 +2,8 @@
 
 <p id="notice"><%= notice %></p>
 
-<%= link_to "new admin", new_admin_path %>
+<%= link_to "new admin", new_admin_path,
+            role: "button", class: "btn btn-primary btn-lg"%>
 
 <table class="table">
   <thead class="thead-dark">
@@ -10,6 +11,7 @@
     <th>Admin</th>
     <th>Domains</th>
     <th>Active</th>
+    <th>Edit</th>
     <th>Delete</th>
     <th>Modified</th>
   </tr>
@@ -17,7 +19,7 @@
   <tbody>
   <% @admins.each do |admin| %>
     <tr>
-      <td><%= link_to admin.username, edit_admin_path(admin) %></td>
+      <td><%= admin.username %></td>
       <td>
         <% if admin.super_admin? %>
           Super Admin
@@ -26,6 +28,8 @@
         <% end %>
       </td>
       <td><%= admin.active %></td>
+      <td><%= link_to "Edit", edit_admin_path(admin),
+                      role: "button", class: "btn btn-info btn-sm"%></td>
       <td><%= link_to "Delete", admin, method: :delete,
                       data: { confirm: 'Are you sure?' },
                       role: "button", class: "btn btn-secondary btn-sm" %></td>
