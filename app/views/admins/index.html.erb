@@ -26,7 +26,9 @@
         <% end %>
       </td>
       <td><%= admin.active %></td>
-      <td><%= link_to "Delete", admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to "Delete", admin, method: :delete,
+                      data: { confirm: 'Are you sure?' },
+                      role: "button", class: "btn btn-secondary btn-sm" %></td>
       <td><%= admin.modified %></td>
     </tr>
   <% end %>

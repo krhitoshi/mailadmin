@@ -20,12 +20,15 @@
   <% @domain.rel_mailboxes.each do |m| %>
     <tr>
       <td><%= link_to m.username, edit_mailbox_path(m) %></td>
-      <td><%= link_to "alias", edit_alias_path(m.alias) %></td>
+      <td><%= link_to "alias", edit_alias_path(m.alias),
+                      role: "button", class: "btn btn-info btn-sm" %></td>
       <td><%= m.name %></td>
       <td><%= m.alias.goto %></td>
       <td><%= m.quota %></td>
       <td><%= m.active %></td>
-      <td><%= link_to "Delete", m, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to "Delete", m, method: :delete,
+                      data: { confirm: 'Are you sure?' },
+                      role: "button", class: "btn btn-secondary btn-sm" %></td>
       <td><%= m.modified %></td>
     </tr>
   <% end %>
@@ -42,7 +45,9 @@
       <td><%= link_to a.address, edit_alias_path(a) %></td>
       <td><%= a.goto %></td>
       <td><%= a.active %></td>
-      <td><%= link_to "Delete", a, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to "Delete", a, method: :delete,
+                      data: { confirm: 'Are you sure?' },
+                      role: "button", class: "btn btn-secondary btn-sm" %></td>
       <td><%= a.modified %></td>
     </tr>
   <% end %>
