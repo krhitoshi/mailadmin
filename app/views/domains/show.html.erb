@@ -14,7 +14,9 @@
 
 <h3>Mailbox</h3>
 <%= link_to "new mailbox", new_mailbox_path(domain_id: @domain.domain) %>
-<table>
+
+<table class="table">
+  <tbody>
   <% @domain.rel_mailboxes.each do |m| %>
     <tr>
       <td><%= link_to m.username, edit_mailbox_path(m) %></td>
@@ -27,11 +29,14 @@
       <td><%= m.modified %></td>
     </tr>
   <% end %>
+  </tbody>
 </table>
 
 <h3>Alias</h3>
 <%= link_to "new alias", new_alias_path(domain_id: @domain.domain) %>
-<table>
+
+<table class="table">
+  <tbody>
   <% @domain.pure_aliases.each do |a| %>
     <tr>
       <td><%= link_to a.address, edit_alias_path(a) %></td>
@@ -41,4 +46,5 @@
       <td><%= a.modified %></td>
     </tr>
   <% end %>
+  </tbody>
 </table>

@@ -2,7 +2,8 @@
 
 <%= link_to "new domain", new_domain_path %>
 
-<table>
+<table class="table">
+  <thead class="thead-dark">
   <tr>
     <th>Domain</th>
     <th>Description</th>
@@ -11,8 +12,11 @@
     <th>Quota (MB)</th>
     <th>Active</th>
     <th>Edit</th>
+    <th>Delete</th>
     <th>Modified</th>
   </tr>
+  </thead>
+  <tbody>
   <% @domains.each do |domain| %>
     <% next if domain.domain == "ALL" %>
     <tr>
@@ -27,4 +31,5 @@
       <td><%= domain.modified %></td>
     </tr>
   <% end %>
+  </tbody>
 </table>
