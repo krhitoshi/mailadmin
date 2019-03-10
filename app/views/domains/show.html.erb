@@ -49,7 +49,7 @@
       <td><%= link_to "Delete", domain_mailbox_path(@domain, m), method: :delete,
                       data: { confirm: 'Are you sure?' },
                       role: "button", class: "btn btn-secondary btn-sm" %></td>
-      <td><%= m.modified.strftime("%Y-%m-%d %X") %></td>
+      <td><%= l m.modified %></td>
     </tr>
   <% end %>
   </tbody>
@@ -86,7 +86,7 @@
       <td><%= link_to "Delete", domain_alias_path(@domain, a), method: :delete,
                       data: { confirm: 'Are you sure?' },
                       role: "button", class: "btn btn-secondary btn-sm" %></td>
-      <td><%= a.modified.strftime("%Y-%m-%d %X") %></td>
+      <td><%= l a.modified %></td>
     </tr>
   <% end %>
   </tbody>
