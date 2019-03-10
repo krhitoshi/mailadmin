@@ -40,7 +40,7 @@ class MailboxesController < ApplicationController
 
   def update
     params = mailbox_params.dup
-    if params["password"]
+    if params["password"] && !params["password"].empty?
       if params["password"] != params["password_confirmation"]
         params.delete("password_confirmation")
         @mailbox.attributes = params
@@ -49,8 +49,11 @@ class MailboxesController < ApplicationController
         return
       end
       params["password"] = DovecotCrammd5.calc(params["password"])
-      params.delete("password_confirmation")
+    else
+      params.delete("password")
     end
+    params.delete("password_confirmation")
+
     if @mailbox.update(params)
       redirect_to domain_path(@mailbox.domain), notice: 'Mailbox was successfully updated.'
     else
