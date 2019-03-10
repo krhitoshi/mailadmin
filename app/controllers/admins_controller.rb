@@ -73,6 +73,7 @@ class AdminsController < ApplicationController
   end
 
   def destroy
+    raise "Invalid action" if @admin == @current_admin
     @admin.destroy
     redirect_to admins_path
   end
