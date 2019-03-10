@@ -2,7 +2,12 @@ class Admin < ApplicationRecord
   self.table_name = :admin
   self.primary_key = :username
 
-  validates :password, presence: true
+  validates :password_plain, length: { minimum: 5 }, allow_blank: true
+  validates_confirmation_of :password_plain, allow_blank: true
+
+  validate do |record|
+    record.errors.add(:password_plain, :blank) unless record.password.present?
+  end
 
   has_many :domain_admins, foreign_key: :username, dependent: :delete_all
   has_many :rel_domains, through: :domain_admins
@@ -20,8 +25,6 @@ class Admin < ApplicationRecord
       self.password = DovecotCrammd5.calc(unencrypted_password)
     end
   end
-
-  validates_confirmation_of :password_plain, allow_blank: true
 
   def super_admin?
     rel_domains.exists?("ALL")
