@@ -2,6 +2,7 @@ class Admin < ApplicationRecord
   self.table_name = :admin
   self.primary_key = :username
 
+  validates :username, presence: true, uniqueness: true
   validates :password_plain, length: { minimum: 5 }, allow_blank: true
   validates_confirmation_of :password_plain, allow_blank: true
 
@@ -13,6 +14,8 @@ class Admin < ApplicationRecord
   has_many :rel_domains, through: :domain_admins
 
   scope :active, -> { where(active: true) }
+
+  attr_accessor :domain_ids
 
   attr_reader :password_plain
   attr_accessor :password_plain_confirmation

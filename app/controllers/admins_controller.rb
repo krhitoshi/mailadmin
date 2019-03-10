@@ -18,16 +18,12 @@ class AdminsController < ApplicationController
   end
 
   def create
-    params = admin_params.dup
-    domains = params["domains"]
-    params.delete("domains")
-
-    @admin = Admin.new(params)
+    @admin = Admin.new(admin_params)
 
     # transation for InnoDB
     Admin.transaction do
-      @admin.update!(params)
-      @admin.rel_domain_ids = domains
+      @admin.save!
+      @admin.rel_domain_ids = admin_params["domain_ids"]
     end
 
     redirect_to admins_path, notice: 'Admin was successfully created.'
@@ -44,14 +40,10 @@ class AdminsController < ApplicationController
   end
 
   def update
-    params = admin_params.dup
-    domains = params["domains"]
-    params.delete("domains")
-
     # transation for InnoDB
     Admin.transaction do
-      @admin.update!(params)
-      @admin.rel_domain_ids = domains
+      @admin.update!(admin_params)
+      @admin.rel_domain_ids = admin_params["domain_ids"]
     end
 
     redirect_to admins_path, notice: 'Admin was successfully updated.'
@@ -83,6 +75,6 @@ class AdminsController < ApplicationController
   def admin_params
     params.require(:admin).permit(:username, :password_plain,
                                   :password_plain_confirmation,
-                                  :active, domains: [])
+                                  :active, domain_ids: [])
   end
 end
