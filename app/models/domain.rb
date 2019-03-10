@@ -7,6 +7,8 @@ class Domain < ApplicationRecord
   has_many :rel_aliases, class_name: "Alias", foreign_key: :domain,
            dependent: :destroy
 
+  scope :without_all, -> { where.not(domain: "ALL") }
+
   def pure_aliases
     rel_aliases.pure
   end

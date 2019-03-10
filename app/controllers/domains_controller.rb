@@ -3,7 +3,7 @@ class DomainsController < ApplicationController
 
   def index
     if @current_admin.super_admin?
-      @domains = Domain.all
+      @domains = Domain.without_all.all
     else
       @domains = @current_admin.rel_domains
     end
