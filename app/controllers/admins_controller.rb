@@ -22,22 +22,13 @@ class AdminsController < ApplicationController
     domains = params["domains"]
     params.delete("domains")
 
-    if params["password"] != params["password_confirmation"]
-      params.delete("password_confirmation")
-      @admin = Adminx.new(params)
-      flash[:notice] = "Password mismatch"
-      render action: 'new'
-      return
-    end
-
-    params["password"] = DovecotCrammd5.calc(params["password"])
-    params.delete("password_confirmation")
     @admin = Admin.new(params)
 
     if @admin.save
       @admin.rel_domain_ids = domains
       redirect_to admins_path, notice: 'Admin was successfully created.'
     else
+      @domains = Domain.all
       render action: 'new'
     end
   end
@@ -51,25 +42,11 @@ class AdminsController < ApplicationController
     domains = params["domains"]
     params.delete("domains")
 
-    if params["password"] && !params["password"].empty?
-      if params["password"] != params["password_confirmation"]
-        params.delete("password_confirmation")
-        @admin.attributes = params
-        flash[:notice] = "Password mismatch"
-        @domains = Domain.all
-        render action: 'edit'
-        return
-      end
-      params["password"] = DovecotCrammd5.calc(params["password"])
-    else
-      params.delete("password")
-    end
-    params.delete("password_confirmation")
-
     if @admin.update(params)
       @admin.rel_domain_ids = domains
       redirect_to admins_path, notice: 'Admin was successfully updated.'
     else
+      @domains = Domain.all
       render action: 'edit'
     end
   end
@@ -92,7 +69,8 @@ class AdminsController < ApplicationController
   end
 
   def admin_params
-    params.require(:admin).permit(:username, :password, :password_confirmation,
+    params.require(:admin).permit(:username, :password_plain,
+                                  :password_plain_confirmation,
                                   :active, domains: [])
   end
 end
