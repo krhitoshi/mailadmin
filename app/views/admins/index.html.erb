@@ -22,7 +22,8 @@
   </thead>
   <tbody>
   <% @admins.each do |admin| %>
-    <tr>
+    <% tr_class = admin.active? ? "" : "table-secondary" %>
+    <tr class="<%= tr_class %>">
       <td><%= admin.username %></td>
       <td>
         <% if admin.super_admin? %>

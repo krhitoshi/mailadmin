@@ -20,7 +20,8 @@
   <tbody>
   <% @domains.each do |domain| %>
     <% next if domain.domain == "ALL" %>
-    <tr>
+    <% tr_class = domain.active? ? "" : "table-secondary" %>
+    <tr class="<%= tr_class %>">
       <td><%= link_to domain.domain, domain %></td>
       <td><%= domain.description %></td>
       <td><%= domain.rel_mailboxes.count %> / <%= domain.mailboxes %></td>
