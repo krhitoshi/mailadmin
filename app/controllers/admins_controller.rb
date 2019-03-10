@@ -24,13 +24,19 @@ class AdminsController < ApplicationController
 
     @admin = Admin.new(params)
 
-    if @admin.save
+    # transation for InnoDB
+    Admin.transaction do
+      @admin.update!(params)
       @admin.rel_domain_ids = domains
-      redirect_to admins_path, notice: 'Admin was successfully created.'
-    else
-      @domains = Domain.all
-      render action: 'new'
     end
+
+    redirect_to admins_path, notice: 'Admin was successfully created.'
+
+  rescue ActiveRecord::ActiveRecordError => e
+    logger.error("#{e.class}: #{e}")
+    flash[:notice] = "Failed to save Admin"
+    @domains = Domain.all
+    render action: 'new'
   end
 
   def edit
@@ -42,13 +48,19 @@ class AdminsController < ApplicationController
     domains = params["domains"]
     params.delete("domains")
 
-    if @admin.update(params)
+    # transation for InnoDB
+    Admin.transaction do
+      @admin.update!(params)
       @admin.rel_domain_ids = domains
-      redirect_to admins_path, notice: 'Admin was successfully updated.'
-    else
-      @domains = Domain.all
-      render action: 'edit'
     end
+
+    redirect_to admins_path, notice: 'Admin was successfully updated.'
+
+  rescue ActiveRecord::ActiveRecordError => e
+    logger.error("#{e.class}: #{e}")
+    flash[:notice] = "Failed to save Admin"
+    @domains = Domain.all
+    render action: 'edit'
   end
 
   def destroy
