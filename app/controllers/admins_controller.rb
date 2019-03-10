@@ -51,7 +51,7 @@ class AdminsController < ApplicationController
     domains = params["domains"]
     params.delete("domains")
 
-    if params["password"]
+    if params["password"] && !params["password"].empty?
       if params["password"] != params["password_confirmation"]
         params.delete("password_confirmation")
         @admin.attributes = params
@@ -61,8 +61,10 @@ class AdminsController < ApplicationController
         return
       end
       params["password"] = DovecotCrammd5.calc(params["password"])
-      params.delete("password_confirmation")
+    else
+      params.delete("password")
     end
+    params.delete("password_confirmation")
 
     if @admin.update(params)
       @admin.rel_domain_ids = domains
