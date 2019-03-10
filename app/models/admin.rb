@@ -5,6 +5,8 @@ class Admin < ApplicationRecord
   has_many :domain_admins, foreign_key: :username, dependent: :delete_all
   has_many :rel_domains, through: :domain_admins
 
+  scope :active, -> { where(active: true) }
+
   def super_admin?
     rel_domains.exists?("ALL")
   end
