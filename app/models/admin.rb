@@ -41,8 +41,8 @@ class Admin < ApplicationRecord
     !rel_domains.where(domain: ["ALL", domain.domain]).empty?
   end
 
-  def authenticate(plain_password)
-    password == DovecotCrammd5.calc(plain_password)
+  def authenticate(unencrypted_password)
+    password == DovecotCrammd5.calc(unencrypted_password)
   end
 
   def self.timestamp_attributes_for_create
