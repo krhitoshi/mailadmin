@@ -1,6 +1,6 @@
 class MailboxesController < ApplicationController
   before_action :set_mailbox, only: [:edit, :update, :destroy]
-  before_action :set_domain, only: [:new]
+  before_action :set_domain, only: [:new, :create]
 
   def new
     @mailbox = Mailbox.new
@@ -8,19 +8,7 @@ class MailboxesController < ApplicationController
   end
 
   def create
-    params = mailbox_params.dup
-
-    if params["password"] != params["password_confirmation"]
-      params.delete("password_confirmation")
-      @mailbox = Mailbox.new(params)
-      flash[:notice] = "Password mismatch"
-      render action: 'new'
-      return
-    end
-
-    params["password"] = DovecotCrammd5.calc(params["password"])
-    params.delete("password_confirmation")
-    @mailbox = Mailbox.new(params)
+    @mailbox = Mailbox.new(mailbox_params)
 
     # TODO: Validation of username
     local_part, _ = @mailbox.username.split("@")
@@ -39,22 +27,7 @@ class MailboxesController < ApplicationController
   end
 
   def update
-    params = mailbox_params.dup
-    if params["password"] && !params["password"].empty?
-      if params["password"] != params["password_confirmation"]
-        params.delete("password_confirmation")
-        @mailbox.attributes = params
-        flash[:notice] = "Password mismatch"
-        render action: 'edit'
-        return
-      end
-      params["password"] = DovecotCrammd5.calc(params["password"])
-    else
-      params.delete("password")
-    end
-    params.delete("password_confirmation")
-
-    if @mailbox.update(params)
+    if @mailbox.update(mailbox_params)
       redirect_to domain_path(@mailbox.domain), notice: 'Mailbox was successfully updated.'
     else
       render action: 'edit'
@@ -80,6 +53,9 @@ class MailboxesController < ApplicationController
   end
 
   def mailbox_params
-    params.require(:mailbox).permit(:username, :name, :domain, :password, :password_confirmation, :quota, :active)
+    params.require(:mailbox).permit(:username, :name, :domain,
+                                    :password_unencrypted,
+                                    :password_unencrypted_confirmation,
+                                    :quota, :active)
   end
 end
