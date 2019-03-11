@@ -42,7 +42,7 @@ class Admin < ApplicationRecord
   end
 
   def authenticate(unencrypted_password)
-    password == DovecotCrammd5.calc(unencrypted_password)
+    password == DovecotCrammd5.calc(unencrypted_password) && self
   end
 
   def self.timestamp_attributes_for_create

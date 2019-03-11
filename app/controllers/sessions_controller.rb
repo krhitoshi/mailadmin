@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
 
   def create
     admin = Admin.active.find_by_username(params[:username])
-    if admin and admin.authenticate(params[:password])
+                &.authenticate(params[:password])
+    if admin
       session[:admin_username] = admin.username
       redirect_to root_url
     else
