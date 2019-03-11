@@ -1,14 +1,14 @@
 class AliasesController < ApplicationController
   before_action :set_alias, only: [:edit, :update, :destroy]
-  before_action :set_domain, only: [:new]
+  before_action :set_domain, only: [:new, :create]
 
   def new
     @alias = Alias.new
-    @alias.rel_domain = @domain
   end
 
   def create
     @alias = Alias.new(alias_params)
+    @alias.rel_domain = @domain
 
     if @alias.save
       redirect_to domain_path(@alias.domain), notice: 'Alias was successfully created.'
@@ -47,6 +47,6 @@ class AliasesController < ApplicationController
   end
 
   def alias_params
-    params.require(:alias).permit(:address, :domain, :goto, :active)
+    params.require(:alias).permit(:address, :goto, :active)
   end
 end
