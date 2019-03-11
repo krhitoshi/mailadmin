@@ -28,7 +28,10 @@ Rails.application.routes.draw do
     end
 
     constraints domain_id: RE_DOMAIN_NAME_LIKE do
-      resources :aliases, only: [:index, :new, :create] do
+      resources :aliases, only: [:new, :create] do
+        collection do
+          get '', to: redirect('/domains/%{domain_id}')
+        end
         member do
           constraints id: RE_ADDRESS_LIKE do
             get 'edit', action: 'edit'
@@ -38,7 +41,10 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :mailboxes, only: [:index, :new, :create] do
+      resources :mailboxes, only: [:new, :create] do
+        collection do
+          get '', to: redirect('/domains/%{domain_id}')
+        end
         member do
           constraints id: RE_ADDRESS_LIKE do
             get 'edit', action: 'edit'
