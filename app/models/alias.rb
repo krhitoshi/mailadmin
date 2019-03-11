@@ -2,6 +2,9 @@ class Alias < ApplicationRecord
   self.table_name = :alias
   self.primary_key = :address
 
+  validates :address, presence: true, uniqueness: true
+  validates :goto, presence: true
+
   belongs_to :rel_domain, class_name: "Domain", foreign_key: :domain
   belongs_to :mailbox, foreign_key: :address, optional: true
 
