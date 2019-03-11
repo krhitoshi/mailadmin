@@ -11,16 +11,23 @@ class MailboxesController < ApplicationController
     @mailbox = Mailbox.new(mailbox_params)
 
     # TODO: Validation of username
+    # TODO: domain_part must match @mailbox.domain
     local_part, _ = @mailbox.username.split("@")
     @mailbox.maildir = "#{@mailbox.domain}/#{@mailbox.username}/"
     @mailbox.local_part  = local_part
     @mailbox.build_alias(goto: @mailbox.username, domain: @mailbox.domain)
 
-    if @mailbox.save
-      redirect_to domain_path(@mailbox.domain), notice: 'Mailbox was successfully created.'
-    else
-      render action: 'new'
+    # transation for InnoDB
+    Mailbox.transaction do
+      @mailbox.save!
     end
+
+    redirect_to domain_path(@mailbox.domain), notice: 'Mailbox was successfully created.'
+
+  rescue ActiveRecord::ActiveRecordError => e
+    logger.error("#{e.class}: #{e}")
+    flash[:notice] = "Failed to save Mailbox"
+    render action: 'new'
   end
 
   def edit
