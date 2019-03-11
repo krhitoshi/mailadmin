@@ -2,13 +2,9 @@ class Admin < ApplicationRecord
   self.table_name = :admin
   self.primary_key = :username
 
-  validates :username, presence: true, uniqueness: true
-  validates :password_unencrypted, length: { minimum: 5 }, allow_blank: true
-  validates_confirmation_of :password_unencrypted, allow_blank: true
+  include DovecotCramMD5Password
 
-  validate do |record|
-    record.errors.add(:password_unencrypted, :blank) unless record.password.present?
-  end
+  validates :username, presence: true, uniqueness: true
 
   has_many :domain_admins, foreign_key: :username, dependent: :delete_all
   has_many :rel_domains, through: :domain_admins
@@ -16,18 +12,6 @@ class Admin < ApplicationRecord
   scope :active, -> { where(active: true) }
 
   attr_accessor :domain_ids
-
-  attr_reader :password_unencrypted
-  attr_accessor :password_unencrypted_confirmation
-
-  def password_unencrypted=(unencrypted_password)
-    if unencrypted_password.nil?
-      self.password = nil
-    elsif !unencrypted_password.empty?
-      @password_unencrypted = unencrypted_password
-      self.password = DovecotCrammd5.calc(unencrypted_password)
-    end
-  end
 
   def super_admin?
     rel_domains.exists?("ALL")
@@ -39,10 +23,6 @@ class Admin < ApplicationRecord
 
   def has_domain?(domain)
     !rel_domains.where(domain: ["ALL", domain.domain]).empty?
-  end
-
-  def authenticate(unencrypted_password)
-    password == DovecotCrammd5.calc(unencrypted_password) && self
   end
 
   def self.timestamp_attributes_for_create
