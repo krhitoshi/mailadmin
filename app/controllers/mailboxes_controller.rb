@@ -4,11 +4,11 @@ class MailboxesController < ApplicationController
 
   def new
     @mailbox = Mailbox.new
-    @mailbox.rel_domain = @domain
   end
 
   def create
     @mailbox = Mailbox.new(mailbox_params)
+    @mailbox.rel_domain = @domain
 
     # TODO: Validation of username
     # TODO: domain_part must match @mailbox.domain
@@ -60,8 +60,7 @@ class MailboxesController < ApplicationController
   end
 
   def mailbox_params
-    params.require(:mailbox).permit(:username, :name, :domain,
-                                    :password_unencrypted,
+    params.require(:mailbox).permit(:username, :name, :password_unencrypted,
                                     :password_unencrypted_confirmation,
                                     :quota, :active)
   end
