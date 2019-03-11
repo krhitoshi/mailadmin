@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   RE_DOMAIN_NAME_LIKE = /([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}/
-  RE_ADDRESS_LIKE = /[A-Za-z0-9\-.]+@([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}/
+  RE_ADDRESS_LIKE = /[^@\s]+@([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}/
 
   root 'domains#index'
   get    'login'  => 'sessions#new'
