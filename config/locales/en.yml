@@ -43,3 +43,5 @@ en:
       mailbox:
         password_unencrypted: "Password"
         password_unencrypted_confirmation: "Password Confirmation"
+      alias:
+        local_part: "Address"

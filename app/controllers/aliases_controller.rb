@@ -7,8 +7,10 @@ class AliasesController < ApplicationController
   end
 
   def create
-    @alias = Alias.new(alias_params)
+    @alias = Alias.new
     @alias.rel_domain = @domain
+    # rel_domain must be set in advance
+    @alias.assign_attributes(alias_params)
 
     if @alias.save
       redirect_to domain_path(@alias.domain), notice: 'Alias was successfully created.'
@@ -47,6 +49,6 @@ class AliasesController < ApplicationController
   end
 
   def alias_params
-    params.require(:alias).permit(:address, :goto, :active)
+    params.require(:alias).permit(:local_part, :goto, :active)
   end
 end
