@@ -12,9 +12,8 @@ class MailboxesController < ApplicationController
 
     # TODO: Validation of username
     # TODO: domain_part must match @mailbox.domain
-    local_part, _ = @mailbox.username.split("@")
+    @mailbox.username = "#{@mailbox.local_part}@#{@mailbox.domain}"
     @mailbox.maildir = "#{@mailbox.domain}/#{@mailbox.username}/"
-    @mailbox.local_part  = local_part
     @mailbox.build_alias(goto: @mailbox.username, domain: @mailbox.domain)
 
     # transation for InnoDB
@@ -60,7 +59,7 @@ class MailboxesController < ApplicationController
   end
 
   def mailbox_params
-    params.require(:mailbox).permit(:username, :name, :password_unencrypted,
+    params.require(:mailbox).permit(:local_part, :name, :password_unencrypted,
                                     :password_unencrypted_confirmation,
                                     :quota, :active)
   end

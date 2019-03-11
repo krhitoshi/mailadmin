@@ -14,12 +14,13 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :username %><br>
+    <%= f.label :local_part %><br>
     <% if controller.action_name == "edit" %>
-      <%= f.text_field :username, size: 50, readonly: true %>
+      <%= f.text_field :local_part, size: 20, readonly: true %>
     <% else %>
-      <%= f.text_field :username, size: 50 %>
+      <%= f.text_field :local_part, size: 20 %>
     <% end %>
+    @<%= @domain.domain %>
   </div>
 
   <div class="field">
