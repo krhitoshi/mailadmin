@@ -34,3 +34,12 @@ en:
   time:
     formats:
       default: "%Y-%m-%d %H:%M"
+
+  activerecord:
+    attributes:
+      admin:
+        password_unencrypted: "Password"
+        password_unencrypted_confirmation: "Password Confirmation"
+      mailbox:
+        password_unencrypted: "Password"
+        password_unencrypted_confirmation: "Password Confirmation"
