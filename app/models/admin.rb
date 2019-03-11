@@ -3,11 +3,11 @@ class Admin < ApplicationRecord
   self.primary_key = :username
 
   validates :username, presence: true, uniqueness: true
-  validates :password_plain, length: { minimum: 5 }, allow_blank: true
-  validates_confirmation_of :password_plain, allow_blank: true
+  validates :password_unencrypted, length: { minimum: 5 }, allow_blank: true
+  validates_confirmation_of :password_unencrypted, allow_blank: true
 
   validate do |record|
-    record.errors.add(:password_plain, :blank) unless record.password.present?
+    record.errors.add(:password_unencrypted, :blank) unless record.password.present?
   end
 
   has_many :domain_admins, foreign_key: :username, dependent: :delete_all
@@ -17,14 +17,14 @@ class Admin < ApplicationRecord
 
   attr_accessor :domain_ids
 
-  attr_reader :password_plain
-  attr_accessor :password_plain_confirmation
+  attr_reader :password_unencrypted
+  attr_accessor :password_unencrypted_confirmation
 
-  def password_plain=(unencrypted_password)
+  def password_unencrypted=(unencrypted_password)
     if unencrypted_password.nil?
       self.password = nil
     elsif !unencrypted_password.empty?
-      @password_plain = unencrypted_password
+      @password_unencrypted = unencrypted_password
       self.password = DovecotCrammd5.calc(unencrypted_password)
     end
   end

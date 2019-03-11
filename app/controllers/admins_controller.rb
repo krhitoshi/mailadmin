@@ -73,8 +73,8 @@ class AdminsController < ApplicationController
   end
 
   def admin_params
-    params.require(:admin).permit(:username, :password_plain,
-                                  :password_plain_confirmation,
+    params.require(:admin).permit(:username, :password_unencrypted,
+                                  :password_unencrypted_confirmation,
                                   :active, domain_ids: [])
   end
 end
