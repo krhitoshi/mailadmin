@@ -13,6 +13,12 @@ class Admin < ApplicationRecord
 
   attr_accessor :domain_ids
 
+  # just in case
+  validate on: :update do |admin|
+    admin.errors.add(:username, 'cannot be changed') if admin.username_changed?
+  end
+
+
   def super_admin?
     rel_domains.exists?("ALL")
   end
