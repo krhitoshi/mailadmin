@@ -30,7 +30,7 @@ class Alias < ApplicationRecord
   end
 
   before_validation do |a|
-    a.address = "#{a.local_part}@#{a.domain}"
+    a.address = "#{a.local_part}@#{a.domain}" unless a.local_part.empty?
   end
 
   def mailbox?
