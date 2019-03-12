@@ -10,12 +10,6 @@ class MailboxesController < ApplicationController
     @mailbox = Mailbox.new(mailbox_params)
     @mailbox.rel_domain = @domain
 
-    # TODO: Validation of username
-    # TODO: domain_part must match @mailbox.domain
-    @mailbox.username = "#{@mailbox.local_part}@#{@mailbox.domain}"
-    @mailbox.maildir = "#{@mailbox.domain}/#{@mailbox.username}/"
-    @mailbox.build_alias(goto: @mailbox.username, domain: @mailbox.domain)
-
     # transation for InnoDB
     Mailbox.transaction do
       @mailbox.save!

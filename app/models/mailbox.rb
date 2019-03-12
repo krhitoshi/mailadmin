@@ -17,6 +17,15 @@ class Mailbox < ApplicationRecord
     mailbox.errors.add(:local_part, 'cannot be changed') if mailbox.local_part_changed?
   end
 
+  # TODO: Validation of username
+  # TODO: domain_part must match @mailbox.domain
+  before_validation do |mailbox|
+    mailbox.name = "" if mailbox.name.nil?
+    mailbox.username = "#{mailbox.local_part}@#{mailbox.domain}"
+    mailbox.maildir = "#{mailbox.domain}/#{mailbox.username}/"
+    mailbox.build_alias(goto: mailbox.username, domain: mailbox.domain)
+  end
+
   def quota_str
     if quota.zero?
       "Unlimited"
