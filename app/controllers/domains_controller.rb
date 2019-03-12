@@ -15,7 +15,6 @@ class DomainsController < ApplicationController
 
   def create
     @domain = Domain.new(domain_params)
-    @domain.transport = "virtual"
 
     if @domain.save
       redirect_to domain_path(@domain.domain), notice: 'Domain was successfully created.'

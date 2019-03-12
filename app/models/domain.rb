@@ -4,6 +4,7 @@ class Domain < ApplicationRecord
 
   validates :domain, presence: true, uniqueness: true,
             format: { with: RE_DOMAIN_NAME_LIKE, message: "must be a valid domain name" }
+  validates :transport, presence: true
 
   validates :aliases, presence: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -19,6 +20,7 @@ class Domain < ApplicationRecord
 
   before_validation do |domain|
     domain.domain = domain.domain.downcase unless domain.domain.empty?
+    domain.transport = "virtual"
   end
 
   scope :without_all, -> { where.not(domain: "ALL") }
