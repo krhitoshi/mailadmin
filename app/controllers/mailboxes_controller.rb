@@ -4,6 +4,11 @@ class MailboxesController < ApplicationController
 
   def new
     @mailbox = Mailbox.new
+    @mailbox.quota = if @domain.maxquota.zero?
+                       0
+                     else
+                       @domain.maxquota * 1_024_000
+                     end
   end
 
   def create
