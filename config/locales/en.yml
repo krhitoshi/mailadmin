@@ -38,11 +38,15 @@ en:
   activerecord:
     attributes:
       admin:
+        username: "Email (User Name)"
         password_unencrypted: "Password"
-        password_unencrypted_confirmation: "Password Confirmation"
+        password_unencrypted_confirmation: "Confirm password"
       mailbox:
-        local_part: "Address"
+        local_part: "Email"
+        username: "Email"
         password_unencrypted: "Password"
-        password_unencrypted_confirmation: "Password Confirmation"
+        password_unencrypted_confirmation: "Confirm password"
       alias:
-        local_part: "Address"
+        local_part: "Alias (Email)"
+        address: "Alias (Email)"
+        goto: "To"
