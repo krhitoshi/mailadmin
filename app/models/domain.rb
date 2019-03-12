@@ -10,6 +10,10 @@ class Domain < ApplicationRecord
   has_many :rel_aliases, class_name: "Alias", foreign_key: :domain,
            dependent: :destroy
 
+  before_validation do |domain|
+    domain.domain = domain.domain.downcase unless domain.domain.empty?
+  end
+
   scope :without_all, -> { where.not(domain: "ALL") }
 
   def pure_aliases
