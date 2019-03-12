@@ -2,6 +2,9 @@ class Domain < ApplicationRecord
   self.table_name = :domain
   self.primary_key = :domain
 
+  validates :domain, presence: true, uniqueness: true,
+            format: { with: RE_DOMAIN_NAME_LIKE, message: "must be a valid domain name" }
+
   has_many :rel_mailboxes, class_name: "Mailbox", foreign_key: :domain,
            dependent: :destroy
   has_many :rel_aliases, class_name: "Alias", foreign_key: :domain,
