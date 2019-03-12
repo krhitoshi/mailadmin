@@ -11,6 +11,15 @@ class Mailbox < ApplicationRecord
   belongs_to :rel_domain, class_name: "Domain", foreign_key: :domain
   has_one :alias, foreign_key: :address, dependent: :destroy
 
+  validate on: :create do |mailbox|
+    domain = mailbox.rel_domain
+    if domain.rel_mailboxes.count >= domain.mailboxes
+      message = "already has the maximum number of mailboxes " \
+                "(maximum is #{domain.mailboxes} mailboxes)"
+      mailbox.errors.add(:domain, message)
+    end
+  end
+
   # just in case
   validate on: :update do |mailbox|
     mailbox.errors.add(:username, 'cannot be changed') if mailbox.username_changed?
