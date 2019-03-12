@@ -5,6 +5,13 @@ class Domain < ApplicationRecord
   validates :domain, presence: true, uniqueness: true,
             format: { with: RE_DOMAIN_NAME_LIKE, message: "must be a valid domain name" }
 
+  validates :aliases, presence: true,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :mailboxes, presence: true,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :maxquota, presence: true,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
   has_many :rel_mailboxes, class_name: "Mailbox", foreign_key: :domain,
            dependent: :destroy
   has_many :rel_aliases, class_name: "Alias", foreign_key: :domain,
