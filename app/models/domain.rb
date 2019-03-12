@@ -24,7 +24,7 @@ class Domain < ApplicationRecord
     if maxquota.zero?
       "Unlimited"
     else
-      maxquota.to_s
+      "#{maxquota} MB"
     end
   end
 end

@@ -8,7 +8,7 @@
 <ul>
   <li>Mailboxes: <%= @domain.rel_mailboxes.count %> / <%= @domain.mailboxes %></li>
   <li>Aliases: <%= @domain.pure_aliases.count %> / <%= @domain.aliases %></li>
-  <li>Quota (MB): <%= @domain.maxquota_str %></li>
+  <li>Max Quota: <%= @domain.maxquota_str %></li>
   <li>Active: <%= @domain.active %></li>
 </ul>
 
@@ -23,7 +23,7 @@
     <th>Mailbox</th>
     <th>To</th>
     <th>Name</th>
-    <th>Quota (MB)</th>
+    <th>Quota</th>
     <th>Active</th>
     <th>Alias</th>
     <th>Edit</th>

@@ -38,7 +38,8 @@ class Mailbox < ApplicationRecord
     if quota.zero?
       "Unlimited"
     else
-      (quota / 1_024_000).to_s
+      quota_mb = quota / 1_024_000
+      "#{quota_mb} MB"
     end
   end
 end
