@@ -2,6 +2,15 @@ class Alias < ApplicationRecord
   self.table_name = :alias
   self.primary_key = :address
 
+  validate on: :create do |a|
+    domain = a.rel_domain
+    if domain.rel_aliases.pure.count >= domain.aliases
+      message = "already has the maximum number of aliases " \
+                "(maximum is #{domain.aliases} aliases)"
+      a.errors.add(:domain, message)
+    end
+  end
+
   # TODO: Validation of address format
   validates :address, presence: true, uniqueness: true
   validates :goto, presence: true
