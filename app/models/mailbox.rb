@@ -4,7 +4,8 @@ class Mailbox < ApplicationRecord
 
   include DovecotCramMD5Password
 
-  validates :username, presence: true, uniqueness: true
+  validates :username, presence: true, uniqueness: true,
+            format: { with: RE_EMAIL_LIKE, message: "must be a valid email address" }
   validates :maildir, presence: true, uniqueness: true
   validates :local_part, presence: true
 
@@ -26,8 +27,6 @@ class Mailbox < ApplicationRecord
     mailbox.errors.add(:local_part, 'cannot be changed') if mailbox.local_part_changed?
   end
 
-  # TODO: Validation of username
-  # TODO: domain_part must match @mailbox.domain
   before_validation do |mailbox|
     mailbox.name = "" if mailbox.name.nil?
     mailbox.username = "#{mailbox.local_part}@#{mailbox.domain}"

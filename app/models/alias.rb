@@ -11,8 +11,8 @@ class Alias < ApplicationRecord
     end
   end
 
-  # TODO: Validation of address format
-  validates :address, presence: true, uniqueness: true
+  validates :address, presence: true, uniqueness: true,
+            format: { with: RE_EMAIL_LIKE, message: "must be a valid email address" }
   validates :goto, presence: true
 
   belongs_to :rel_domain, class_name: "Domain", foreign_key: :domain

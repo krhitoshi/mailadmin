@@ -4,7 +4,8 @@ class Admin < ApplicationRecord
 
   include DovecotCramMD5Password
 
-  validates :username, presence: true, uniqueness: true
+  validates :username, presence: true, uniqueness: true,
+            format: { with: RE_EMAIL_LIKE, message: "must be a valid email address" }
 
   has_many :domain_admins, foreign_key: :username, dependent: :delete_all
   has_many :rel_domains, through: :domain_admins
