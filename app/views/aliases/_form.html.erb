@@ -18,11 +18,12 @@
   <div class="field">
     <%= f.label :local_part %><br>
     <% if controller.action_name == "edit" %>
-      <%= f.text_field :local_part, size: 20, readonly: true %>
+      <%= f.hidden_field :local_part, size: 20 %>
+      <%= @alias.address %>
     <% else %>
-      <%= f.text_field :local_part, size: 20 %>
+      <%= f.text_field :local_part, size: 20 %>@<%= @domain.domain %>
     <% end %>
-    @<%= @domain.domain %>
+
   </div>
 
   <div class="field">

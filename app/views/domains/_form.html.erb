@@ -14,7 +14,8 @@
   <div class="field">
     <%= f.label :domain %><br>
     <% if controller.action_name == "edit" %>
-      <%= f.text_field :domain, size: 50, readonly: true %>
+      <%= f.hidden_field :domain, size: 50 %>
+      <%= @domain.domain %>
     <% else %>
       <%= f.text_field :domain, size: 50 %>
     <% end %>
