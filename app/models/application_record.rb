@@ -3,9 +3,13 @@ class ApplicationRecord < ActiveRecord::Base
 
   include ExistingTimestamp
 
-  RE_DOMAIN_NAME_LIKE = /([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}/
-  RE_EMAIL_LIKE = /[^@\s]+@([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}/
+  RE_DOMAIN_NAME_LIKE_BASE = '([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}'
+  RE_EMAIL_LIKE_BASE = '[^@\s]+@([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}'
 
-  RE_DOMAIN_NAME_LIKE_WITH_ANCHORS = /\A([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\z/
-  RE_EMAIL_LIKE_WITH_ANCHORS = /\A[^@\s]+@([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\z/
+
+  RE_DOMAIN_NAME_LIKE = /#{RE_DOMAIN_NAME_LIKE_BASE}/
+  RE_EMAIL_LIKE = /#{RE_EMAIL_LIKE_BASE}/
+
+  RE_DOMAIN_NAME_LIKE_WITH_ANCHORS = /\A#{RE_DOMAIN_NAME_LIKE_BASE}\z/
+  RE_EMAIL_LIKE_WITH_ANCHORS = /\A#{RE_EMAIL_LIKE_BASE}\z/
 end
