@@ -14,7 +14,8 @@ class Mailbox < ApplicationRecord
   end
 
   validates :username, presence: true, uniqueness: true,
-            format: { with: RE_EMAIL_LIKE, message: "must be a valid email address" }
+            format: { with: RE_EMAIL_LIKE_WITH_ANCHORS,
+                      message: "must be a valid email address" }
   validates :maildir, presence: true, uniqueness: true
   validates :local_part, presence: true
   validates :quota, presence: true,

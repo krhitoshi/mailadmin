@@ -3,7 +3,8 @@ class Domain < ApplicationRecord
   self.primary_key = :domain
 
   validates :domain, presence: true, uniqueness: true,
-            format: { with: RE_DOMAIN_NAME_LIKE, message: "must be a valid domain name" }
+            format: { with: RE_DOMAIN_NAME_LIKE_WITH_ANCHORS,
+                      message: "must be a valid domain name" }
   validates :transport, presence: true
 
   validates :aliases, presence: true,

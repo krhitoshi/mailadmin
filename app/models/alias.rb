@@ -13,7 +13,8 @@ class Alias < ApplicationRecord
   end
 
   validates :address, presence: true, uniqueness: true,
-            format: { with: RE_EMAIL_LIKE, message: "must be a valid email address" }
+            format: { with: RE_EMAIL_LIKE_WITH_ANCHORS,
+                      message: "must be a valid email address" }
   validates :goto, presence: true
 
   belongs_to :rel_domain, class_name: "Domain", foreign_key: :domain
