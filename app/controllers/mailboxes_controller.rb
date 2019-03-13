@@ -4,11 +4,11 @@ class MailboxesController < ApplicationController
 
   def new
     @mailbox = Mailbox.new
-    @mailbox.quota = if @domain.maxquota.zero?
-                       0
-                     else
-                       @domain.maxquota * 1_024_000
-                     end
+    @mailbox.quota_mb = if @domain.maxquota.zero?
+                          0
+                        else
+                          @domain.maxquota
+                        end
   end
 
   def create
@@ -60,6 +60,6 @@ class MailboxesController < ApplicationController
   def mailbox_params
     params.require(:mailbox).permit(:local_part, :name, :password_unencrypted,
                                     :password_unencrypted_confirmation,
-                                    :quota, :active)
+                                    :quota_mb, :active)
   end
 end

@@ -48,6 +48,8 @@ en:
       mailbox:
         local_part: "Email"
         username: "Email"
+        quota: "Quota"
+        quota_mb: "Quota (MB)"
         password_unencrypted: "Password"
         password_unencrypted_confirmation: "Confirm password"
       alias:
