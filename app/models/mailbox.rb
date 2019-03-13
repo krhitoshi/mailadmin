@@ -40,6 +40,18 @@ class Mailbox < ApplicationRecord
     mailbox.errors.add(:local_part, 'cannot be changed') if mailbox.local_part_changed?
   end
 
+  validate do |mailbox|
+    domain = mailbox.rel_domain
+    unless domain.maxquota.zero?
+      if mailbox.quota_mb.to_i.zero?
+        mailbox.errors.add(:quota_mb, "cannot be 0")
+      elsif mailbox.quota_mb.to_i > domain.maxquota
+        message = "must be less than or equal to #{domain.maxquota} (MB)"
+        mailbox.errors.add(:quota_mb, message)
+      end
+    end
+  end
+
   before_validation do |mailbox|
     mailbox.name = "" if mailbox.name.nil?
     if mailbox.quota_mb.nil?
