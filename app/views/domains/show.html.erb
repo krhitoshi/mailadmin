@@ -3,7 +3,9 @@
 <%= link_to "Back", domains_path %>
 <%= link_to "Edit", edit_domain_path(@domain) %>
 
-<p id="notice"><%= notice %></p>
+<% if flash.key?(:notice) %>
+  <div class="alert alert-primary" role="alert"><%= notice %></div>
+<% end %>
 
 <ul class="list-group list-group-horizontal">
   <li class="list-group-item">

@@ -1,10 +1,12 @@
 <h1>Admins</h1>
 
-<p id="notice"><%= notice %></p>
-
 <% if @super_admin %>
 <%= link_to "new admin", new_admin_path,
             role: "button", class: "btn btn-primary btn-lg"%>
+<% end %>
+
+<% if flash.key?(:notice) %>
+  <div class="alert alert-primary" role="alert"><%= notice %></div>
 <% end %>
 
 <table class="table">
