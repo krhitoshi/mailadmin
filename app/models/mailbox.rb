@@ -4,16 +4,7 @@ class Mailbox < ApplicationRecord
 
   include DovecotCramMD5Password
 
-  def quota_mb=(value)
-    @quota_mb = value.to_i
-  end
-
-  def quota_mb
-    if @quota_mb.nil? && !self.quota.nil?
-      @quota_mb = (self.quota / 1_024_000)
-    end
-    @quota_mb
-  end
+  attribute :quota_mb, :integer
 
   validates :username, presence: true, uniqueness: true,
             format: { with: RE_EMAIL_LIKE_WITH_ANCHORS,

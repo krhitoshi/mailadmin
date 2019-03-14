@@ -29,6 +29,9 @@ class MailboxesController < ApplicationController
   end
 
   def edit
+    unless @mailbox.quota.nil?
+      @mailbox.quota_mb = (@mailbox.quota / 1_024_000).to_i
+    end
   end
 
   def update
