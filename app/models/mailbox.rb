@@ -55,7 +55,8 @@ class Mailbox < ApplicationRecord
     end
     mailbox.username = "#{mailbox.local_part}@#{mailbox.domain}"
     mailbox.maildir = "#{mailbox.domain}/#{mailbox.username}/"
-    mailbox.build_alias(goto: mailbox.username, domain: mailbox.domain)
+    mailbox.build_alias(local_part: mailbox.local_part, goto: mailbox.username,
+                        domain: mailbox.domain)
   end
 
   def quota_str
