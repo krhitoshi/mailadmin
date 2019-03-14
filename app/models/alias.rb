@@ -22,7 +22,7 @@ class Alias < ApplicationRecord
 
   scope :pure, -> { joins("LEFT OUTER JOIN mailbox ON alias.address = mailbox.username").where("mailbox.username" => nil) }
 
-  attr_accessor :local_part
+  attr_writer :local_part
 
   def local_part
     unless self.address.nil?

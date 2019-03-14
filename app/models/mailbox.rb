@@ -4,7 +4,7 @@ class Mailbox < ApplicationRecord
 
   include DovecotCramMD5Password
 
-  attr_accessor :quota_mb
+  attr_writer :quota_mb
 
   def quota_mb
     if @quota_mb.nil? && !self.quota.nil?
