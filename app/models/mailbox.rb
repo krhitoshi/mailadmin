@@ -4,7 +4,9 @@ class Mailbox < ApplicationRecord
 
   include DovecotCramMD5Password
 
-  attr_writer :quota_mb
+  def quota_mb=(value)
+    @quota_mb = value.to_i
+  end
 
   def quota_mb
     if @quota_mb.nil? && !self.quota.nil?
@@ -44,9 +46,9 @@ class Mailbox < ApplicationRecord
   validate do |mailbox|
     domain = mailbox.rel_domain
     unless domain.maxquota.zero?
-      if mailbox.quota_mb.to_i.zero?
+      if mailbox.quota_mb.zero?
         mailbox.errors.add(:quota_mb, "cannot be 0")
-      elsif mailbox.quota_mb.to_i > domain.maxquota
+      elsif mailbox.quota_mb > domain.maxquota
         message = "must be less than or equal to #{domain.maxquota} (MB)"
         mailbox.errors.add(:quota_mb, message)
       end
@@ -58,7 +60,7 @@ class Mailbox < ApplicationRecord
     if mailbox.quota_mb.nil?
       mailbox.quota = nil
     else
-      mailbox.quota = mailbox.quota_mb.to_i * 1_024_000
+      mailbox.quota = mailbox.quota_mb * 1_024_000
     end
     mailbox.username = "#{mailbox.local_part}@#{mailbox.domain}"
     mailbox.maildir = "#{mailbox.domain}/#{mailbox.username}/"
