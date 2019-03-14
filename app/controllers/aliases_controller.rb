@@ -20,6 +20,9 @@ class AliasesController < ApplicationController
   end
 
   def edit
+    unless @alias.address.nil?
+      @alias.local_part = @alias.address.split("@").first
+    end
   end
 
   def update
