@@ -5,11 +5,29 @@
 
 <p id="notice"><%= notice %></p>
 
-<ul>
-  <li>Mailboxes: <%= @domain.rel_mailboxes.count %> / <%= @domain.mailboxes %></li>
-  <li>Aliases: <%= @domain.pure_aliases.count %> / <%= @domain.aliases %></li>
-  <li>Max Quota: <%= @domain.maxquota_str %></li>
-  <li>Active: <%= @domain.active %></li>
+<ul class="list-group list-group-horizontal">
+  <li class="list-group-item">
+    <span class="font-weight-bold">Mailboxes</span>
+    <%= @domain.rel_mailboxes.count %> / <%= @domain.mailboxes %>
+  </li>
+  <li class="list-group-item">
+    <span class="font-weight-bold">Aliases</span>
+    <%= @domain.pure_aliases.count %> / <%= @domain.aliases %>
+  </li>
+  <li class="list-group-item">
+    <span class="font-weight-bold">Max Quota</span>
+    <%= @domain.maxquota_str %>
+  </li>
+  <% active_class = @domain.active? ? "list-group-item-success" : "list-group-item-secondary" %>
+  <li class="list-group-item <%= active_class %>">
+    <span class="font-weight-bold">
+    <% if @domain.active? %>
+      Active
+    <% else %>
+      Inactive
+    <% end %>
+    </span>
+  </li>
 </ul>
 
 <h3>Mailbox</h3>
