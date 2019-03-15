@@ -24,6 +24,7 @@ class DomainsController < ApplicationController
   end
 
   def show
+    redirect_to domain_mailboxes_path(@domain)
   end
 
   def edit

@@ -1,0 +1,34 @@
+<%= render "domains/info" %>
+
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th>Alias</th>
+    <th>To</th>
+    <th>Active</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    <th>Modified</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @domain.pure_aliases.each do |a| %>
+    <% tr_class = a.active? ? "" : "table-secondary" %>
+    <tr class="<%= tr_class %>">
+      <td><%= a.address %></td>
+      <td>
+        <% a.gotos.each do |g| %>
+          <%= g %><br>
+        <% end %>
+      </td>
+      <td><%= a.active %></td>
+      <td><%= link_to "Edit", edit_domain_alias_path(@domain, a),
+                      role: "button", class: "btn btn-info btn-sm" %></td>
+      <td><%= link_to "Delete", domain_alias_path(@domain, a), method: :delete,
+                      data: { confirm: 'Are you sure?' },
+                      role: "button", class: "btn btn-secondary btn-sm" %></td>
+      <td><%= l a.modified %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

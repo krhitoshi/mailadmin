@@ -1,6 +1,6 @@
 class MailboxesController < ApplicationController
   before_action :set_mailbox, only: [:edit, :update, :destroy]
-  before_action :set_domain, only: [:new, :create]
+  before_action :set_domain, only: [:index, :new, :create]
 
   def new
     @mailbox = Mailbox.new
