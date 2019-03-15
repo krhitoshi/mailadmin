@@ -11,6 +11,7 @@
     <th>Aliases</th>
     <th>Max Quota</th>
     <th>Active</th>
+    <th>Show</th>
     <th>Edit</th>
     <th>Delete</th>
     <th>Modified</th>
@@ -20,12 +21,15 @@
   <% @domains.each do |domain| %>
     <% tr_class = domain.active? ? "" : "table-secondary" %>
     <tr class="<%= tr_class %>">
-      <td><%= link_to domain.domain, domain %></td>
+      <td><%= domain.domain %></td>
       <td><%= domain.description %></td>
       <td><%= domain.rel_mailboxes.count %> / <%= domain.mailboxes %></td>
       <td><%= domain.pure_aliases.count %> / <%= domain.aliases %></td>
       <td><%= domain.maxquota_str %></td>
       <td><%= domain.active %></td>
+      <td><%= link_to "Show", domain,
+                      role: "button", class: "btn btn-primary btn-sm" %></td>
+
       <td><%= link_to "Edit", edit_domain_path(domain),
                       role: "button", class: "btn btn-info btn-sm" %></td>
       <td><%= link_to "Delete", domain, method: :delete,
