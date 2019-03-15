@@ -22,7 +22,11 @@ class Admin < ApplicationRecord
 
 
   def super_admin?
-    rel_domains.exists?("ALL")
+    if @super_admin.nil?
+      @super_admin = rel_domains.exists?("ALL")
+    else
+      @super_admin
+    end
   end
 
   def has_admin?(admin)

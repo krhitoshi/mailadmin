@@ -9,8 +9,8 @@
     <th>Domains</th>
     <th>Active</th>
     <th>Edit</th>
-    <% if @super_admin %>
-    <th>Delete</th>
+    <% if @current_admin.super_admin? %>
+      <th>Delete</th>
     <% end %>
     <th>Modified</th>
   </tr>
@@ -30,18 +30,18 @@
       <td><%= admin.active_str %></td>
       <td><%= link_to "Edit", edit_admin_path(admin),
                       role: "button", class: "btn btn-info btn-sm"%></td>
-      <% if @super_admin %>
-      <td>
-        <% if @current_admin == admin %>
-        <%= link_to "Delete", "", role: "button",
-                    class: "btn btn-secondary btn-sm disabled",
-                    "aria-disabled": "true" %>
-        <% else %>
-        <%= link_to "Delete", admin, method: :delete,
-                      data: { confirm: 'Are you sure?' },
-                      role: "button", class: "btn btn-secondary btn-sm" %>
-        <% end %>
-      </td>
+      <% if @current_admin.super_admin? %>
+        <td>
+          <% if @current_admin == admin %>
+            <%= link_to "Delete", "", role: "button",
+                        class: "btn btn-secondary btn-sm disabled",
+                        "aria-disabled": "true" %>
+          <% else %>
+            <%= link_to "Delete", admin, method: :delete,
+                        data: { confirm: 'Are you sure?' },
+                        role: "button", class: "btn btn-secondary btn-sm" %>
+          <% end %>
+        </td>
       <% end %>
       <td><%= l admin.modified %></td>
     </tr>

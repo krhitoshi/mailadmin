@@ -12,8 +12,10 @@
     <th>Max Quota</th>
     <th>Active</th>
     <th>Show</th>
-    <th>Edit</th>
-    <th>Delete</th>
+    <% if @current_admin.super_admin? %>
+      <th>Edit</th>
+      <th>Delete</th>
+    <% end %>
     <th>Modified</th>
   </tr>
   </thead>
@@ -30,11 +32,13 @@
       <td><%= link_to "Show", domain,
                       role: "button", class: "btn btn-primary btn-sm" %></td>
 
-      <td><%= link_to "Edit", edit_domain_path(domain),
-                      role: "button", class: "btn btn-info btn-sm" %></td>
-      <td><%= link_to "Delete", domain, method: :delete,
-                      data: { confirm: 'Are you sure?' },
-                      role: "button", class: "btn btn-secondary btn-sm" %></td>
+      <% if @current_admin.super_admin? %>
+        <td><%= link_to "Edit", edit_domain_path(domain),
+                        role: "button", class: "btn btn-info btn-sm" %></td>
+        <td><%= link_to "Delete", domain, method: :delete,
+                        data: { confirm: 'Are you sure?' },
+                        role: "button", class: "btn btn-secondary btn-sm" %></td>
+      <% end %>
       <td><%= l domain.modified %></td>
     </tr>
   <% end %>

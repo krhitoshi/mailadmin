@@ -1,4 +1,5 @@
 class DomainsController < ApplicationController
+  before_action :super_admin_check, except: [:index, :show]
   before_action :set_domain, only: [:show, :edit, :update, :destroy]
 
   def index

@@ -5,10 +5,8 @@ class AdminsController < ApplicationController
   def index
     if @current_admin.super_admin?
       @admins = Admin.all
-      @super_admin = true
     else
       @admins = [@current_admin]
-      @super_admin = false
     end
   end
 
@@ -62,10 +60,6 @@ class AdminsController < ApplicationController
   end
 
   private
-
-  def super_admin_check
-    raise "Ivalid admin access" unless @current_admin.super_admin?
-  end
 
   def set_admin
     @admin = Admin.find(params[:id])
