@@ -26,7 +26,7 @@
       </td>
       <td><%= m.name %></td>
       <td><%= m.quota_str %></td>
-      <td><%= m.active %></td>
+      <td><%= m.active_str %></td>
       <td><%= link_to "alias", edit_domain_alias_path(@domain, m.alias),
                       role: "button", class: "btn btn-info btn-sm" %></td>
       <td><%= link_to "Edit", edit_domain_mailbox_path(@domain, m),

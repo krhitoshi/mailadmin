@@ -12,4 +12,8 @@ class ApplicationRecord < ActiveRecord::Base
 
   RE_DOMAIN_NAME_LIKE_WITH_ANCHORS = /\A#{RE_DOMAIN_NAME_LIKE_BASE}\z/
   RE_EMAIL_LIKE_WITH_ANCHORS = /\A#{RE_EMAIL_LIKE_BASE}\z/
+
+  def active_str
+    self.active? ? "Active" : "Inactive"
+  end
 end

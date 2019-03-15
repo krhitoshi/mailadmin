@@ -27,7 +27,7 @@
           <%= admin.rel_domains.count %>
         <% end %>
       </td>
-      <td><%= admin.active %></td>
+      <td><%= admin.active_str %></td>
       <td><%= link_to "Edit", edit_admin_path(admin),
                       role: "button", class: "btn btn-info btn-sm"%></td>
       <% if @super_admin %>

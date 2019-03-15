@@ -21,7 +21,7 @@
           <%= g %><br>
         <% end %>
       </td>
-      <td><%= a.active %></td>
+      <td><%= a.active_str %></td>
       <td><%= link_to "Edit", edit_domain_alias_path(@domain, a),
                       role: "button", class: "btn btn-info btn-sm" %></td>
       <td><%= link_to "Delete", domain_alias_path(@domain, a), method: :delete,
