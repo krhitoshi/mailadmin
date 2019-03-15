@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mailadmin</title>
+    <title>MailAdmin</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,14 +11,28 @@
 
   <body>
   <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <%= link_to "Mailadmin", root_path, class: "navbar-brand" %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 20px">
+      <%= link_to "MailAdmin", root_path, class: "navbar-brand" %>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <% admins_class = controller.controller_name == "admins" ? "active" : ""  %>
+          <% domains_class = controller.controller_name == "domains" ? "active" : ""  %>
+          <li class="nav-item <%= admins_class %>">
             <%= link_to "Admins", admins_path, class: "nav-link" %>
           </li>
+          <li class="nav-item <%= domains_class %>">
+            <%= link_to "Domains", domains_path, class: "nav-link" %>
+          </li>
         </ul>
+
+        <% if @current_admin.super_admin? %>
+          <%= link_to "new admin", new_admin_path,
+                      role: "button", class: "btn btn-success"%>
+          &nbsp;&nbsp;
+        <% end %>
+
+        <%= link_to "new domain", new_domain_path,
+                    role: "button", class: "btn btn-success" %>
 
         <div class="ml-md-auto">
           Signed in as
