@@ -35,6 +35,7 @@ class AdminsController < ApplicationController
 
   def edit
     @domains = Domain.all
+    @admin.domain_ids = @admin.rel_domains.map(&:domain)
   end
 
   def update

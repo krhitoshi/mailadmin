@@ -38,12 +38,9 @@
   </div>
 
   <ul>
-    <% @domains.each do |d| %>
-      <% if @admin.rel_domains.exists?(d.domain) %>
-      <li><%= d.domain %> <%= check_box_tag 'admin[domain_ids][]', d.domain, checked: true %></li>
-      <% else %>
-      <li><%= d.domain %> <%= check_box_tag 'admin[domain_ids][]', d.domain %></li>
-      <% end %>
+    <%= f.collection_check_boxes(:domain_ids, @domains, :domain,
+                                 :domain) do |b| %>
+      <li><%= b.label { b.check_box + " " + b.text } %></li>
     <% end %>
   </ul>
 
