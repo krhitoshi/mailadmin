@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %>
+  <div class="alert alert-primary" role="alert"><%= notice %></div>
+<% end %>
 
 <%= form_for(@admin) do |f| %>
   <div class="card-body">
