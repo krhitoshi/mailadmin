@@ -12,7 +12,7 @@ class AdminsController < ApplicationController
 
   def new
     @admin = Admin.new
-    @domains = Domain.all
+    @domains = Domain.without_all.all
   end
 
   def create
@@ -21,7 +21,9 @@ class AdminsController < ApplicationController
     # transation for InnoDB
     Admin.transaction do
       @admin.save!
-      @admin.rel_domain_ids = admin_params["domain_ids"]
+      domain_ids = admin_params["domain_ids"].dup
+      domain_ids << "ALL" if @admin.form_super_admin
+      @admin.rel_domain_ids = domain_ids
     end
 
     redirect_to admins_path, notice: 'Admin was successfully created.'
@@ -34,15 +36,18 @@ class AdminsController < ApplicationController
   end
 
   def edit
-    @domains = Domain.all
+    @domains = Domain.without_all.all
     @admin.domain_ids = @admin.rel_domains.map(&:domain)
+    @admin.form_super_admin = @admin.super_admin?
   end
 
   def update
     # transation for InnoDB
     Admin.transaction do
       @admin.update!(admin_params)
-      @admin.rel_domain_ids = admin_params["domain_ids"]
+      domain_ids = admin_params["domain_ids"].dup
+      domain_ids << "ALL" if @admin.form_super_admin
+      @admin.rel_domain_ids = domain_ids
     end
 
     redirect_to admins_path, notice: 'Admin was successfully updated.'
@@ -70,6 +75,6 @@ class AdminsController < ApplicationController
   def admin_params
     params.require(:admin).permit(:username, :password_unencrypted,
                                   :password_unencrypted_confirmation,
-                                  :active, domain_ids: [])
+                                  :active, :form_super_admin, domain_ids: [])
   end
 end

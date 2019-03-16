@@ -42,6 +42,7 @@ en:
         password_unencrypted: "Password"
         password_unencrypted_confirmation: "Confirm password"
         domain_ids: "Domains"
+        form_super_admin: "Super Admin"
       domain:
         aliases: "Max Aliases"
         mailboxes: "Max Mailboxes"

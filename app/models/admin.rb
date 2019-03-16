@@ -14,12 +14,12 @@ class Admin < ApplicationRecord
   scope :active, -> { where(active: true) }
 
   attr_accessor :domain_ids
+  attribute :form_super_admin, :boolean, default: false
 
   # just in case
   validate on: :update do |admin|
     admin.errors.add(:username, 'cannot be changed') if admin.username_changed?
   end
-
 
   def super_admin?
     if @super_admin.nil?
