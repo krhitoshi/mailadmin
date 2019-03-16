@@ -41,6 +41,7 @@ en:
         username: "Email (User Name)"
         password_unencrypted: "Password"
         password_unencrypted_confirmation: "Confirm password"
+        domain_ids: "Domains"
       domain:
         aliases: "Max Aliases"
         mailboxes: "Max Mailboxes"

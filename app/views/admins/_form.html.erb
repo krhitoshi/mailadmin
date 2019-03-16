@@ -1,3 +1,4 @@
+<div class="card-body">
 <p id="notice"><%= notice %></p>
 
 <%= form_for(@admin) do |f| %>
@@ -13,7 +14,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :username %><br>
     <% if controller.action_name == "edit" %>
       <%= f.hidden_field :username, size: 50 %>
@@ -23,28 +24,37 @@
     <% end %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password_unencrypted %><br>
-    <%= f.password_field :password_unencrypted, size: 50 %>
+    <%= f.password_field :password_unencrypted,
+                         size: 50, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password_unencrypted_confirmation %><br>
-    <%= f.password_field :password_unencrypted_confirmation, size: 50 %>
+    <%= f.password_field :password_unencrypted_confirmation,
+                         size: 50, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :active %> <%= f.check_box :active %>
+  <div class="form-group form-check">
+    <%= f.check_box :active, class: "form-check-input" %>
+    <%= f.label :active, class: "form-check-label" %>
   </div>
 
-  <ul>
-    <%= f.collection_check_boxes(:domain_ids, @domains, :domain,
-                                 :domain) do |b| %>
-      <li><%= b.label { b.check_box + " " + b.text } %></li>
-    <% end %>
-  </ul>
+  <div>
+    <%= f.label :domain_ids %>
+    <div  class="form-group form-check">
+      <ul>
+        <%= f.collection_check_boxes(:domain_ids, @domains, :domain,
+                                     :domain) do |b| %>
+          <li><%= b.label(class: "form-check-label") { b.check_box(class: "form-check-input") + b.text } %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
 
-  <div class="actions">
+  <div class="card-footer">
     <%= f.submit(class: "btn btn-primary") %>
   </div>
 
