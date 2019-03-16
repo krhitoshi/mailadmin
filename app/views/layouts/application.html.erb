@@ -28,11 +28,11 @@
         </ul>
 
         <% if @current_admin.super_admin? %>
-          <%= link_to "new admin", new_admin_path,
+          <%= link_to "New admin", new_admin_path,
                       role: "button", class: "btn btn-outline-success",
                       style: "margin: 0 8px" %>
 
-          <%= link_to "new domain", new_domain_path,
+          <%= link_to "New domain", new_domain_path,
                       role: "button", class: "btn btn-outline-success",
                       style: "margin: 0 8px" %>
         <% end %>

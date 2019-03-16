@@ -22,7 +22,7 @@
       <%= f.hidden_field :username, size: 50 %>
       <%= @admin.username %>
     <% else %>
-      <%= f.text_field :username, size: 50 %>
+      <%= f.text_field :username, size: 50, class: "form-control" %>
     <% end %>
   </div>
 
