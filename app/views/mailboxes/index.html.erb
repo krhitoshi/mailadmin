@@ -3,6 +3,7 @@
 <table class="table">
   <thead class="thead-dark">
   <tr>
+    <th>#</th>
     <th>Mailbox</th>
     <th>To</th>
     <th>Name</th>
@@ -15,9 +16,10 @@
   </tr>
   </thead>
   <tbody>
-  <% @domain.rel_mailboxes.includes(:alias).each do |m| %>
+  <% @domain.rel_mailboxes.includes(:alias).each_with_index do |m, i| %>
     <% tr_class = m.active? ? "" : "table-secondary" %>
     <tr class="<%= tr_class %>">
+      <td><%= i+1 %></td>
       <td><%= m.username %></td>
       <td>
         <% m.alias.gotos.each do |g| %>

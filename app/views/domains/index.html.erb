@@ -5,6 +5,7 @@
 <table class="table">
   <thead class="thead-dark">
   <tr>
+    <th>#</th>
     <th>Domain</th>
     <th>Description</th>
     <th>Mailboxes</th>
@@ -20,9 +21,10 @@
   </tr>
   </thead>
   <tbody>
-  <% @domains.each do |domain| %>
+  <% @domains.each_with_index do |domain, i| %>
     <% tr_class = domain.active? ? "" : "table-secondary" %>
     <tr class="<%= tr_class %>">
+      <td><%= i+1 %></td>
       <td><%= domain.domain %></td>
       <td><%= domain.description %></td>
       <td><%= domain.rel_mailboxes.count %> / <%= domain.mailboxes %></td>

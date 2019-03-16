@@ -5,6 +5,7 @@
 <table class="table">
   <thead class="thead-dark">
   <tr>
+    <th>#</th>
     <th>Admin</th>
     <th>Domains</th>
     <th>Active</th>
@@ -16,9 +17,10 @@
   </tr>
   </thead>
   <tbody>
-  <% @admins.each do |admin| %>
+  <% @admins.each_with_index do |admin, i| %>
     <% tr_class = admin.active? ? "" : "table-secondary" %>
     <tr class="<%= tr_class %>">
+      <td><%= i+1 %></td>
       <td><%= admin.username %></td>
       <td>
         <% if admin.super_admin? %>

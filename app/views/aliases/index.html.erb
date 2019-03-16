@@ -3,6 +3,7 @@
 <table class="table">
   <thead class="thead-dark">
   <tr>
+    <th>#</th>
     <th>Alias</th>
     <th>To</th>
     <th>Active</th>
@@ -12,9 +13,10 @@
   </tr>
   </thead>
   <tbody>
-  <% @domain.pure_aliases.each do |a| %>
+  <% @domain.pure_aliases.each_with_index do |a, i| %>
     <% tr_class = a.active? ? "" : "table-secondary" %>
     <tr class="<%= tr_class %>">
+      <td><%= i+1 %></td>
       <td><%= a.address %></td>
       <td>
         <% a.gotos.each do |g| %>
