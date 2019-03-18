@@ -1,4 +1,5 @@
 <%= form_for(@domain) do |f| %>
+  <div class="card-body">
   <% if @domain.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@domain.errors.count, "error") %> prohibited this domain from being saved:</h2>
@@ -11,42 +12,46 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :domain %><br>
     <% if controller.action_name == "edit" %>
       <%= f.hidden_field :domain, size: 50 %>
       <%= @domain.domain %>
     <% else %>
-      <%= f.text_field :domain, size: 50 %>
+      <%= f.text_field :domain, size: 50, class: "form-control" %>
     <% end %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description %><br>
-    <%= f.text_field :description, size: 50 %>
+    <%= f.text_field :description, size: 50, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :aliases %><br>
-    <%= f.text_field :aliases, size: 50 %>
+    <%= f.text_field :aliases, size: 50, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :mailboxes %><br>
-    <%= f.text_field :mailboxes, size: 50 %>
+    <%= f.text_field :mailboxes, size: 50, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :maxquota %><br>
-    <%= f.text_field :maxquota, size: 50 %>
+    <%= f.text_field :maxquota, size: 50, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :active %> <%= f.check_box :active %>
+  <div class="form-group form-check">
+    <%= f.check_box :active, class: "form-check-input" %>
+    <%= f.label :active, class: "form-check-label" %>
+  </div>
   </div>
 
-  <div class="actions">
+  <div class="card-footer">
     <%= f.submit(class: "btn btn-primary") %>
+    <%= link_to "Cancel", domains_path, role: "button",
+                class: "btn btn-secondary" %>
   </div>
 
 <% end %>
