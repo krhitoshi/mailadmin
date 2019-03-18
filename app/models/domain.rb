@@ -54,6 +54,14 @@ class Domain < ApplicationRecord
     end
   end
 
+  def maxquota_short_str
+    if maxquota.zero?
+      "Ultd."
+    else
+      "#{maxquota} MB"
+    end
+  end
+
   private
 
   def num_str(num)
