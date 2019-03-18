@@ -38,6 +38,14 @@ class Domain < ApplicationRecord
     num_str(self.mailboxes)
   end
 
+  def aliases_short_str
+    num_short_str(self.aliases)
+  end
+
+  def mailboxes_short_str
+    num_short_str(self.mailboxes)
+  end
+
   def maxquota_str
     if maxquota.zero?
       "Unlimited"
@@ -51,6 +59,14 @@ class Domain < ApplicationRecord
   def num_str(num)
     if num.zero?
       "Unlimited"
+    else
+      num.to_s
+    end
+  end
+
+  def num_short_str(num)
+    if num.zero?
+      "Ultd."
     else
       num.to_s
     end
