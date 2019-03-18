@@ -13,7 +13,7 @@ class AliasesController < ApplicationController
     @alias.assign_attributes(alias_params)
 
     if @alias.save
-      redirect_to domain_path(@alias.domain), notice: 'Alias was successfully created.'
+      redirect_to domain_aliases_path(@alias.domain), notice: 'Alias was successfully created.'
     else
       render action: 'new'
     end
@@ -27,7 +27,7 @@ class AliasesController < ApplicationController
 
   def update
     if @alias.update(alias_params)
-      redirect_to domain_path(@alias.domain), notice: 'Alias was successfully updated.'
+      redirect_to domain_aliases_path(@alias.domain), notice: 'Alias was successfully updated.'
     else
       render action: 'edit'
     end
@@ -35,7 +35,7 @@ class AliasesController < ApplicationController
 
   def destroy
     @alias.destroy
-    redirect_to domain_path(@alias.domain)
+    redirect_to domain_aliases_path(@alias.domain)
   end
 
   private
