@@ -56,7 +56,7 @@ class Domain < ApplicationRecord
 
   def maxquota_short_str
     if maxquota.zero?
-      "Ultd."
+      "--"
     else
       "#{maxquota} MB"
     end
@@ -74,7 +74,7 @@ class Domain < ApplicationRecord
 
   def num_short_str(num)
     if num.zero?
-      "Ultd."
+      "--"
     else
       num.to_s
     end
