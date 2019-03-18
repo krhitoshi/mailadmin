@@ -5,32 +5,32 @@
 <table class="table">
   <thead class="thead-dark">
   <tr>
-    <th>#</th>
+    <th class="text-center">#</th>
     <th>Domain</th>
     <th>Description</th>
-    <th>Mailboxes</th>
-    <th>Aliases</th>
-    <th>Max Quota</th>
-    <th>Active</th>
-    <th>Show</th>
+    <th class="text-center">Mailboxes</th>
+    <th class="text-center">Aliases</th>
+    <th class="text-center">Max Quota</th>
+    <th class="text-center">Active</th>
+    <th class="text-center">Show</th>
     <% if @current_admin.super_admin? %>
-      <th>Edit</th>
-      <th>Delete</th>
+      <th class="text-center">Edit</th>
+      <th class="text-center">Delete</th>
     <% end %>
-    <th>Modified</th>
+    <th class="text-center">Modified</th>
   </tr>
   </thead>
   <tbody>
   <% @domains.each_with_index do |domain, i| %>
     <% tr_class = domain.active? ? "" : "table-secondary" %>
     <tr class="<%= tr_class %>">
-      <td><%= i+1 %></td>
+      <td class="text-center"><%= i+1 %></td>
       <td><%= domain.domain %></td>
       <td><%= domain.description %></td>
-      <td><%= domain.rel_mailboxes.count %> / <%= domain.mailboxes %></td>
-      <td><%= domain.pure_aliases.count %> / <%= domain.aliases %></td>
-      <td><%= domain.maxquota_str %></td>
-      <td><%= domain.active_str %></td>
+      <td class="text-center"><%= domain.rel_mailboxes.count %> / <%= domain.mailboxes %></td>
+      <td class="text-center"><%= domain.pure_aliases.count %> / <%= domain.aliases %></td>
+      <td class="text-center"><%= domain.maxquota_str %></td>
+      <td class="text-center"><%= domain.active_str %></td>
       <td><%= link_to "Show", domain,
                       role: "button", class: "btn btn-primary btn-sm" %></td>
 
@@ -41,7 +41,7 @@
                         data: { confirm: 'Are you sure?' },
                         role: "button", class: "btn btn-secondary btn-sm" %></td>
       <% end %>
-      <td><%= l domain.modified %></td>
+      <td class="text-center"><%= l domain.modified %></td>
     </tr>
   <% end %>
   </tbody>

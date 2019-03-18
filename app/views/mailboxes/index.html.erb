@@ -3,23 +3,23 @@
 <table class="table">
   <thead class="thead-dark">
   <tr>
-    <th>#</th>
+    <th class="text-center">#</th>
     <th>Mailbox</th>
     <th>To</th>
     <th>Name</th>
-    <th>Quota</th>
-    <th>Active</th>
-    <th>Alias</th>
-    <th>Edit</th>
-    <th>Delete</th>
-    <th>Modified</th>
+    <th class="text-center">Quota</th>
+    <th class="text-center">Active</th>
+    <th class="text-center">Alias</th>
+    <th class="text-center">Edit</th>
+    <th class="text-center">Delete</th>
+    <th class="text-center">Modified</th>
   </tr>
   </thead>
   <tbody>
   <% @domain.rel_mailboxes.includes(:alias).each_with_index do |m, i| %>
     <% tr_class = m.active? ? "" : "table-secondary" %>
     <tr class="<%= tr_class %>">
-      <td><%= i+1 %></td>
+      <td class="text-center"><%= i+1 %></td>
       <td><%= m.username %></td>
       <td>
         <% m.alias.gotos.each do |g| %>
@@ -27,16 +27,16 @@
         <% end %>
       </td>
       <td><%= m.name %></td>
-      <td><%= m.quota_str %></td>
-      <td><%= m.active_str %></td>
-      <td><%= link_to "alias", edit_domain_alias_path(@domain, m.alias),
+      <td class="text-center"><%= m.quota_str %></td>
+      <td class="text-center"><%= m.active_str %></td>
+      <td class="text-center"><%= link_to "alias", edit_domain_alias_path(@domain, m.alias),
                       role: "button", class: "btn btn-info btn-sm" %></td>
-      <td><%= link_to "Edit", edit_domain_mailbox_path(@domain, m),
+      <td class="text-center"><%= link_to "Edit", edit_domain_mailbox_path(@domain, m),
                       role: "button", class: "btn btn-info btn-sm" %></td>
-      <td><%= link_to "Delete", domain_mailbox_path(@domain, m), method: :delete,
+      <td class="text-center"><%= link_to "Delete", domain_mailbox_path(@domain, m), method: :delete,
                       data: { confirm: 'Are you sure?' },
                       role: "button", class: "btn btn-secondary btn-sm" %></td>
-      <td><%= l m.modified %></td>
+      <td class="text-center"><%= l m.modified %></td>
     </tr>
   <% end %>
   </tbody>

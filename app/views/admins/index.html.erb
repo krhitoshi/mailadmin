@@ -5,35 +5,35 @@
 <table class="table">
   <thead class="thead-dark">
   <tr>
-    <th>#</th>
+    <th class="text-center">#</th>
     <th>Admin</th>
-    <th>Domains</th>
-    <th>Active</th>
-    <th>Edit</th>
+    <th class="text-center">Domains</th>
+    <th class="text-center">Active</th>
+    <th class="text-center">Edit</th>
     <% if @current_admin.super_admin? %>
-      <th>Delete</th>
+      <th class="text-center">Delete</th>
     <% end %>
-    <th>Modified</th>
+    <th class="text-center">Modified</th>
   </tr>
   </thead>
   <tbody>
   <% @admins.each_with_index do |admin, i| %>
     <% tr_class = admin.active? ? "" : "table-secondary" %>
     <tr class="<%= tr_class %>">
-      <td><%= i+1 %></td>
+      <td class="text-center"><%= i+1 %></td>
       <td><%= admin.username %></td>
-      <td>
+      <td class="text-center">
         <% if admin.super_admin? %>
           Super Admin
         <% else %>
           <%= admin.rel_domains.count %>
         <% end %>
       </td>
-      <td><%= admin.active_str %></td>
-      <td><%= link_to "Edit", edit_admin_path(admin),
+      <td class="text-center"><%= admin.active_str %></td>
+      <td class="text-center"><%= link_to "Edit", edit_admin_path(admin),
                       role: "button", class: "btn btn-info btn-sm"%></td>
       <% if @current_admin.super_admin? %>
-        <td>
+        <td class="text-center">
           <% if @current_admin == admin %>
             <%= link_to "Delete", "", role: "button",
                         class: "btn btn-secondary btn-sm disabled",
@@ -45,7 +45,7 @@
           <% end %>
         </td>
       <% end %>
-      <td><%= l admin.modified %></td>
+      <td class="text-center"><%= l admin.modified %></td>
     </tr>
   <% end %>
   </tbody>
