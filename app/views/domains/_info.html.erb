@@ -26,11 +26,11 @@
 <ul class="list-group list-group-horizontal" style="margin: 5px 0">
   <li class="list-group-item">
     <span class="font-weight-bold">Mailboxes</span>
-    <%= @domain.rel_mailboxes.count %> / <%= @domain.mailboxes %>
+    <%= @domain.rel_mailboxes.count %> / <%= @domain.mailboxes_str %>
   </li>
   <li class="list-group-item">
     <span class="font-weight-bold">Aliases</span>
-    <%= @domain.pure_aliases.count %> / <%= @domain.aliases %>
+    <%= @domain.pure_aliases.count %> / <%= @domain.aliases_str %>
   </li>
   <li class="list-group-item">
     <span class="font-weight-bold">Max Quota</span>

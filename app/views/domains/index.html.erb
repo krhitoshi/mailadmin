@@ -27,8 +27,12 @@
       <td class="text-center"><%= i+1 %></td>
       <td><%= domain.domain %></td>
       <td><%= domain.description %></td>
-      <td class="text-center"><%= domain.rel_mailboxes.count %> / <%= domain.mailboxes %></td>
-      <td class="text-center"><%= domain.pure_aliases.count %> / <%= domain.aliases %></td>
+      <td class="text-center">
+        <%= domain.rel_mailboxes.count %> / <%= domain.mailboxes_str %>
+      </td>
+      <td class="text-center">
+        <%= domain.pure_aliases.count %> / <%= domain.aliases_str %>
+      </td>
       <td class="text-center"><%= domain.maxquota_str %></td>
       <td class="text-center"><%= domain.active_str %></td>
       <td><%= link_to "Show", domain,

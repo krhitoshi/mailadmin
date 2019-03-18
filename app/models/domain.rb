@@ -30,11 +30,29 @@ class Domain < ApplicationRecord
     rel_aliases.pure
   end
 
+  def aliases_str
+    num_str(self.aliases)
+  end
+
+  def mailboxes_str
+    num_str(self.mailboxes)
+  end
+
   def maxquota_str
     if maxquota.zero?
       "Unlimited"
     else
       "#{maxquota} MB"
+    end
+  end
+
+  private
+
+  def num_str(num)
+    if num.zero?
+      "Unlimited"
+    else
+      num.to_s
     end
   end
 end
