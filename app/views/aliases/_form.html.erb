@@ -1,8 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Back', domain_path(@domain) %>
-
 <%= form_for([@domain, @alias]) do |f| %>
+  <div class="card-body">
   <% if @alias.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@alias.errors.count, "error") %> prohibited this alias from being saved:</h2>
@@ -15,30 +12,39 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :local_part %><br>
     <% if controller.action_name == "edit" %>
       <%= f.hidden_field :local_part, size: 20 %>
       <%= @alias.address %>
     <% else %>
-      <%= f.text_field :local_part, size: 20 %>@<%= @domain.domain %>
+      <div class="input-group">
+        <%= f.text_field :local_part, size: 20, class: "form-control" %>
+        <div class="input-group-append">
+          <div class="input-group-text">@<%= @domain.domain %></div>
+        </div>
+      </div>
     <% end %>
 
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :goto %><br>
-    <%= f.text_field :goto, size: 50 %>
+    <%= f.text_field :goto, size: 50, class: "form-control" %>
   </div>
 
   <% if @alias.pure_alias? %>
-  <div class="field">
-    <%= f.label :active %> <%= f.check_box :active %>
+  <div class="form-group form-check">
+    <%= f.check_box :active, class: "form-check-input" %>
+    <%= f.label :active, class: "form-check-label" %>
   </div>
   <% end %>
+  </div>
 
-  <div class="actions">
+  <div class="card-footer">
     <%= f.submit(class: "btn btn-primary") %>
+    <%= link_to "Cancel", domain_aliases_path(@domain), role: "button",
+                          class: "btn btn-secondary" %>
   </div>
 
 <% end %>
