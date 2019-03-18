@@ -1,8 +1,10 @@
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %>
+  <div class="alert alert-primary" role="alert"><%= notice %></div>
+<% end %>
 
-<%= link_to 'Back', domain_path(@domain) %>
 
 <%= form_for([@domain, @mailbox]) do |f| %>
+  <div class="card-body">
   <% if @mailbox.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@mailbox.errors.count, "error") %> prohibited this mailbox from being saved:</h2>
@@ -15,42 +17,53 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :local_part %><br>
     <% if controller.action_name == "edit" %>
       <%= f.hidden_field :local_part, size: 20 %>
       <%= @mailbox.username %>
     <% else %>
-      <%= f.text_field :local_part, size: 20 %>@<%= @domain.domain %>
+      <div class="input-group">
+        <%= f.text_field :local_part, size: 20, class: "form-control" %>
+        <div class="input-group-append">
+          <div class="input-group-text">@<%= @domain.domain %></div>
+        </div>
+      </div>
     <% end %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name, size: 50 %>
+    <%= f.text_field :name, size: 50, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password_unencrypted %><br>
-    <%= f.password_field :password_unencrypted, size: 50 %>
+    <%= f.password_field :password_unencrypted, size: 50,
+                         class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password_unencrypted_confirmation %><br>
-    <%= f.password_field :password_unencrypted_confirmation, size: 50 %>
+    <%= f.password_field :password_unencrypted_confirmation, size: 50,
+                         class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group number">
     <%= f.label :quota_mb %><br>
-    <%= f.text_field :quota_mb, size: 50 %>
+    <%= f.text_field :quota_mb, size: 50, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :active %> <%= f.check_box :active %>
+  <div class="form-group form-check">
+    <%= f.check_box :active, class: "form-check-input" %>
+    <%= f.label :active, class: "form-check-label" %>
+  </div>
   </div>
 
-  <div class="actions">
+  <div class="card-footer">
     <%= f.submit(class: "btn btn-primary") %>
+    <%= link_to "Cancel", domain_mailboxes_path(@domain), role: "button",
+                          class: "btn btn-secondary" %>
   </div>
 
 <% end %>
