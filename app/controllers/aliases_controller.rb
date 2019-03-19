@@ -52,6 +52,6 @@ class AliasesController < ApplicationController
   end
 
   def alias_params
-    params.require(:alias).permit(:local_part, :goto, :active)
+    params.require(:alias).permit(:local_part, :active, forward_addresses: [])
   end
 end

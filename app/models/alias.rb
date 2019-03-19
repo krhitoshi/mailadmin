@@ -23,9 +23,27 @@ class Alias < ApplicationRecord
   scope :pure, -> { joins("LEFT OUTER JOIN mailbox ON alias.address = mailbox.username").where("mailbox.username" => nil) }
 
   attribute :local_part, :string
+  attr_writer :forward_addresses
+
+  def forward_addresses
+    if @forward_addresses.nil?
+      if self.goto.nil?
+        [nil, nil, nil]
+      else
+        self.goto.split(",") + [nil, nil, nil]
+      end
+    else
+      @forward_addresses
+    end
+  end
 
   before_validation do |a|
     a.address = "#{a.local_part}@#{a.domain}" unless a.local_part.empty?
+    unless a.forward_addresses.empty?
+      forward_addresses = a.forward_addresses.dup
+      forward_addresses.delete_if { |f| f.blank? }
+      a.goto = forward_addresses.join(",")
+    end
   end
 
   def mailbox?

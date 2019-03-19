@@ -29,8 +29,11 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :goto %><br>
-    <%= f.text_field :goto, size: 50, class: "form-control" %>
+    <%= f.label :goto %>
+    <% @alias.forward_addresses.each do |f| %>
+      <%= text_field_tag 'alias[forward_addresses][]', f, size: 50,
+                         class: "form-control", style: "margin-bottom: 5px" %>
+    <% end %>
   </div>
 
   <% if @alias.pure_alias? %>
