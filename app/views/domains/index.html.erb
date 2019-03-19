@@ -28,10 +28,18 @@
       <td><%= domain.domain %></td>
       <td><%= domain.description %></td>
       <td class="text-center">
-        <%= domain.rel_mailboxes.count %> / <%= domain.mailboxes_short_str %>
+        <% if domain.mailboxes_unlimited? %>
+          <%= domain.rel_mailboxes.count %>
+        <% else %>
+          <%= domain.rel_mailboxes.count %> / <%= domain.mailboxes_short_str %>
+        <% end %>
       </td>
       <td class="text-center">
-        <%= domain.pure_aliases.count %> / <%= domain.aliases_short_str %>
+        <% if domain.aliases_unlimited? %>
+          <%= domain.pure_aliases.count %>
+        <% else %>
+          <%= domain.pure_aliases.count %> / <%= domain.aliases_short_str %>
+        <% end %>
       </td>
       <td class="text-center"><%= domain.maxquota_short_str %></td>
       <td class="text-center"><%= domain.active_str %></td>

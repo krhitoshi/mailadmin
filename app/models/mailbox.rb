@@ -61,7 +61,7 @@ class Mailbox < ApplicationRecord
 
   def quota_str
     if quota.zero?
-      "Unlimited"
+      "--"
     else
       quota_mb = quota / 1_024_000
       "#{quota_mb} MB"

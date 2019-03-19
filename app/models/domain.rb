@@ -30,6 +30,14 @@ class Domain < ApplicationRecord
     rel_aliases.pure
   end
 
+  def aliases_unlimited?
+    self.aliases.zero?
+  end
+
+  def mailboxes_unlimited?
+    self.mailboxes.zero?
+  end
+
   def aliases_str
     num_str(self.aliases)
   end
