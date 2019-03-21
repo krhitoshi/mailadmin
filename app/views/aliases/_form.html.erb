@@ -31,11 +31,15 @@
   <div class="form-group" id="forward-address-group">
     <%= f.label :goto %>
     <% @alias.forward_addresses.each do |f| %>
+      <div class="input-group mb-2 forward-address">
       <%= text_field_tag 'alias[forward_addresses][]', f, size: 50,
-                         class: "form-control forward-address",
-                         style: "margin-bottom: 5px" %>
+                         class: "form-control" %>
+        <div class="input-group-append">
+          <button class="btn btn-outline-info delete-forward-address-button" type="button">Delete</button>
+        </div>
+      </div>
     <% end %>
-    <button class="btn btn-info" id="add-forward-address-button">Add</button>
+    <button class="btn btn-outline-info" id="add-forward-address-button" type="button">Add</button>
   </div>
 
   <% if @alias.pure_alias? %>
