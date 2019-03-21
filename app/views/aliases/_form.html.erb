@@ -30,12 +30,12 @@
 
   <div class="form-group" id="forward-address-group">
     <%= f.label :goto %>
-    <% @alias.forward_addresses.each do |f| %>
+    <% @alias.forward_addresses.each_with_index do |f, i| %>
       <div class="input-group mb-2 forward-address">
       <%= text_field_tag 'alias[forward_addresses][]', f, size: 50,
                          class: "form-control" %>
-        <div class="input-group-append">
-          <button class="btn btn-outline-info delete-forward-address-button" type="button">Delete</button>
+        <div class="input-group-append <%= i == 0 ? "d-none" : "" %>">
+          <button class="btn btn-outline-info delete-forward-address-button" type="button" <%= i == 0 ? "disabled" : "" %>>Delete</button>
         </div>
       </div>
     <% end %>

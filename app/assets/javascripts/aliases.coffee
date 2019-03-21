@@ -4,10 +4,13 @@ deleteAddress = ->
 $(document).on "turbolinks:load", ->
   addButton = $("#add-forward-address-button")
   addButton.click  ->
-    input = $(".forward-address").last()
+    input = $(".forward-address").first()
     newInput = $(input).clone()
     newInput.children("input").val("")
-    newInput.find(".delete-forward-address-button").click deleteAddress
+    button = newInput.find(".delete-forward-address-button")
+    button.removeAttr("disabled")
+    button.click deleteAddress
+    newInput.children(".input-group-append").removeClass("d-none")
     newInput.insertBefore addButton
 
   $(".delete-forward-address-button").click deleteAddress
