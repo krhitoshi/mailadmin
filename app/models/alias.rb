@@ -28,9 +28,9 @@ class Alias < ApplicationRecord
   def forward_addresses
     if @forward_addresses.nil?
       if self.goto.nil?
-        [nil, nil, nil]
+        [nil]
       else
-        self.goto.split(",") + [nil, nil, nil]
+        self.goto.split(",") + [nil]
       end
     else
       @forward_addresses
