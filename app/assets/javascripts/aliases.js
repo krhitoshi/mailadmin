@@ -3,19 +3,24 @@
         $(this).closest(".input-group").remove();
     }
 
-    $(document).on("turbolinks:load", function () {
-        addButton = $("#add-forward-address-button");
-        addButton.click(function () {
-            input = $(".forward-address").first();
-            newInput = $(input).clone();
-            newInput.children("input").val("");
-            button = newInput.find(".delete-forward-address-button");
+    document.addEventListener("turbolinks:load", function () {
+        var addButton = document.getElementById("add-forward-address-button");
+        if (addButton === null) {
+            return;
+        }
+        addButton.addEventListener('click', function () {
+            var address = document.querySelector(".forward-address");
+            var newAddress = $(address).clone();
+            newAddress.children("input").val("");
+            var button = newAddress.find(".delete-forward-address-button");
             button.removeAttr("disabled");
             button.click(deleteAddress);
-            newInput.children(".input-group-append").removeClass("d-none");
-            newInput.insertBefore(addButton);
+            newAddress.children(".input-group-append").removeClass("d-none");
+            newAddress.insertBefore(addButton);
         });
 
-        $(".delete-forward-address-button").click(deleteAddress);
+        document.querySelectorAll(".delete-forward-address-button").forEach(function (button){
+            button.addEventListener('click', deleteAddress);
+        });
     });
 }).call(this);
