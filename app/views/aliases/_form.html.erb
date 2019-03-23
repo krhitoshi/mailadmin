@@ -50,10 +50,12 @@
   <% end %>
   </div>
 
+  <% cancel_path = @alias.pure_alias? ? domain_aliases_path(@domain) : domain_mailboxes_path(@domain)%>
+
   <div class="card-footer">
     <%= f.submit(class: "btn btn-primary") %>
-    <%= link_to "Cancel", domain_aliases_path(@domain), role: "button",
-                          class: "btn btn-secondary" %>
+    <%= link_to "Cancel", cancel_path, role: "button",
+                class: "btn btn-secondary" %>
   </div>
 
 <% end %>
