@@ -11,7 +11,9 @@
         addButton.addEventListener('click', function () {
             var address = document.querySelector(".forward-address");
             var newAddress = address.cloneNode(true);
-            newAddress.querySelector("input").value = "";
+            var input = newAddress.querySelector("input");
+            input.value = "";
+            input.removeAttribute("readonly");
             var button = newAddress.querySelector(".delete-forward-address-button");
             button.removeAttribute("disabled");
             button.addEventListener('click', deleteAddress);

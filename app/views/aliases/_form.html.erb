@@ -33,7 +33,7 @@
     <% @alias.forward_addresses.each_with_index do |f, i| %>
       <div class="input-group mb-2 forward-address">
       <%= text_field_tag 'alias[forward_addresses][]', f, size: 50,
-                         class: "form-control" %>
+                         class: "form-control", readonly: i == 0 && @alias.mailbox? %>
         <div class="input-group-append <%= i == 0 ? "d-none" : "" %>">
           <button class="btn btn-outline-info delete-forward-address-button" type="button" <%= i == 0 ? "disabled" : "" %>>Delete</button>
         </div>
