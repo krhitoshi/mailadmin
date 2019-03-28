@@ -50,11 +50,11 @@ class Mailbox < ApplicationRecord
 
   before_validation do |mailbox|
     mailbox.name = "" if mailbox.name.nil?
-    if mailbox.quota_mb.nil?
-      mailbox.quota = nil
-    else
-      mailbox.quota = mailbox.quota_mb * 1_024_000
-    end
+    mailbox.quota = if mailbox.quota_mb.nil?
+                      nil
+                    else
+                      mailbox.quota_mb * 1_024_000
+                    end
     mailbox.username = "#{mailbox.local_part}@#{mailbox.domain}"
     mailbox.maildir = "#{mailbox.domain}/#{mailbox.username}/"
     mailbox.build_alias(local_part: mailbox.local_part, goto: mailbox.username,
