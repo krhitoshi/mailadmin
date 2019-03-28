@@ -27,7 +27,12 @@ class AliasesController < ApplicationController
 
   def update
     if @alias.update(alias_params)
-      redirect_to domain_aliases_path(@alias.domain), notice: 'Alias was successfully updated.'
+      path = if @alias.pure_alias?
+               domain_aliases_path(@alias.domain)
+             else
+               domain_mailboxes_path(@alias.domain)
+             end
+      redirect_to path, notice: 'Alias was successfully updated.'
     else
       render action: 'edit'
     end
