@@ -7,14 +7,16 @@ class Mailbox < ApplicationRecord
   attribute :quota_mb, :integer
 
   validates :username, presence: true, uniqueness: true,
-            format: { with: RE_EMAIL_LIKE_WITH_ANCHORS,
-                      message: "must be a valid email address" }
+                       format: { with: RE_EMAIL_LIKE_WITH_ANCHORS,
+                                 message: "must be a valid email address" }
   validates :maildir, presence: true, uniqueness: true
   validates :local_part, presence: true
   validates :quota, presence: true,
-            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+                    numericality: { only_integer: true,
+                                    greater_than_or_equal_to: 0 }
   validates :quota_mb, presence: true,
-            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+                       numericality: { only_integer: true,
+                                       greater_than_or_equal_to: 0 }
 
   belongs_to :rel_domain, class_name: "Domain", foreign_key: :domain
   has_one :alias, foreign_key: :address, dependent: :destroy
