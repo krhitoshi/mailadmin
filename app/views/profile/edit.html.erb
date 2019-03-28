@@ -1,0 +1,39 @@
+<div class="card card-form">
+  <h4 class="card-header">Change password</h4>
+  <% if flash[:notice] %>
+    <div class="alert alert-primary" role="alert"><%= notice %></div>
+  <% end %>
+
+  <%= form_for @current_admin, url: {controller: :profile, action: :update } do |f| %>
+    <div class="card-body">
+      <% if @current_admin.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@current_admin.errors.count, "error") %> prohibited
+            this admin from being saved:</h2>
+
+          <ul>
+            <% @current_admin.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :password_unencrypted %><br>
+        <%= f.password_field :password_unencrypted,
+                             size: 50, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_unencrypted_confirmation %><br>
+        <%= f.password_field :password_unencrypted_confirmation,
+                             size: 50, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <%= f.submit(class: "btn btn-primary") %>
+    </div>
+  <% end %>
+</div>

@@ -25,6 +25,10 @@
             <%= link_to "Domains", domains_path, class: "nav-link",
                         style: "text-decoration: underline" %>
           </li>
+          <li class="nav-item">
+            <%= link_to "Profile", profile_path, class: "nav-link",
+                        style: "text-decoration: underline" %>
+          </li>
         </ul>
 
         <% if @current_admin.super_admin? %>
