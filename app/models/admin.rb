@@ -11,8 +11,6 @@ class Admin < ApplicationRecord
   has_many :domain_admins, foreign_key: :username, dependent: :delete_all
   has_many :rel_domains, through: :domain_admins
 
-  scope :active, -> { where(active: true) }
-
   attr_accessor :domain_ids
   attribute :form_super_admin, :boolean, default: false
 

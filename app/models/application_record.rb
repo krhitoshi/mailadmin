@@ -13,6 +13,12 @@ class ApplicationRecord < ActiveRecord::Base
   RE_DOMAIN_NAME_LIKE_WITH_ANCHORS = /\A#{RE_DOMAIN_NAME_LIKE_BASE}\z/
   RE_EMAIL_LIKE_WITH_ANCHORS = /\A#{RE_EMAIL_LIKE_BASE}\z/
 
+  scope :active, -> { where(active: true) }
+
+  def inactive?
+    !active?
+  end
+
   def active_str
     active? ? "Active" : "Inactive"
   end

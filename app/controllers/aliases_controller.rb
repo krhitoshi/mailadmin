@@ -1,6 +1,6 @@
 class AliasesController < ApplicationController
   before_action :set_alias, only: [:edit, :update, :destroy]
-  before_action :set_domain, only: [:index, :new, :create]
+  before_action :set_active_domain, only: [:index, :new, :create]
 
   def new
     @alias = Alias.new
@@ -45,14 +45,9 @@ class AliasesController < ApplicationController
 
   private
 
-  def set_domain
-    @domain = Domain.find(params[:domain_id])
-    raise "Invalid domain access" unless @current_admin.has_domain?(@domain)
-  end
-
   def set_alias
     @alias = Alias.find(params[:id])
-    set_domain
+    set_active_domain
     raise "Invalid Paramters" if @alias.rel_domain != @domain
   end
 

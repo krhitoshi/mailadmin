@@ -1,6 +1,6 @@
 class MailboxesController < ApplicationController
   before_action :set_mailbox, only: [:edit, :update, :destroy]
-  before_action :set_domain, only: [:index, :new, :create]
+  before_action :set_active_domain, only: [:index, :new, :create]
 
   def new
     @mailbox = Mailbox.new
@@ -49,14 +49,9 @@ class MailboxesController < ApplicationController
 
   private
 
-  def set_domain
-    @domain = Domain.find(params[:domain_id])
-    raise "Invalid domain access" unless @current_admin.has_domain?(@domain)
-  end
-
   def set_mailbox
     @mailbox = Mailbox.find(params[:id])
-    set_domain
+    set_active_domain
     raise "Invalid Paramters" if @mailbox.rel_domain != @domain
   end
 

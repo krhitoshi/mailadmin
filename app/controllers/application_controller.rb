@@ -3,6 +3,15 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def set_active_domain
+    @domain = Domain.find(params[:domain_id])
+    raise "Invalid domain access" unless @current_admin.has_domain?(@domain)
+
+    if @domain.inactive? && !@current_admin.super_admin?
+      raise "Invalid domain access"
+    end
+  end
+
   def super_admin_check
     raise "Ivalid admin access" unless @current_admin.super_admin?
   end

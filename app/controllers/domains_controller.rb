@@ -6,7 +6,7 @@ class DomainsController < ApplicationController
     if @current_admin.super_admin?
       @domains = Domain.without_all.all
     else
-      @domains = @current_admin.rel_domains
+      @domains = @current_admin.rel_domains.active
     end
   end
 
