@@ -31,27 +31,27 @@ class Domain < ApplicationRecord
   end
 
   def aliases_unlimited?
-    self.aliases.zero?
+    aliases.zero?
   end
 
   def mailboxes_unlimited?
-    self.mailboxes.zero?
+    mailboxes.zero?
   end
 
   def aliases_str
-    num_str(self.aliases)
+    num_str(aliases)
   end
 
   def mailboxes_str
-    num_str(self.mailboxes)
+    num_str(mailboxes)
   end
 
   def aliases_short_str
-    num_short_str(self.aliases)
+    num_short_str(aliases)
   end
 
   def mailboxes_short_str
-    num_short_str(self.mailboxes)
+    num_short_str(mailboxes)
   end
 
   def maxquota_str

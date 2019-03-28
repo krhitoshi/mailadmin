@@ -14,6 +14,6 @@ class ApplicationRecord < ActiveRecord::Base
   RE_EMAIL_LIKE_WITH_ANCHORS = /\A#{RE_EMAIL_LIKE_BASE}\z/
 
   def active_str
-    self.active? ? "Active" : "Inactive"
+    active? ? "Active" : "Inactive"
   end
 end
