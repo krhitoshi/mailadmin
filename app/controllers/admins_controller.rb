@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action :super_admin_check, only: [:new, :create, :destroy]
+  before_action :super_admin_check
   before_action :set_admin, only: [:edit, :update, :destroy]
 
   def index

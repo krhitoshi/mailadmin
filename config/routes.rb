@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   post   'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
+  get 'profile' => 'profile#edit'
+  patch 'profile' => 'profile#update'
+
   resources :admins, only: [:index, :new, :create] do
     member do
       constraints id: ApplicationRecord::RE_EMAIL_LIKE do

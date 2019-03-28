@@ -17,10 +17,12 @@
         <ul class="navbar-nav">
           <% admins_class = controller.controller_name == "admins" ? "active" : ""  %>
           <% domains_class = controller.controller_name == "domains" ? "active" : ""  %>
+          <% if @current_admin.super_admin? %>
           <li class="nav-item <%= admins_class %>">
             <%= link_to "Admins", admins_path, class: "nav-link",
                         style: "text-decoration: underline" %>
           </li>
+          <% end %>
           <li class="nav-item <%= domains_class %>">
             <%= link_to "Domains", domains_path, class: "nav-link",
                         style: "text-decoration: underline" %>
