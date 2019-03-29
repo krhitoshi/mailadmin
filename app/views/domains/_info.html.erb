@@ -1,47 +1,35 @@
 <h1><%= @domain.domain %></h1>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="collapse navbar-collapse">
-    <ul class="navbar-nav">
-      <% mb_class = controller.controller_name == "mailboxes" ? "active" : ""  %>
-      <% al_class = controller.controller_name == "aliases" ? "active" : ""  %>
-      <li class="nav-item <%= mb_class %>">
-        <%= link_to "Mailboxes", domain_mailboxes_path(@domain),
-                    class: "nav-link", style: "text-decoration: underline" %>
-      </li>
-      <li class="nav-item <%= al_class %>">
-        <%= link_to "Aliases", domain_aliases_path(@domain),
-                    class: "nav-link", style: "text-decoration: underline" %>
-      </li>
-    </ul>
-    <%= link_to "New mailbox", new_domain_mailbox_path(@domain),
-                role: "button", class: "btn btn-outline-success",
-                style: "margin: 0 8px" %>
-    <%= link_to "New alias", new_domain_alias_path(@domain),
-                role: "button", class: "btn btn-outline-success",
-                style: "margin: 0 8px" %>
-  </div>
-</nav>
+<div class="mb-3 clearfix">
+  <ul class="list-group list-group-horizontal float-left">
+    <li class="list-group-item">
+      <%= link_to "Mailboxes", domain_mailboxes_path(@domain),
+                  style: "text-decoration: underline" %>
+      <%= @domain.rel_mailboxes.count %> / <%= @domain.mailboxes_str %>
+    </li>
+    <li class="list-group-item">
+      <%= link_to "Aliases", domain_aliases_path(@domain),
+                  style: "text-decoration: underline" %>
+      <%= @domain.pure_aliases.count %> / <%= @domain.aliases_str %>
+    </li>
+    <li class="list-group-item">
+      <span class="font-weight-bold">Max Quota</span>
+      <%= @domain.maxquota_str %>
+    </li>
+    <% active_class = @domain.active? ? "list-group-item-success" : "list-group-item-secondary" %>
+    <li class="list-group-item <%= active_class %>">
+      <span class="font-weight-bold">Status</span>
+      <%= @domain.active_str %>
+    </li>
+  </ul>
 
-<ul class="list-group list-group-horizontal" style="margin: 5px 0">
-  <li class="list-group-item">
-    <span class="font-weight-bold">Mailboxes</span>
-    <%= @domain.rel_mailboxes.count %> / <%= @domain.mailboxes_str %>
-  </li>
-  <li class="list-group-item">
-    <span class="font-weight-bold">Aliases</span>
-    <%= @domain.pure_aliases.count %> / <%= @domain.aliases_str %>
-  </li>
-  <li class="list-group-item">
-    <span class="font-weight-bold">Max Quota</span>
-    <%= @domain.maxquota_str %>
-  </li>
-  <% active_class = @domain.active? ? "list-group-item-success" : "list-group-item-secondary" %>
-  <li class="list-group-item <%= active_class %>">
-    <span class="font-weight-bold">Status</span>
-    <%= @domain.active_str %>
-  </li>
-</ul>
+  <div class=" float-left pt-1 ml-3">
+    <%= link_to "New mailbox", new_domain_mailbox_path(@domain),
+                role: "button", class: "btn btn-outline-success mx-2" %>
+    <%= link_to "New alias", new_domain_alias_path(@domain),
+                role: "button", class: "btn btn-outline-success mx-2" %>
+  </div>
+</div>
 
 <% if flash[:notice] %>
   <div class="alert alert-primary" role="alert"><%= notice %></div>
