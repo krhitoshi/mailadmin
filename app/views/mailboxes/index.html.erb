@@ -27,7 +27,7 @@
         <% end %>
       </td>
       <td><%= m.name %></td>
-      <td class="text-center"><%= m.quota_str %></td>
+      <td class="text-center"><%= m.quota_usage_str %>/<%= m.quota_str %></td>
       <td class="text-center"><%= m.active_str %></td>
       <td class="text-center"><%= link_to "alias", edit_domain_alias_path(@domain, m.alias),
                       role: "button", class: "btn btn-info btn-sm" %></td>

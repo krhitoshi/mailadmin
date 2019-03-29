@@ -20,6 +20,8 @@ class Mailbox < ApplicationRecord
 
   belongs_to :rel_domain, class_name: "Domain", foreign_key: :domain
   has_one :alias, foreign_key: :address, dependent: :destroy
+  has_one :quota_usage, class_name: "Quota", foreign_key: :username,
+          dependent: :destroy
 
   validate on: :create do |mailbox|
     domain = mailbox.rel_domain
@@ -59,6 +61,15 @@ class Mailbox < ApplicationRecord
     mailbox.maildir = "#{mailbox.domain}/#{mailbox.username}/"
     mailbox.build_alias(local_part: mailbox.local_part, goto: mailbox.username,
                         domain: mailbox.domain)
+  end
+
+  def quota_usage_str
+    if quota_usage
+      usage_mb = quota_usage.bytes / 1_024_000
+      usage_mb.to_s
+    else
+      "0"
+    end
   end
 
   def quota_str
