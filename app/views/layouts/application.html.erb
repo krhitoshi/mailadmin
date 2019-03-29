@@ -27,10 +27,6 @@
             <%= link_to "Domains", domains_path, class: "nav-link",
                         style: "text-decoration: underline" %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Profile", profile_path, class: "nav-link",
-                        style: "text-decoration: underline" %>
-          </li>
         </ul>
 
         <% if @current_admin.super_admin? %>
@@ -43,12 +39,15 @@
                       style: "margin: 0 8px" %>
         <% end %>
 
-        <div class="ml-md-auto">
-          Signed in as
-          <span class="font-weight-bold"><%= @current_admin.username %></span>
-          &nbsp;&nbsp;
-          <%= link_to "Sign out", logout_path, method: :delete,
-                      role: "button", class: "btn btn-outline-primary" %>
+        <div class="dropdown ml-md-auto">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class=""><%= @current_admin.username %></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= link_to "Profile", profile_path, class: "dropdown-item" %>
+            <%= link_to "Sign out", logout_path, method: :delete,
+                        role: "button", class: "dropdown-item" %>
+          </div>
         </div>
       </div>
     </nav>
