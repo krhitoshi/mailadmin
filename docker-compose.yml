@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=mysql2://mailadmin:iBMVRf8bLP7vN49C5YmT@host.docker.internal/mailadmin_development
+    volumes:
+      - .:/app
