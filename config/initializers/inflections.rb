@@ -14,3 +14,9 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+
+# Zeitwerk はファイル名 dovecot_cram_md5_password から DovecotCramMd5Password を
+# 期待するため, 実際のモジュール名 DovecotCramMD5Password を登録する
+Rails.autoloaders.each do |autoloader|
+  autoloader.inflector.inflect("dovecot_cram_md5_password" => "DovecotCramMD5Password")
+end

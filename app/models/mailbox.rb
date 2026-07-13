@@ -6,10 +6,10 @@ class Mailbox < ApplicationRecord
 
   attribute :quota_mb, :integer
 
-  validates :username, presence: true, uniqueness: true,
+  validates :username, presence: true, uniqueness: { case_sensitive: true },
                        format: { with: RE_EMAIL_LIKE_WITH_ANCHORS,
                                  message: "must be a valid email address" }
-  validates :maildir, presence: true, uniqueness: true
+  validates :maildir, presence: true, uniqueness: { case_sensitive: true }
   validates :local_part, presence: true
   validates :quota, presence: true,
                     numericality: { only_integer: true,
