@@ -1,4 +1,4 @@
-# メールボックス随伴エイリアス (Mailbox 作成時に自動生成される形)
+# Mailbox-accompanying alias (the form auto-created on mailbox creation)
 user1_self:
   address: user1@example.com
   goto: user1@example.com
@@ -7,7 +7,7 @@ user1_self:
   modified: 2020-01-01 00:00:00
   active: true
 
-# 転送専用エイリアス (pure alias)
+# Forward-only alias (pure alias)
 info:
   address: info@example.com
   goto: external@example.org
@@ -16,7 +16,7 @@ info:
   modified: 2020-01-01 00:00:00
   active: true
 
-# limited.example の上限 (aliases: 1) を使い切っている pure alias
+# Pure alias that uses up the limit of limited.example (aliases: 1)
 limited_info:
   address: info@limited.example
   goto: external@example.org

@@ -1,4 +1,4 @@
-# domain "ALL" の行が super admin を表す (postfixadmin 標準)
+# A row with domain "ALL" represents a super admin (postfixadmin standard)
 super_all:
   username: admin@example.com
   domain: ALL

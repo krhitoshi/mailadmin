@@ -1,5 +1,5 @@
-# concurrent-ruby 1.3.5 以降が logger を require しなくなったため明示的に読み込む
-# (Rails 7.1 未満では ActiveSupport が Logger 未定義でエラーになる)
+# concurrent-ruby 1.3.5+ no longer requires logger, which breaks
+# ActiveSupport on Rails < 7.1 with an uninitialized constant Logger error
 require 'logger'
 
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../Gemfile', __dir__)

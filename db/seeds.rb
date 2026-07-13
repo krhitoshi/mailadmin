@@ -1,5 +1,5 @@
-# 手動確認用の初期データ
-# ALL ドメイン行は db/structure.sql の INSERT で投入済み
+# Initial data for manual testing
+# The ALL domain row is inserted by db/structure.sql
 
 admin = Admin.find_or_initialize_by(username: "admin@example.com")
 admin.password_unencrypted = "adminpass"

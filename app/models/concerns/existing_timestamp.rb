@@ -4,10 +4,11 @@ module ExistingTimestamp
   extend ActiveSupport::Concern
 
   included do
-    # created/modified には DB カラムデフォルト '2000-01-01 00:00:00' があり,
-    # AR がデフォルト値を設定済み属性とみなして create 時のタイムスタンプ設定を
-    # スキップするため, 明示的に値が代入されていない場合はここで設定する
-    # (domain_admins には modified が, quota2 には両方が無いため has_attribute? で確認)
+    # created/modified have the DB column default '2000-01-01 00:00:00' and
+    # AR treats the loaded default as a user-set attribute and skips its own
+    # timestamp stamping on create, so set them here unless explicitly assigned
+    # (checked with has_attribute? since domain_admins has no modified and
+    # quota2 has neither)
     before_create do
       now = Time.current
       if has_attribute?(:created) && !created_changed?

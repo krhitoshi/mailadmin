@@ -1,4 +1,4 @@
-# super admin 用の特殊行 (postfixadmin 標準)
+# Special row for super admins (postfixadmin standard)
 all_domain:
   domain: ALL
   description: ""
@@ -25,7 +25,7 @@ example:
   modified: 2020-01-01 00:00:00
   active: true
 
-# alias/mailbox 数の上限テスト用 (上限 1 で既に 1 つ使用済み)
+# For alias/mailbox limit tests (limit is 1 and already used by one alias)
 limited:
   domain: limited.example
   description: Limited domain

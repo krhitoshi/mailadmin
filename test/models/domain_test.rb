@@ -1,10 +1,10 @@
 require 'test_helper'
 
-# ExistingTimestamp (created/modified カラム) のカナリアテスト
-# AR の private API に依存しているため Rails アップグレードで壊れたら検知する
+# Canary tests for ExistingTimestamp (created/modified columns)
+# It depends on private AR API, so these detect breakage on Rails upgrades
 class DomainTest < ActiveSupport::TestCase
-  # created/modified には DB カラムデフォルト '2000-01-01 00:00:00' があるため
-  # AR 標準のタイムスタンプ設定はスキップされ, ExistingTimestamp の before_create が設定する
+  # created/modified have the DB column default '2000-01-01 00:00:00', so
+  # AR skips its own stamping and the before_create in ExistingTimestamp sets them
   test "create sets created and modified" do
     now = Time.zone.parse("2024-05-01 12:00:00")
     travel_to now do

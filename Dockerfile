@@ -3,8 +3,8 @@ FROM ruby:2.6.10
 
 WORKDIR /app
 
-# mysql CLI は structure.sql のロード (db:structure:load) に必要
-# nodejs は uglifier (ExecJS) 用
+# mysql CLI is required to load structure.sql (db:structure:load)
+# nodejs is for uglifier (ExecJS)
 RUN apt-get update \
     && apt-get install -y --no-install-recommends default-mysql-client nodejs \
     && rm -rf /var/lib/apt/lists/*

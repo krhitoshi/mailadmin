@@ -14,12 +14,12 @@ class ActionDispatch::IntegrationTest
     post login_path, params: { username: username, password: password }
   end
 
-  # fixture の super admin でログインする
+  # Sign in as the super admin fixture
   def sign_in_super
     sign_in("admin@example.com", "adminpass")
   end
 
-  # fixture の一般 admin でログインする
+  # Sign in as the normal admin fixture
   def sign_in_normal
     sign_in("manager@example.com", "managerpass")
   end

@@ -20,7 +20,8 @@ services:
       - "3000:3000"
     environment:
       - DB_HOST=db
-      # spring はコンテナ内で動作しないため無効化 (Rails 6 化の際に gem ごと削除予定)
+      # Disable spring because it does not work in the container
+      # (the gem is planned to be removed in the Rails 6 upgrade)
       - DISABLE_SPRING=1
     volumes:
       - .:/app
