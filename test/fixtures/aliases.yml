@@ -1,11 +1,26 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# メールボックス随伴エイリアス (Mailbox 作成時に自動生成される形)
+user1_self:
+  address: user1@example.com
+  goto: user1@example.com
+  domain: example.com
+  created: 2020-01-01 00:00:00
+  modified: 2020-01-01 00:00:00
+  active: true
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+# 転送専用エイリアス (pure alias)
+info:
+  address: info@example.com
+  goto: external@example.org
+  domain: example.com
+  created: 2020-01-01 00:00:00
+  modified: 2020-01-01 00:00:00
+  active: true
+
+# limited.example の上限 (aliases: 1) を使い切っている pure alias
+limited_info:
+  address: info@limited.example
+  goto: external@example.org
+  domain: limited.example
+  created: 2020-01-01 00:00:00
+  modified: 2020-01-01 00:00:00
+  active: true

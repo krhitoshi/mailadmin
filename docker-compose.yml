@@ -1,11 +1,29 @@
-version: "3.7"
-
 services:
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpass
+      MARIADB_USER: mailadmin
+      MARIADB_PASSWORD: iBMVRf8bLP7vN49C5YmT
+      MARIADB_DATABASE: mailadmin_development
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./db/grant.sql:/docker-entrypoint-initdb.d/grant.sql
+
   app:
     build: .
+    depends_on:
+      - db
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=mysql2://mailadmin:iBMVRf8bLP7vN49C5YmT@host.docker.internal/mailadmin_development
+      - DB_HOST=db
+      # spring はコンテナ内で動作しないため無効化 (Rails 6 化の際に gem ごと削除予定)
+      - DISABLE_SPRING=1
     volumes:
       - .:/app
+
+volumes:
+  db-data:

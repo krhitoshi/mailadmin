@@ -1,11 +1,12 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+user1:
+  username: user1@example.com
+  password: <%= DovecotCrammd5.calc("user1pass") %>
+  name: User One
+  maildir: example.com/user1@example.com/
+  # 100 MB (quota_mb * 1_024_000)
+  quota: 102400000
+  local_part: user1
+  domain: example.com
+  created: 2020-01-01 00:00:00
+  modified: 2020-01-01 00:00:00
+  active: true

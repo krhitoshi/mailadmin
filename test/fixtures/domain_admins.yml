@@ -1,11 +1,12 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# domain "ALL" の行が super admin を表す (postfixadmin 標準)
+super_all:
+  username: admin@example.com
+  domain: ALL
+  created: 2020-01-01 00:00:00
+  active: true
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+normal_example:
+  username: manager@example.com
+  domain: example.com
+  created: 2020-01-01 00:00:00
+  active: true
