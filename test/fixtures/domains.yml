@@ -1,11 +1,40 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# super admin 用の特殊行 (postfixadmin 標準)
+all_domain:
+  domain: ALL
+  description: ""
+  aliases: 0
+  mailboxes: 0
+  maxquota: 0
+  quota: 0
+  transport: ""
+  backupmx: false
+  created: 2020-01-01 00:00:00
+  modified: 2020-01-01 00:00:00
+  active: true
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+example:
+  domain: example.com
+  description: Example domain
+  aliases: 10
+  mailboxes: 10
+  maxquota: 100
+  quota: 0
+  transport: virtual
+  backupmx: false
+  created: 2020-01-01 00:00:00
+  modified: 2020-01-01 00:00:00
+  active: true
+
+# alias/mailbox 数の上限テスト用 (上限 1 で既に 1 つ使用済み)
+limited:
+  domain: limited.example
+  description: Limited domain
+  aliases: 1
+  mailboxes: 1
+  maxquota: 100
+  quota: 0
+  transport: virtual
+  backupmx: false
+  created: 2020-01-01 00:00:00
+  modified: 2020-01-01 00:00:00
+  active: true

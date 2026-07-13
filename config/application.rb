@@ -14,6 +14,9 @@ module Mailadmin
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
 
+    # スキーマは外部の postfixadmin スキーマ (db/structure.sql) に依存する
+    config.active_record.schema_format = :sql
+
     config.action_view.field_error_proc = Proc.new{ |html_tag, _| html_tag }
 
     # Settings in config/environments/* take precedence over those specified here.
