@@ -3,15 +3,25 @@ require 'test_helper'
 # ExistingTimestamp (created/modified カラム) のカナリアテスト
 # AR の private API に依存しているため Rails アップグレードで壊れたら検知する
 class DomainTest < ActiveSupport::TestCase
-  # 既存挙動: created/modified には DB デフォルト '2000-01-01 00:00:00' があり,
-  # AR は新規レコードにカラムデフォルトを読み込むため attribute_present? が true になり
-  # create 時のタイムスタンプ設定はスキップされる (update 時の modified は設定される)
-  test "create leaves created and modified at column default" do
-    domain = Domain.create!(domain: "timestamp.example", description: "",
-                            aliases: 0, mailboxes: 0, maxquota: 0)
-    domain.reload
-    assert_equal "2000-01-01", domain.created.strftime("%Y-%m-%d")
-    assert_equal "2000-01-01", domain.modified.strftime("%Y-%m-%d")
+  # created/modified には DB カラムデフォルト '2000-01-01 00:00:00' があるため
+  # AR 標準のタイムスタンプ設定はスキップされ, ExistingTimestamp の before_create が設定する
+  test "create sets created and modified" do
+    now = Time.zone.parse("2024-05-01 12:00:00")
+    travel_to now do
+      domain = Domain.create!(domain: "timestamp.example", description: "",
+                              aliases: 0, mailboxes: 0, maxquota: 0)
+      domain.reload
+      assert_equal now, domain.created
+      assert_equal now, domain.modified
+    end
+  end
+
+  test "create keeps explicitly assigned created" do
+    explicit = Time.zone.parse("2010-06-15 00:00:00")
+    domain = Domain.create!(domain: "explicit.example", description: "",
+                            aliases: 0, mailboxes: 0, maxquota: 0,
+                            created: explicit)
+    assert_equal explicit, domain.reload.created
   end
 
   test "update advances modified" do

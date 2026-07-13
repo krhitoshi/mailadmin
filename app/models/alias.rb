@@ -12,7 +12,7 @@ class Alias < ApplicationRecord
     end
   end
 
-  validates :address, presence: true, uniqueness: true,
+  validates :address, presence: true, uniqueness: { case_sensitive: true },
                       format: { with: RE_EMAIL_LIKE_WITH_ANCHORS,
                                 message: "must be a valid email address" }
   validates :goto, presence: true
