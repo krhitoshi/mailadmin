@@ -1,13 +1,13 @@
 <% if flash[:notice] %>
-  <div class="alert alert-primary" role="alert"><%= notice %></div>
+  <div class="alert-notice" role="alert"><%= notice %></div>
 <% end %>
 
-<table class="table">
-  <thead class="thead-dark">
+<table class="table-admin">
+  <thead>
   <tr>
     <th class="text-center">#</th>
-    <th>Domain</th>
-    <th>Description</th>
+    <th class="text-left">Domain</th>
+    <th class="text-left">Description</th>
     <th class="text-center">Mailboxes</th>
     <th class="text-center">Aliases</th>
     <th class="text-center">Max Quota</th>
@@ -22,8 +22,7 @@
   </thead>
   <tbody>
   <% @domains.each_with_index do |domain, i| %>
-    <% tr_class = domain.active? ? "" : "table-secondary" %>
-    <tr class="<%= tr_class %>">
+    <tr class="<%= domain.active? ? "" : "row-inactive" %>">
       <td class="text-center"><%= i+1 %></td>
       <td><%= domain.domain %></td>
       <td><%= domain.description %></td>
@@ -43,15 +42,13 @@
       </td>
       <td class="text-center"><%= domain.maxquota_short_str %></td>
       <td class="text-center"><%= domain.active_str %></td>
-      <td><%= link_to "Show", domain,
-                      role: "button", class: "btn btn-primary btn-sm" %></td>
+      <td class="text-center"><%= link_to "Show", domain, class: "btn btn-sm btn-primary" %></td>
 
       <% if @current_admin.super_admin? %>
-        <td><%= link_to "Edit", edit_domain_path(domain),
-                        role: "button", class: "btn btn-info btn-sm" %></td>
-        <td><%= button_to "Delete", domain, method: :delete,
-                          form: { data: { turbo_confirm: 'Are you sure?' } },
-                          class: "btn btn-secondary btn-sm" %></td>
+        <td class="text-center"><%= link_to "Edit", edit_domain_path(domain), class: "btn btn-sm btn-info" %></td>
+        <td class="text-center"><%= button_to "Delete", domain, method: :delete,
+                        form: { data: { turbo_confirm: 'Are you sure?' } },
+                        class: "btn btn-sm btn-danger" %></td>
       <% end %>
       <td class="text-center"><%= l domain.modified %></td>
     </tr>

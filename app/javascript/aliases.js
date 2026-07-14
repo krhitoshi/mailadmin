@@ -1,6 +1,6 @@
 (function() {
     function deleteAddress() {
-        this.parentNode.parentNode.remove();
+        this.parentNode.remove();
     }
 
     document.addEventListener("turbo:load", function () {
@@ -16,8 +16,8 @@
             input.removeAttribute("readonly");
             var button = newAddress.querySelector(".delete-forward-address-button");
             button.removeAttribute("disabled");
+            button.classList.remove("hidden");
             button.addEventListener('click', deleteAddress);
-            newAddress.querySelector(".input-group-append").classList.remove("d-none");
             addButton.parentNode.insertBefore(newAddress, addButton);
         });
 

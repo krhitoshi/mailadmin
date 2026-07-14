@@ -1,17 +1,17 @@
-<div class="card card-form">
+<div class="card">
   <h4 class="card-header">Change password</h4>
   <% if flash[:notice] %>
-    <div class="alert alert-primary" role="alert"><%= notice %></div>
+    <div class="alert-notice mx-4 mt-4 mb-0" role="alert"><%= notice %></div>
   <% end %>
 
   <%= form_for @current_admin, url: {controller: :profile, action: :update } do |f| %>
     <div class="card-body">
       <% if @current_admin.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@current_admin.errors.count, "error") %> prohibited
+        <div id="error_explanation" class="alert-error">
+          <h2 class="font-semibold"><%= pluralize(@current_admin.errors.count, "error") %> prohibited
             this admin from being saved:</h2>
 
-          <ul>
+          <ul class="list-disc pl-5">
             <% @current_admin.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>
             <% end %>
@@ -19,16 +19,14 @@
         </div>
       <% end %>
 
-      <div class="form-group">
-        <%= f.label :password_unencrypted %><br>
-        <%= f.password_field :password_unencrypted,
-                             size: 50, class: "form-control" %>
+      <div>
+        <%= f.label :password_unencrypted, class: "form-label" %>
+        <%= f.password_field :password_unencrypted, class: "form-input" %>
       </div>
 
-      <div class="form-group">
-        <%= f.label :password_unencrypted_confirmation %><br>
-        <%= f.password_field :password_unencrypted_confirmation,
-                             size: 50, class: "form-control" %>
+      <div>
+        <%= f.label :password_unencrypted_confirmation, class: "form-label" %>
+        <%= f.password_field :password_unencrypted_confirmation, class: "form-input" %>
       </div>
     </div>
 

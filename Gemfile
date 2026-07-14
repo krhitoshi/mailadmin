@@ -9,10 +9,10 @@ gem 'rails', '~> 6.1.7'
 gem 'mysql2', '~> 0.5', '>= 0.5.4'
 # Use Puma as the app server
 gem 'puma', '~> 6.4'
-# Use SCSS for stylesheets
-gem 'sassc-rails'
 # Sprockets 4 reads app/assets/config/manifest.js (required for importmap assets)
 gem 'sprockets', '~> 4.0'
+# Tailwind CSS via the standalone binary (no Node required)
+gem 'tailwindcss-rails', '~> 2.0'
 # Hotwire: import maps for JavaScript and Turbo for page navigation
 # (importmap-rails 2.x requires Ruby 3.1+, so 1.x is pinned for now.
 #  turbo-rails must be 2.x: Turbo 7 misjudges this app's URLs, whose
@@ -23,9 +23,6 @@ gem 'turbo-rails', '~> 2.0'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
-gem 'bootstrap', '~> 4.3.1'
-gem 'jquery-rails'
 
 gem 'dovecot_crammd5'
 

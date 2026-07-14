@@ -1,14 +1,14 @@
 <% if flash[:notice] %>
-  <div class="alert alert-primary" role="alert"><%= notice %></div>
+  <div class="alert-notice" role="alert"><%= notice %></div>
 <% end %>
 
 <%= form_for(@admin) do |f| %>
   <div class="card-body">
   <% if @admin.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@admin.errors.count, "error") %> prohibited this admin from being saved:</h2>
+    <div id="error_explanation" class="alert-error">
+      <h2 class="font-semibold"><%= pluralize(@admin.errors.count, "error") %> prohibited this admin from being saved:</h2>
 
-      <ul>
+      <ul class="list-disc pl-5">
         <% @admin.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
@@ -16,55 +16,50 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :username %><br>
+  <div>
+    <%= f.label :username, class: "form-label" %>
     <% if controller.action_name == "edit" %>
-      <%= f.hidden_field :username, size: 50 %>
+      <%= f.hidden_field :username %>
       <%= @admin.username %>
     <% else %>
-      <%= f.text_field :username, size: 50, class: "form-control" %>
+      <%= f.text_field :username, class: "form-input" %>
     <% end %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :password_unencrypted %><br>
-    <%= f.password_field :password_unencrypted,
-                         size: 50, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :password_unencrypted_confirmation %><br>
-    <%= f.password_field :password_unencrypted_confirmation,
-                         size: 50, class: "form-control" %>
-  </div>
-
-  <div class="form-group form-check">
-    <%= f.check_box :active, class: "form-check-input" %>
-    <%= f.label :active, class: "form-check-label" %>
-  </div>
-
-  <div class="form-group form-check">
-    <%= f.check_box :form_super_admin, class: "form-check-input" %>
-    <%= f.label :form_super_admin, class: "form-check-label" %>
+  <div>
+    <%= f.label :password_unencrypted, class: "form-label" %>
+    <%= f.password_field :password_unencrypted, class: "form-input" %>
   </div>
 
   <div>
-    <%= f.label :domain_ids %>
-    <div  class="form-group form-check">
-      <ul>
-        <%= f.collection_check_boxes(:domain_ids, @domains, :domain,
-                                     :domain) do |b| %>
-          <li><%= b.label(class: "form-check-label") { b.check_box(class: "form-check-input") + b.text } %></li>
-        <% end %>
-      </ul>
-    </div>
+    <%= f.label :password_unencrypted_confirmation, class: "form-label" %>
+    <%= f.password_field :password_unencrypted_confirmation, class: "form-input" %>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <%= f.check_box :active, class: "form-checkbox" %>
+    <%= f.label :active, class: "text-sm text-gray-700" %>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <%= f.check_box :form_super_admin, class: "form-checkbox" %>
+    <%= f.label :form_super_admin, class: "text-sm text-gray-700" %>
+  </div>
+
+  <div>
+    <%= f.label :domain_ids, class: "form-label" %>
+    <ul class="space-y-1">
+      <%= f.collection_check_boxes(:domain_ids, @domains, :domain,
+                                   :domain) do |b| %>
+        <li><%= b.label(class: "flex items-center gap-2 text-sm text-gray-700") { b.check_box(class: "form-checkbox") + b.text } %></li>
+      <% end %>
+    </ul>
   </div>
 </div>
 
   <div class="card-footer">
     <%= f.submit(class: "btn btn-primary") %>
-    <%= link_to "Cancel", admins_path, role: "button",
-                class: "btn btn-secondary" %>
+    <%= link_to "Cancel", admins_path, class: "btn btn-secondary" %>
   </div>
 
 <% end %>

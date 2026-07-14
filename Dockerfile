@@ -4,11 +4,9 @@ FROM ruby:3.0.7
 WORKDIR /app
 
 # mysql CLI is required to load structure.sql (db:structure:load)
-# nodejs is for autoprefixer-rails via the bootstrap gem (ExecJS,
-# goes away with the Tailwind migration)
 # chromium and chromium-driver are for system tests (headless)
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends default-mysql-client nodejs \
+    && apt-get install -y --no-install-recommends default-mysql-client \
        chromium chromium-driver \
     && rm -rf /var/lib/apt/lists/*
 

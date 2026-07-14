@@ -4,56 +4,52 @@
     <title>MailAdmin</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbo-track': 'reload' %>
-    <%= javascript_include_tag 'legacy', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-  <div class="container" style="margin-bottom: 30px">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 20px">
-      <%= link_to "MailAdmin", root_path, class: "navbar-brand" %>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <% admins_class = controller.controller_name == "admins" ? "active" : ""  %>
-          <% domains_class = controller.controller_name == "domains" ? "active" : ""  %>
+  <body class="bg-gray-100 min-h-screen">
+    <nav class="bg-white border-b border-gray-200 shadow-sm">
+      <div class="mx-auto max-w-6xl px-4 py-3 flex items-center gap-6">
+        <%= link_to "MailAdmin", root_path,
+                    class: "navbar-brand text-lg font-bold text-gray-900" %>
+
+        <div class="flex items-center gap-4 text-sm">
           <% if @current_admin.super_admin? %>
-          <li class="nav-item <%= admins_class %>">
-            <%= link_to "Admins", admins_path, class: "nav-link",
-                        style: "text-decoration: underline" %>
-          </li>
+            <% admins_class = controller.controller_name == "admins" ? "text-blue-700 font-semibold" : "text-gray-600" %>
+            <%= link_to "Admins", admins_path,
+                        class: "#{admins_class} underline hover:text-blue-700" %>
           <% end %>
-          <li class="nav-item <%= domains_class %>">
-            <%= link_to "Domains", domains_path, class: "nav-link",
-                        style: "text-decoration: underline" %>
-          </li>
-        </ul>
+          <% domains_class = controller.controller_name == "domains" ? "text-blue-700 font-semibold" : "text-gray-600" %>
+          <%= link_to "Domains", domains_path,
+                      class: "#{domains_class} underline hover:text-blue-700" %>
+        </div>
 
         <% if @current_admin.super_admin? %>
-          <%= link_to "New admin", new_admin_path,
-                      role: "button", class: "btn btn-outline-success",
-                      style: "margin: 0 8px" %>
-
-          <%= link_to "New domain", new_domain_path,
-                      role: "button", class: "btn btn-outline-success",
-                      style: "margin: 0 8px" %>
+          <div class="flex items-center gap-2">
+            <%= link_to "New admin", new_admin_path, class: "btn btn-sm btn-new" %>
+            <%= link_to "New domain", new_domain_path, class: "btn btn-sm btn-new" %>
+          </div>
         <% end %>
 
-        <div class="dropdown ml-md-auto">
-          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class=""><%= @current_admin.username %></span>
+        <div class="relative ml-auto">
+          <button type="button" id="user-menu-button"
+                  class="btn border border-blue-600 text-blue-700 hover:bg-blue-50">
+            <%= @current_admin.username %> &#x25BE;
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <%= link_to "Profile", profile_path, class: "dropdown-item" %>
+          <div id="user-menu"
+               class="hidden absolute right-0 mt-1 w-44 rounded border border-gray-200 bg-white py-1 shadow-lg z-10">
+            <%= link_to "Profile", profile_path,
+                        class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
             <%= button_to "Sign out", logout_path, method: :delete,
-                          class: "dropdown-item" %>
+                          class: "block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100" %>
           </div>
         </div>
       </div>
     </nav>
 
-    <%= yield %>
-  </div>
+    <main class="mx-auto max-w-6xl px-4 py-6">
+      <%= yield %>
+    </main>
   </body>
 </html>

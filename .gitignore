@@ -30,3 +30,6 @@
 /config/credentials.yml.enc
 
 /.idea/*
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
