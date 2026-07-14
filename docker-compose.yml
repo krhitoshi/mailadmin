@@ -11,6 +11,11 @@ services:
     volumes:
       - db-data:/var/lib/mysql
       - ./db/grant.sql:/docker-entrypoint-initdb.d/grant.sql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   app:
     build: .
