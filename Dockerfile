@@ -5,8 +5,10 @@ WORKDIR /app
 
 # mysql CLI is required to load structure.sql (db:structure:load)
 # nodejs is for uglifier (ExecJS)
+# chromium and chromium-driver are for system tests (headless)
 RUN apt-get update \
     && apt-get install -y --no-install-recommends default-mysql-client nodejs \
+       chromium chromium-driver \
     && rm -rf /var/lib/apt/lists/*
 
 RUN gem install bundler -v 2.3.27
