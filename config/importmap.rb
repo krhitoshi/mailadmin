@@ -3,3 +3,4 @@
 pin "application", preload: true
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "aliases", preload: true
+pin "dropdown", preload: true

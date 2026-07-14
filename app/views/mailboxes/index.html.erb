@@ -1,12 +1,12 @@
 <%= render "domains/info" %>
 
-<table class="table">
-  <thead class="thead-dark">
+<table class="table-admin">
+  <thead>
   <tr>
     <th class="text-center">#</th>
-    <th>Mailbox</th>
-    <th>To</th>
-    <th>Name</th>
+    <th class="text-left">Mailbox</th>
+    <th class="text-left">To</th>
+    <th class="text-left">Name</th>
     <th class="text-center">Quota</th>
     <th class="text-center">Status</th>
     <th class="text-center">Alias</th>
@@ -17,8 +17,7 @@
   </thead>
   <tbody>
   <% @domain.rel_mailboxes.includes(:alias).each_with_index do |m, i| %>
-    <% tr_class = m.active? ? "" : "table-secondary" %>
-    <tr class="<%= tr_class %>">
+    <tr class="<%= m.active? ? "" : "row-inactive" %>">
       <td class="text-center"><%= i+1 %></td>
       <td><%= m.username %></td>
       <td>
@@ -30,12 +29,12 @@
       <td class="text-center"><%= m.quota_usage_str %>/<%= m.quota_str %></td>
       <td class="text-center"><%= m.active_str %></td>
       <td class="text-center"><%= link_to "alias", edit_domain_alias_path(@domain, m.alias),
-                      role: "button", class: "btn btn-info btn-sm" %></td>
+                      class: "btn btn-sm btn-info" %></td>
       <td class="text-center"><%= link_to "Edit", edit_domain_mailbox_path(@domain, m),
-                      role: "button", class: "btn btn-info btn-sm" %></td>
+                      class: "btn btn-sm btn-info" %></td>
       <td class="text-center"><%= button_to "Delete", domain_mailbox_path(@domain, m), method: :delete,
                       form: { data: { turbo_confirm: 'Are you sure?' } },
-                      class: "btn btn-secondary btn-sm" %></td>
+                      class: "btn btn-sm btn-danger" %></td>
       <td class="text-center"><%= l m.modified %></td>
     </tr>
   <% end %>

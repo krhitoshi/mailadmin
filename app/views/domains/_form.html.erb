@@ -1,10 +1,10 @@
 <%= form_for(@domain) do |f| %>
   <div class="card-body">
   <% if @domain.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@domain.errors.count, "error") %> prohibited this domain from being saved:</h2>
+    <div id="error_explanation" class="alert-error">
+      <h2 class="font-semibold"><%= pluralize(@domain.errors.count, "error") %> prohibited this domain from being saved:</h2>
 
-      <ul>
+      <ul class="list-disc pl-5">
         <% @domain.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
@@ -12,46 +12,45 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :domain %><br>
+  <div>
+    <%= f.label :domain, class: "form-label" %>
     <% if controller.action_name == "edit" %>
-      <%= f.hidden_field :domain, size: 50 %>
+      <%= f.hidden_field :domain %>
       <%= @domain.domain %>
     <% else %>
-      <%= f.text_field :domain, size: 50, class: "form-control" %>
+      <%= f.text_field :domain, class: "form-input" %>
     <% end %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :description %><br>
-    <%= f.text_field :description, size: 50, class: "form-control" %>
+  <div>
+    <%= f.label :description, class: "form-label" %>
+    <%= f.text_field :description, class: "form-input" %>
   </div>
 
-  <div class="form-group number">
-    <%= f.label :aliases %><br>
-    <%= f.text_field :aliases, size: 50, class: "form-control" %>
+  <div>
+    <%= f.label :aliases, class: "form-label" %>
+    <%= f.text_field :aliases, class: "form-input w-40" %>
   </div>
 
-  <div class="form-group number">
-    <%= f.label :mailboxes %><br>
-    <%= f.text_field :mailboxes, size: 50, class: "form-control" %>
+  <div>
+    <%= f.label :mailboxes, class: "form-label" %>
+    <%= f.text_field :mailboxes, class: "form-input w-40" %>
   </div>
 
-  <div class="form-group number">
-    <%= f.label :maxquota %><br>
-    <%= f.text_field :maxquota, size: 50, class: "form-control" %>
+  <div>
+    <%= f.label :maxquota, class: "form-label" %>
+    <%= f.text_field :maxquota, class: "form-input w-40" %>
   </div>
 
-  <div class="form-group form-check">
-    <%= f.check_box :active, class: "form-check-input" %>
-    <%= f.label :active, class: "form-check-label" %>
+  <div class="flex items-center gap-2">
+    <%= f.check_box :active, class: "form-checkbox" %>
+    <%= f.label :active, class: "text-sm text-gray-700" %>
   </div>
   </div>
 
   <div class="card-footer">
     <%= f.submit(class: "btn btn-primary") %>
-    <%= link_to "Cancel", domains_path, role: "button",
-                          class: "btn btn-secondary" %>
+    <%= link_to "Cancel", domains_path, class: "btn btn-secondary" %>
   </div>
 
 <% end %>

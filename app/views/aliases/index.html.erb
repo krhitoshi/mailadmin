@@ -1,11 +1,11 @@
 <%= render "domains/info" %>
 
-<table class="table">
-  <thead class="thead-dark">
+<table class="table-admin">
+  <thead>
   <tr>
     <th class="text-center">#</th>
-    <th>Alias</th>
-    <th>To</th>
+    <th class="text-left">Alias</th>
+    <th class="text-left">To</th>
     <th class="text-center">Status</th>
     <th class="text-center">Edit</th>
     <th class="text-center">Delete</th>
@@ -14,9 +14,8 @@
   </thead>
   <tbody>
   <% @domain.pure_aliases.each_with_index do |a, i| %>
-    <% tr_class = a.active? ? "" : "table-secondary" %>
-    <tr class="<%= tr_class %>">
-      <td><%= i+1 %></td>
+    <tr class="<%= a.active? ? "" : "row-inactive" %>">
+      <td class="text-center"><%= i+1 %></td>
       <td><%= a.address %></td>
       <td>
         <% a.gotos.each do |g| %>
@@ -25,10 +24,10 @@
       </td>
       <td class="text-center"><%= a.active_str %></td>
       <td class="text-center"><%= link_to "Edit", edit_domain_alias_path(@domain, a),
-                      role: "button", class: "btn btn-info btn-sm" %></td>
+                      class: "btn btn-sm btn-info" %></td>
       <td class="text-center"><%= button_to "Delete", domain_alias_path(@domain, a), method: :delete,
                       form: { data: { turbo_confirm: 'Are you sure?' } },
-                      class: "btn btn-secondary btn-sm" %></td>
+                      class: "btn btn-sm btn-danger" %></td>
       <td class="text-center"><%= l a.modified %></td>
     </tr>
   <% end %>

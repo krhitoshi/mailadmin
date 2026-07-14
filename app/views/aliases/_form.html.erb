@@ -1,10 +1,10 @@
 <%= form_for([@domain, @alias]) do |f| %>
   <div class="card-body">
   <% if @alias.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@alias.errors.count, "error") %> prohibited this alias from being saved:</h2>
+    <div id="error_explanation" class="alert-error">
+      <h2 class="font-semibold"><%= pluralize(@alias.errors.count, "error") %> prohibited this alias from being saved:</h2>
 
-      <ul>
+      <ul class="list-disc pl-5">
         <% @alias.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
@@ -12,40 +12,37 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :local_part %><br>
+  <div>
+    <%= f.label :local_part, class: "form-label" %>
     <% if controller.action_name == "edit" %>
-      <%= f.hidden_field :local_part, size: 20 %>
+      <%= f.hidden_field :local_part %>
       <%= @alias.address %>
     <% else %>
-      <div class="input-group">
-        <%= f.text_field :local_part, size: 20, class: "form-control" %>
-        <div class="input-group-append">
-          <div class="input-group-text">@<%= @domain.domain %></div>
-        </div>
+      <div class="flex">
+        <%= f.text_field :local_part, class: "form-input rounded-r-none" %>
+        <span class="inline-flex items-center rounded-r border border-l-0 border-gray-300 bg-gray-100 px-3 text-sm text-gray-600">@<%= @domain.domain %></span>
       </div>
     <% end %>
 
   </div>
 
-  <div class="form-group" id="forward-address-group">
-    <%= f.label :goto %>
+  <div id="forward-address-group">
+    <%= f.label :goto, class: "form-label" %>
     <% @alias.forward_addresses.each_with_index do |f, i| %>
-      <div class="input-group mb-2 forward-address">
-      <%= text_field_tag 'alias[forward_addresses][]', f, size: 50,
-                         class: "form-control", readonly: i == 0 && @alias.mailbox? %>
-        <div class="input-group-append <%= i == 0 ? "d-none" : "" %>">
-          <button class="btn btn-outline-info delete-forward-address-button" type="button" <%= i == 0 ? "disabled" : "" %>>Delete</button>
-        </div>
+      <div class="forward-address mb-2 flex gap-2">
+      <%= text_field_tag 'alias[forward_addresses][]', f,
+                         class: "form-input",
+                         readonly: i == 0 && @alias.mailbox? %>
+        <button class="delete-forward-address-button btn btn-danger <%= i == 0 ? "hidden" : "" %>" type="button" <%= i == 0 ? "disabled" : "" %>>Delete</button>
       </div>
     <% end %>
-    <button class="btn btn-outline-info" id="add-forward-address-button" type="button">Add</button>
+    <button class="btn btn-new" id="add-forward-address-button" type="button">Add</button>
   </div>
 
   <% if @alias.pure_alias? %>
-  <div class="form-group form-check">
-    <%= f.check_box :active, class: "form-check-input" %>
-    <%= f.label :active, class: "form-check-label" %>
+  <div class="flex items-center gap-2">
+    <%= f.check_box :active, class: "form-checkbox" %>
+    <%= f.label :active, class: "text-sm text-gray-700" %>
   </div>
   <% end %>
   </div>
@@ -54,8 +51,7 @@
 
   <div class="card-footer">
     <%= f.submit(class: "btn btn-primary") %>
-    <%= link_to "Cancel", cancel_path, role: "button",
-                class: "btn btn-secondary" %>
+    <%= link_to "Cancel", cancel_path, class: "btn btn-secondary" %>
   </div>
 
 <% end %>

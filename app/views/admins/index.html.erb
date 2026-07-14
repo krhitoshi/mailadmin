@@ -1,12 +1,12 @@
 <% if flash[:notice] %>
-  <div class="alert alert-primary" role="alert"><%= notice %></div>
+  <div class="alert-notice" role="alert"><%= notice %></div>
 <% end %>
 
-<table class="table">
-  <thead class="thead-dark">
+<table class="table-admin">
+  <thead>
   <tr>
     <th class="text-center">#</th>
-    <th>Admin</th>
+    <th class="text-left">Admin</th>
     <th class="text-center">Domains</th>
     <th class="text-center">Status</th>
     <th class="text-center">Edit</th>
@@ -18,8 +18,7 @@
   </thead>
   <tbody>
   <% @admins.each_with_index do |admin, i| %>
-    <% tr_class = admin.active? ? "" : "table-secondary" %>
-    <tr class="<%= tr_class %>">
+    <tr class="<%= admin.active? ? "" : "row-inactive" %>">
       <td class="text-center"><%= i+1 %></td>
       <td><%= admin.username %></td>
       <td class="text-center">
@@ -31,17 +30,16 @@
       </td>
       <td class="text-center"><%= admin.active_str %></td>
       <td class="text-center"><%= link_to "Edit", edit_admin_path(admin),
-                      role: "button", class: "btn btn-info btn-sm"%></td>
+                      class: "btn btn-sm btn-info" %></td>
       <% if @current_admin.super_admin? %>
         <td class="text-center">
           <% if @current_admin == admin %>
-            <%= link_to "Delete", "", role: "button",
-                        class: "btn btn-secondary btn-sm disabled",
-                        "aria-disabled": "true" %>
+            <span class="btn btn-sm bg-gray-200 text-gray-400 cursor-not-allowed"
+                  aria-disabled="true">Delete</span>
           <% else %>
             <%= button_to "Delete", admin, method: :delete,
                           form: { data: { turbo_confirm: 'Are you sure?' } },
-                          class: "btn btn-secondary btn-sm" %>
+                          class: "btn btn-sm btn-danger" %>
           <% end %>
         </td>
       <% end %>

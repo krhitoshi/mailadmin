@@ -20,6 +20,9 @@ jobs:
       - name: Prepare test database
         run: docker compose run --rm app bin/rails db:create db:test:prepare
 
+      - name: Build Tailwind CSS
+        run: docker compose run --rm app bin/rails tailwindcss:build
+
       - name: Run tests
         run: docker compose run --rm app bin/rails test
 

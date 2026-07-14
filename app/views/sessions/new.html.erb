@@ -1,11 +1,11 @@
-<%= form_tag(nil, class: "form-signin", style: "max-width: 330px; margin: auto;") do %>
-  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+<%= form_tag(nil, class: "mx-auto max-w-xs text-left") do %>
+  <h1 class="mb-4 text-center text-xl text-gray-700">Please sign in</h1>
   <% if alert %>
-    <p id="notice"><%= alert %></p>
+    <p id="notice" class="alert-error"><%= alert %></p>
   <% end %>
-  <%= text_field_tag :username, nil, class: "form-control", placeholder: "Login (email)" %>
+  <%= text_field_tag :username, nil, class: "form-input mb-2", placeholder: "Login (email)" %>
 
-  <%= password_field_tag :password, nil, class: "form-control", placeholder: "Password" %>
+  <%= password_field_tag :password, nil, class: "form-input", placeholder: "Password" %>
 
-  <%= submit_tag 'Sign in', class: "btn btn-lg btn-primary btn-block", style: "margin-top: 20px" %>
+  <%= submit_tag 'Sign in', class: "btn btn-primary mt-5 w-full py-2 text-base" %>
 <% end %>

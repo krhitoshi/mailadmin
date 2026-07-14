@@ -18,6 +18,13 @@ docker compose up app   # http://localhost:3000 (admin@example.com / adminpass)
 
 The schema is managed with `db/structure.sql`, not with migrations.
 
+Stylesheets are built with Tailwind CSS. Rebuild after changing views or
+`app/assets/stylesheets/application.tailwind.css`:
+
+```
+docker compose run --rm app bin/rails tailwindcss:build
+```
+
 ## Production
 
 `secret_key_base` is required in production. This repository does not ship
