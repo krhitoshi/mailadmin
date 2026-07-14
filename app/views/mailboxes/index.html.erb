@@ -33,9 +33,9 @@
                       role: "button", class: "btn btn-info btn-sm" %></td>
       <td class="text-center"><%= link_to "Edit", edit_domain_mailbox_path(@domain, m),
                       role: "button", class: "btn btn-info btn-sm" %></td>
-      <td class="text-center"><%= link_to "Delete", domain_mailbox_path(@domain, m), method: :delete,
-                      data: { confirm: 'Are you sure?' },
-                      role: "button", class: "btn btn-secondary btn-sm" %></td>
+      <td class="text-center"><%= button_to "Delete", domain_mailbox_path(@domain, m), method: :delete,
+                      form: { data: { turbo_confirm: 'Are you sure?' } },
+                      class: "btn btn-secondary btn-sm" %></td>
       <td class="text-center"><%= l m.modified %></td>
     </tr>
   <% end %>

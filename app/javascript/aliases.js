@@ -3,7 +3,7 @@
         this.parentNode.parentNode.remove();
     }
 
-    document.addEventListener("turbolinks:load", function () {
+    document.addEventListener("turbo:load", function () {
         var addButton = document.getElementById("add-forward-address-button");
         if (addButton === null) {
             return;

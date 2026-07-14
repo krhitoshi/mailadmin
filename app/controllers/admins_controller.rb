@@ -32,7 +32,7 @@ class AdminsController < ApplicationController
     logger.error("#{e.class}: #{e}")
     flash[:notice] = "Failed to save Admin"
     @domains = Domain.all
-    render action: 'new'
+    render action: 'new', status: :unprocessable_entity
   end
 
   def edit
@@ -56,7 +56,7 @@ class AdminsController < ApplicationController
     logger.error("#{e.class}: #{e}")
     flash[:notice] = "Failed to save Admin"
     @domains = Domain.all
-    render action: 'edit'
+    render action: 'edit', status: :unprocessable_entity
   end
 
   def destroy

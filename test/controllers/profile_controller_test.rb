@@ -13,7 +13,7 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
       admin: { password_unencrypted: "newadminpass",
                password_unencrypted_confirmation: "newadminpass" }
     }
-    assert_response :success
+    assert_redirected_to profile_path
     assert_equal "Your password was successfully updated.", flash[:notice]
 
     delete logout_path
@@ -27,7 +27,7 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
       admin: { password_unencrypted: "",
                password_unencrypted_confirmation: "" }
     }
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_nil flash[:notice]
     assert admins(:super).reload.authenticate("adminpass")
   end

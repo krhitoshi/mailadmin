@@ -5,8 +5,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_include_tag 'legacy', 'data-turbo-track': 'reload' %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
@@ -45,8 +46,8 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <%= link_to "Profile", profile_path, class: "dropdown-item" %>
-            <%= link_to "Sign out", logout_path, method: :delete,
-                        role: "button", class: "dropdown-item" %>
+            <%= button_to "Sign out", logout_path, method: :delete,
+                          class: "dropdown-item" %>
           </div>
         </div>
       </div>

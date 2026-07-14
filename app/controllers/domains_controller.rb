@@ -20,7 +20,7 @@ class DomainsController < ApplicationController
     if @domain.save
       redirect_to domain_path(@domain.domain), notice: 'Domain was successfully created.'
     else
-      render action: 'new'
+      render action: 'new', status: :unprocessable_entity
     end
   end
 
@@ -35,7 +35,7 @@ class DomainsController < ApplicationController
     if @domain.update(domain_params)
       redirect_to domains_path, notice: 'Domain was successfully updated.'
     else
-      render action: 'edit'
+      render action: 'edit', status: :unprocessable_entity
     end
   end
 
