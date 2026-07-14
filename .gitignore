@@ -26,4 +26,7 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# Each deployment generates its own credentials with `bin/rails credentials:edit`
+/config/credentials.yml.enc
+
 /.idea/*
