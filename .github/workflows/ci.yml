@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start database
+        run: docker compose up -d --wait db
+
+      - name: Build app image
+        run: docker compose build app
+
+      - name: Prepare test database
+        run: docker compose run --rm app bin/rails db:create db:test:prepare
+
+      - name: Run tests
+        run: docker compose run --rm app bin/rails test
+
+      - name: Check Zeitwerk eager loading
+        run: docker compose run --rm app bin/rails zeitwerk:check
+
+      - name: Precompile assets (production)
+        run: docker compose run --rm -e RAILS_ENV=production -e SECRET_KEY_BASE=dummy app bin/rails assets:precompile
