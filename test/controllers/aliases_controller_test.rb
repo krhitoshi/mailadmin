@@ -24,7 +24,7 @@ class AliasesControllerTest < ActionDispatch::IntegrationTest
       alias: { local_part: "second", active: true,
                forward_addresses: ["x@example.org"] }
     }
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_not Alias.exists?("second@limited.example")
   end
 

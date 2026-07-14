@@ -39,9 +39,9 @@
                         class: "btn btn-secondary btn-sm disabled",
                         "aria-disabled": "true" %>
           <% else %>
-            <%= link_to "Delete", admin, method: :delete,
-                        data: { confirm: 'Are you sure?' },
-                        role: "button", class: "btn btn-secondary btn-sm" %>
+            <%= button_to "Delete", admin, method: :delete,
+                          form: { data: { turbo_confirm: 'Are you sure?' } },
+                          class: "btn btn-secondary btn-sm" %>
           <% end %>
         </td>
       <% end %>

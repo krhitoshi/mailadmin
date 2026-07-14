@@ -40,7 +40,7 @@ class DomainsControllerTest < ActionDispatch::IntegrationTest
       domain: { domain: "invalid domain", description: "",
                 aliases: 5, mailboxes: 5, maxquota: 50, active: true }
     }
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_not Domain.exists?("invalid domain")
   end
 

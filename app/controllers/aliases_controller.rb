@@ -15,7 +15,7 @@ class AliasesController < ApplicationController
     if @alias.save
       redirect_to domain_aliases_path(@alias.domain), notice: 'Alias was successfully created.'
     else
-      render action: 'new'
+      render action: 'new', status: :unprocessable_entity
     end
   end
 
@@ -34,7 +34,7 @@ class AliasesController < ApplicationController
              end
       redirect_to path, notice: 'Alias was successfully updated.'
     else
-      render action: 'edit'
+      render action: 'edit', status: :unprocessable_entity
     end
   end
 

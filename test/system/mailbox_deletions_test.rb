@@ -6,8 +6,9 @@ class MailboxDeletionsTest < ApplicationSystemTestCase
     visit domain_mailboxes_path("example.com")
     assert_text "user1@example.com"
 
+    # Delete is a button_to form since the Hotwire migration
     accept_confirm do
-      click_link "Delete"
+      click_button "Delete"
     end
 
     assert_no_text "user1@example.com"

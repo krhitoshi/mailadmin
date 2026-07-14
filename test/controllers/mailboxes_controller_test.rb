@@ -34,7 +34,7 @@ class MailboxesControllerTest < ActionDispatch::IntegrationTest
                  password_unencrypted_confirmation: "user2pass",
                  quota_mb: 200, active: true }
     }
-    assert_response :success
+    assert_response :unprocessable_entity
     assert_not Mailbox.exists?("user2@example.com")
   end
 

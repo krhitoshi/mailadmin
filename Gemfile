@@ -11,13 +11,14 @@ gem 'mysql2', '~> 0.5', '>= 0.5.4'
 gem 'puma', '~> 6.4'
 # Use SCSS for stylesheets
 gem 'sassc-rails'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'mini_racer', platforms: :ruby
-
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# Sprockets 4 reads app/assets/config/manifest.js (required for importmap assets)
+gem 'sprockets', '~> 4.0'
+# Hotwire: import maps for JavaScript and Turbo for page navigation
+# (importmap-rails 2.x requires Ruby 3.1+, so 1.x is pinned for now.
+#  turbo-rails must be 2.x: Turbo 7 misjudges this app's URLs, whose
+#  IDs end in domain names like .com, as non-HTML and skips them)
+gem 'importmap-rails', '~> 1.2'
+gem 'turbo-rails', '~> 2.0'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

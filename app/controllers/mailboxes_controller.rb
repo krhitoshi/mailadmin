@@ -25,7 +25,7 @@ class MailboxesController < ApplicationController
   rescue ActiveRecord::ActiveRecordError => e
     logger.error("#{e.class}: #{e}")
     flash[:notice] = "Failed to save Mailbox"
-    render action: 'new'
+    render action: 'new', status: :unprocessable_entity
   end
 
   def edit
@@ -38,7 +38,7 @@ class MailboxesController < ApplicationController
     if @mailbox.update(mailbox_params)
       redirect_to domain_path(@mailbox.domain), notice: 'Mailbox was successfully updated.'
     else
-      render action: 'edit'
+      render action: 'edit', status: :unprocessable_entity
     end
   end
 

@@ -5,11 +5,12 @@ class ProfileController < ApplicationController
       @current_admin.password = nil
     end
 
+    # Turbo does not accept a 200 render for a form submission
     if @current_admin.update(profile_params)
-      flash[:notice] = 'Your password was successfully updated.'
+      redirect_to profile_path, notice: 'Your password was successfully updated.'
+    else
+      render "edit", status: :unprocessable_entity
     end
-
-    render "edit"
   end
 
   private
