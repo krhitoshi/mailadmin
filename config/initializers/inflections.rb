@@ -14,9 +14,3 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
-
-# Zeitwerk expects DovecotCramMd5Password from the file name
-# dovecot_cram_md5_password, so register the actual module name
-Rails.autoloaders.each do |autoloader|
-  autoloader.inflector.inflect("dovecot_cram_md5_password" => "DovecotCramMD5Password")
-end

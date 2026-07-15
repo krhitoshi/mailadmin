@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module DovecotCramMD5Password
+module DovecotCramMd5Password
   extend ActiveSupport::Concern
 
   included do

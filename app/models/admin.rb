@@ -2,7 +2,7 @@ class Admin < ApplicationRecord
   self.table_name = :admin
   self.primary_key = :username
 
-  include DovecotCramMD5Password
+  include DovecotCramMd5Password
 
   validates :username, presence: true, uniqueness: { case_sensitive: true },
                        format: { with: RE_EMAIL_LIKE_WITH_ANCHORS,

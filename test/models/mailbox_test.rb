@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class MailboxTest < ActiveSupport::TestCase
-  test "password round trip (DovecotCramMD5Password)" do
+  test "password round trip (DovecotCramMd5Password)" do
     mailbox = mailboxes(:user1)
     assert_equal mailbox, mailbox.authenticate("user1pass")
     assert_equal false, mailbox.authenticate("wrongpass")

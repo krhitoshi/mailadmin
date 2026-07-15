@@ -2,7 +2,7 @@ class Mailbox < ApplicationRecord
   self.table_name = :mailbox
   self.primary_key = :username
 
-  include DovecotCramMD5Password
+  include DovecotCramMd5Password
 
   attribute :quota_mb, :integer
 
