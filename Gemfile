@@ -4,12 +4,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '>= 2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.7'
+gem 'rails', '~> 7.0.10'
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.5', '>= 0.5.4'
 # Use Puma as the app server
 gem 'puma', '~> 6.4'
 # Sprockets 4 reads app/assets/config/manifest.js (required for importmap assets)
+# (Rails 7.0 no longer depends on sprockets-rails, so it must be listed here)
+gem 'sprockets-rails'
 gem 'sprockets', '~> 4.0'
 # Tailwind CSS via the standalone binary (no Node required)
 gem 'tailwindcss-rails', '~> 2.0'
