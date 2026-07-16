@@ -8,7 +8,7 @@ gem 'rails', '~> 7.1.6'
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.5', '>= 0.5.4'
 # Use Puma as the app server
-gem 'puma', '~> 6.4'
+gem 'puma', '~> 7.2'
 # Sprockets 4 reads app/assets/config/manifest.js (required for importmap assets)
 # (Rails 7.0 no longer depends on sprockets-rails, so it must be listed here)
 gem 'sprockets-rails'
