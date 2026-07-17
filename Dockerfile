@@ -1,5 +1,5 @@
 # Ref. https://docs.docker.com/compose/rails/
-FROM ruby:3.0.7
+FROM ruby:3.2.11
 
 WORKDIR /app
 
@@ -9,6 +9,10 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends default-mysql-client \
        chromium chromium-driver \
     && rm -rf /var/lib/apt/lists/*
+
+# The MariaDB client 11.4+ (Debian trixie) requires SSL by default,
+# but the dev/test DB container does not support it
+RUN printf '[client]\nskip-ssl\n' > /etc/mysql/conf.d/skip-ssl.cnf
 
 RUN gem install bundler -v 2.3.27
 
