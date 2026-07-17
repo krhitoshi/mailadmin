@@ -1,5 +1,5 @@
 # Ref. https://docs.docker.com/compose/rails/
-FROM ruby:3.0.7
+FROM ruby:3.1.7
 
 WORKDIR /app
 
