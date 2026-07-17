@@ -11,7 +11,7 @@ Development and tests run on Docker:
 ```
 docker compose up -d db
 docker compose build app
-docker compose run --rm app bin/rails db:create db:structure:load db:seed
+docker compose run --rm app bin/rails db:create db:schema:load db:seed
 docker compose run --rm app bin/rails test
 docker compose up app   # http://localhost:3000 (admin@example.com / adminpass)
 ```

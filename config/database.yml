@@ -14,7 +14,8 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: mailadmin
-  password: iBMVRf8bLP7vN49C5YmT
+  # Non-secret default for development and CI (see docker-compose.yml)
+  password: <%= ENV.fetch("MAILADMIN_DATABASE_PASSWORD", "mailadmin_dev") %>
   host: <%= ENV.fetch("DB_HOST", "127.0.0.1") %>
 
 development:
