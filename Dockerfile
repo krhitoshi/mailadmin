@@ -10,6 +10,10 @@ RUN apt-get update \
        chromium chromium-driver \
     && rm -rf /var/lib/apt/lists/*
 
+# The MariaDB client 11.4+ (Debian trixie) requires SSL by default,
+# but the dev/test DB container does not support it
+RUN printf '[client]\nskip-ssl\n' > /etc/mysql/conf.d/skip-ssl.cnf
+
 RUN gem install bundler -v 2.3.27
 
 ARG BUNDLE_INSTALL_ARGS="-j 4"
