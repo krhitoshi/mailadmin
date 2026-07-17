@@ -13,7 +13,7 @@ gem 'puma', '~> 6.4'
 # The modern asset pipeline for Rails (the Rails 8 default, replacing Sprockets)
 gem 'propshaft'
 # Tailwind CSS via the standalone binary (no Node required)
-gem 'tailwindcss-rails', '~> 2.0'
+gem 'tailwindcss-rails', '~> 4.0'
 # Hotwire: import maps for JavaScript and Turbo for page navigation
 # (importmap-rails 2.x requires Ruby 3.1+, so 1.x is pinned for now.
 #  turbo-rails must be 2.x: Turbo 7 misjudges this app's URLs, whose
