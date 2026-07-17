@@ -4,7 +4,9 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: rootpass
       MARIADB_USER: mailadmin
-      MARIADB_PASSWORD: iBMVRf8bLP7vN49C5YmT
+      # Non-secret default for development and CI; override with the
+      # environment variable for anything beyond local use
+      MARIADB_PASSWORD: ${MAILADMIN_DATABASE_PASSWORD:-mailadmin_dev}
       MARIADB_DATABASE: mailadmin_development
     ports:
       - "127.0.0.1:3306:3306"
@@ -25,6 +27,7 @@ services:
       - "3000:3000"
     environment:
       - DB_HOST=db
+      - MAILADMIN_DATABASE_PASSWORD
     volumes:
       - .:/app
 

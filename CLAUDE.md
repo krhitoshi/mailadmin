@@ -13,5 +13,5 @@
 
 - Development and tests run on Docker: `docker compose up -d db` -> `docker compose build app` -> `docker compose run --rm app bin/rails test`
 - The schema is managed with db/structure.sql (postfixadmin database version 1841), not with migrations
-- Initialize the development DB with `bin/rails db:create db:structure:load db:seed` (seeded login: admin@example.com / adminpass)
-- Note that `db:structure:load` loads into both development and test, so it fails with duplicate errors when the test DB is already loaded
+- Initialize the development DB with `bin/rails db:create db:schema:load db:seed` (seeded login: admin@example.com / adminpass)
+- `db:schema:load` only loads the development DB; the test DB is prepared separately with `bin/rails db:test:prepare`
