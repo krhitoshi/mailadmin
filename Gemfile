@@ -1,19 +1,17 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-# Rails 7.2 requires Ruby 3.1.0 or later
-ruby '>= 3.1.0'
+# Rails 8.0 requires Ruby 3.2.0 or later
+ruby '>= 3.2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.2.3'
+gem 'rails', '~> 8.0.5'
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.5', '>= 0.5.4'
 # Use Puma as the app server
 gem 'puma', '~> 6.4'
-# Sprockets 4 reads app/assets/config/manifest.js (required for importmap assets)
-# (Rails 7.0 no longer depends on sprockets-rails, so it must be listed here)
-gem 'sprockets-rails'
-gem 'sprockets', '~> 4.0'
+# The modern asset pipeline for Rails (the Rails 8 default, replacing Sprockets)
+gem 'propshaft'
 # Tailwind CSS via the standalone binary (no Node required)
 gem 'tailwindcss-rails', '~> 2.0'
 # Hotwire: import maps for JavaScript and Turbo for page navigation
