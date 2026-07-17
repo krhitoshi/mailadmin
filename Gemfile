@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '>= 3.2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 8.0.5'
+gem 'rails', '~> 8.1.3'
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.5', '>= 0.5.4'
 # Use Puma as the app server
@@ -13,7 +13,7 @@ gem 'puma', '~> 6.4'
 # The modern asset pipeline for Rails (the Rails 8 default, replacing Sprockets)
 gem 'propshaft'
 # Tailwind CSS via the standalone binary (no Node required)
-gem 'tailwindcss-rails', '~> 2.0'
+gem 'tailwindcss-rails', '~> 4.0'
 # Hotwire: import maps for JavaScript and Turbo for page navigation
 # (importmap-rails 2.x requires Ruby 3.1+, so 1.x is pinned for now.
 #  turbo-rails must be 2.x: Turbo 7 misjudges this app's URLs, whose

@@ -4,12 +4,12 @@
     <title>MailAdmin</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body class="bg-gray-100 min-h-screen">
-    <nav class="bg-white border-b border-gray-200 shadow-sm">
+    <nav class="bg-white border-b border-gray-200 shadow-xs">
       <div class="mx-auto max-w-6xl px-4 py-3 flex items-center gap-6">
         <%= link_to "MailAdmin", root_path,
                     class: "navbar-brand text-lg font-bold text-gray-900" %>

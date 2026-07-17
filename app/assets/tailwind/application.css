@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
 
 @layer components {
   .btn {
@@ -30,14 +29,14 @@
   }
   .form-input {
     @apply w-full rounded border border-gray-300 px-3 py-1.5 text-sm
-           focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500;
+           focus:border-blue-500 focus:outline-hidden focus:ring-1 focus:ring-blue-500;
   }
   .form-checkbox {
     @apply rounded border-gray-300 text-blue-600 focus:ring-blue-500;
   }
 
   .card {
-    @apply max-w-xl rounded border border-gray-200 bg-white shadow-sm;
+    @apply max-w-xl rounded border border-gray-200 bg-white shadow-xs;
   }
   .card-header {
     @apply border-b border-gray-200 bg-gray-50 px-4 py-3 text-lg font-semibold rounded-t;
@@ -50,7 +49,7 @@
   }
 
   .table-admin {
-    @apply w-full border-collapse bg-white text-sm shadow-sm;
+    @apply w-full border-collapse bg-white text-sm shadow-xs;
   }
   .table-admin th {
     @apply bg-gray-800 px-3 py-2 text-white font-medium;
